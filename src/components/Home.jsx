@@ -88,7 +88,7 @@ function App() {
             className='ring-1 lg:row-span-2 flex flex-col justify-between group hover:ring-primary/10 dark:hover:ring-white/20 duration-300 h-full dark:ring-white/10 ring-primary/5 lg:row-start-2 md:grid-cols-2 md:grid lg:gap-0 md:items-center md:gap-12 lg:grid-cols-none lg:col-start-2 lg:col-span-2 rounded-3xl p-8 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'>
             <div>
               <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-6xl'>
-                Desinify 
+              Projects   
               </p>
               <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
                 Design & development subscriptions for startups.
@@ -136,16 +136,27 @@ function App() {
           {/* Designify Section */}
             <Link 
               to="/designify"
-              className='ring-1 lg:row-start-3 items-center h-full flex p-8 flex-col justify-center hover:ring-primary/5 dark:hover:ring-white/20 dark:ring-white/10 ring-primary/5 relative rounded-3xl overflow-hidden bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'
+              className='ring-1 lg:row-start-3 items-center h-full flex px-8 pb-8 pt-2 flex-col justify-center hover:ring-primary/5 dark:hover:ring-white/20 dark:ring-white/10 ring-primary/5 relative rounded-3xl overflow-hidden bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'
             >
-              <img 
-                src="/images/Desginifynew.png"
-                className='rounded-3xl hover:scale-105 duration-300'
-                alt="designify" 
-              />
-              <p className='text-xl hover:underline hover:scale-105 duration-500 text-primary dark:text-white lg:text-2xl mt-6'>
+              
+              <p className='text-xl hover:underline hover:scale-105 duration-500 text-primary w-full text-start dark:text-white lg:text-2xl mt-2'>
                 Designify
               </p>
+              <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
+                Design & development subscriptions for startups.
+                <br />
+                <br />
+                Designify streamlines the design process with a fixed monthly rate
+                and limitless design requests. Say goodbye to phone calls and
+                extensive contracts; reach out to Designify directly at any time.
+                Embrace flexibility, pause or terminate your subscription whenever
+                you need.
+              </p>
+              <img 
+                src="/images/Desginifynew.png"
+                className='rounded-3xl hover:scale-105 duration-300 w-[250px] '
+                alt="designify" 
+              />
             </Link>
 
            {/* Skills Section */}
