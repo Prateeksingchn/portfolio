@@ -12,19 +12,9 @@ const SocialIcon = ({ href, icon }) => (
 );
 
 const SkillIcon = ({ icon, name }) => (
-  <div className='flex flex-col items-center justify-center'>
+  <div className="flex flex-col items-center">
     {icon}
-    <p className='text-[12px] mt-2 w-full text-center'>{name}</p>
-  </div>
-);
-
-const Testimonial = ({ text, name, role, textColor }) => (
-  <div className='mt-2'>
-    <p className={`text-sm ${textColor}`}>{text}</p>
-    <p className='text-xs mt-2 text-zinc-500'>
-      <span className='block text-xs'>{name}</span>
-      <span className='block text-xs'>{role}</span>
-    </p>
+    <span className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{name}</span>
   </div>
 );
 
@@ -56,10 +46,10 @@ function Home() {
               Hey, I'm Prateek, welcome to my site!
             </p>
             <p className='mt-8 leading-16 text-sm text-zinc-500 dark:text-zinc-400 font-light lg:text-xl'>
-              I am a digital designer and developer located in Bhopal, India. I excel in the digital world, crafting user interfaces and exploring the complexities of coding. 
+              I am a digital designer and developer based in Bhopal, India. My passion lies in crafting user interfaces and exploring the intricacies of coding. 
               <br />
               <br />
-              Outside of the screen, I enjoy playing football or working out at the gym. My life is a balanced mix of technology and nature, switching between focused coding sessions and moments of creative inspiration.
+              When I'm not behind the screen, you'll find me on the football field or at the gym. My life is a perfect blend of technology and physical activity, balancing intense coding sessions with moments of creative inspiration.
             </p>
           </div>
 
@@ -70,7 +60,7 @@ function Home() {
                 Find <br /> me on
               </p>
             </div>
-            <div className='grid mt-32 grid-cols-4 md:grid-cols-8 lg:grid-cols-4 gap-y-4 gap-4 justify-center items-center w-full'>
+            <div className='grid mt-8 grid-cols-4 md:grid-cols-8 lg:grid-cols-4 gap-y-4 gap-4 justify-center items-center w-full'>
               <SocialIcon href="mailto:email@prateeksinghchouhan007.com" icon={<IoMdMail className='icon icon-tabler h-6 w-6 group-hover:scale-125 duration-300  text-primary hover:text-primary dark:text-black group-hover text-primary:dark:text-white/50' />} />
               <SocialIcon href="https://github.com/Prateeksingchn" icon={<i className="icon icon-tabler h-6 w-6 ml-[5.5px] text-[22px] mt-[2px]  group-hover:scale-125 duration-300  text-primary hover:text-primary dark:text-black group-hover text-primary:dark:text-white/50 fa-brands fa-github"></i>} />
               <SocialIcon href="https://www.linkedin.com/in/prateek-singh-chouhan-7a511b1b7" icon={<i className="icon icon-tabler h-6 w-6 ml-[5.5px] text-[22px] mt-[2px]  group-hover:scale-125 duration-300  text-primary hover:text-primary dark:text-black group-hover text-primary:dark:text-white/50 fa-brands fa-linkedin"></i>} />
@@ -85,27 +75,21 @@ function Home() {
           {/* Projects Section */}
           <Link 
             to="/projects"
-            className='ring-1 lg:row-span-2 flex flex-col justify-between group hover:ring-primary/10 dark:hover:ring-white/20 duration-300 h-full dark:ring-white/10 ring-primary/5 lg:row-start-2 md:grid-cols-2 md:grid lg:gap-0 md:items-center md:gap-12 lg:grid-cols-none lg:col-start-2 lg:col-span-2 rounded-3xl p-8 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'>
+            className='ring-1 lg:row-span-2 flex flex-col justify-between group hover:ring-primary/10 dark:hover:ring-white/20 duration-300 h-full dark:ring-white/10 ring-primary/5 lg:row-start-2 md:grid-cols-2 md:grid lg:gap-0 md:items-center md:gap-12 lg:grid-cols-none lg:col-start-2 lg:col-span-2 rounded-3xl p-8 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'
+          >
             <div>
               <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-6xl'>
               Projects   
               </p>
-              {/* <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
-                Design & development subscriptions for startups.
-                <br />
-                <br />
-                Designify streamlines the design process with a fixed monthly rate
-                and limitless design requests. Say goodbye to phone calls and
-                extensive contracts; reach out to Designify directly at any time.
-                Embrace flexibility, pause or terminate your subscription whenever
-                you need.
-              </p> */}
+              <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
+                Explore my portfolio of innovative web applications and design projects.
+              </p>
             </div>
             <div className='mt-8'>
               <img 
                 src="/images/Projectsnew.png"
                 className='rounded-2xl h-auto group-hover:ring-white/20 duration-300 invert dark:invert-0 aspect-[4/4] bg-primary/5 dark:bg-primary ring-1 ring-white/10 object-cover' 
-                alt="Designify" 
+                alt="Projects Preview" 
               />
             </div>
           </Link>
@@ -113,12 +97,11 @@ function Home() {
           {/* Resume Section */}
           <div className='ring-1 dark:ring-white/10 ring-primary/5 flex flex-col justify-between items-center rounded-3xl shadow-xl dark:shadow-thick p-8 bg-[#1A1A1A] dark:bg-secondary overflow-hidden text-center lg:text-left'>
             <div> 
-              <p className='text-xl text-primary dark:text-white lg:text-7xl tracking-tight'>
+              <p className='text-xl text-primary dark:text-white lg:text-5xl tracking-tight'>
                 Grab my résumé!
               </p>
               <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400 md:max-w-xs lg:max-w-none'>
-                Unlock the doors to explore the rich tapestry of my professional
-                journey and accomplishments.
+                Discover my professional journey and achievements.
               </p>
             </div>
             <div className='w-full mt-8 md:max-w-xs lg:max-w-none'>
@@ -133,96 +116,79 @@ function Home() {
             </div>
           </div>
 
+          {/* Skills Section */}
+<div className='lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 hover:ring-primary/5 bg-[#1A1A1A] dark:bg-secondary dark:hover:ring-white/20 overflow-hidden duration-300 shadow-xl dark:shadow-thick rounded-3xl p-8'>
+  <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-4xl mb-6'>
+    Skills & Tools
+  </p>
+  <div className='grid grid-cols-1 gap-6'>
+    {/* Skills */}
+    <div>
+      <p className='text-lg tracking-tight font-medium text-primary dark:text-white md:text-2xl mb-4'>
+        Skills
+      </p>
+      <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 gap-6 text-white'>
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-orange-500 fa-brands fa-html5"></i>} name="HTML" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-blue-500 fa-brands fa-css3-alt"></i>} name="CSS" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-yellow-400 fa-brands fa-js"></i>} name="JavaScript" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-teal-400 fa-brands fa-react"></i>} name="React" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-purple-600 fa-brands fa-bootstrap"></i>} name="Bootstrap" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-sky-400 fa-brands fa-twitter"></i>} name="Tailwind CSS" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-purple-500 fa-solid fa-bolt"></i>} name="Redux" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-black dark:text-white fa-brands fa-next-js"></i>} name="Next.js" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-green-600 fa-brands fa-node-js"></i>} name="Node.js" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-gray-500 fa-solid fa-server"></i>} name="Express.js" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-green-500 fa-solid fa-database"></i>} name="MongoDB" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-red-500 fa-brands fa-java"></i>} name="Java" />
+      </div>
+    </div>
+    
+    {/* Tools */}
+    <div className='mt-8'>
+      <p className='text-lg tracking-tight font-medium text-primary dark:text-white md:text-2xl mb-4'>
+        Tools
+      </p>
+      <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 gap-6 text-white'>
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-blue-400 fa-brands fa-github"></i>} name="GitHub" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-orange-500 fa-brands fa-git-alt"></i>} name="Git" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-blue-600 fa-brands fa-docker"></i>} name="Docker" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-purple-400 fa-brands fa-figma"></i>} name="Figma" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-blue-500 fa-solid fa-pen-ruler"></i>} name="Photoshop" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-orange-600 fa-solid fa-laptop-code"></i>} name="VS Code" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-green-500 fa-solid fa-leaf"></i>} name="GSAP" />
+        <SkillIcon icon={<i className="text-5xl hover:scale-125 duration-300 text-blue-400 fa-solid fa-cube"></i>} name="Framer Motion" />
+      </div>
+    </div>
+  </div>
+</div>
+
           {/* Designify Section */}
-            <Link 
-              to="/designify"
-              className='ring-1 lg:row-start-3 items-center h-full flex px-8 pb-8 pt-2 flex-col justify-center hover:ring-primary/5 dark:hover:ring-white/20 dark:ring-white/10 ring-primary/5 relative rounded-3xl overflow-hidden bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'
-            >
-              
-              <p className='text-xl hover:underline hover:scale-105 duration-500 text-primary w-full text-start dark:text-white lg:text-2xl mt-2'>
-                Designify
-              </p>
-              <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
-                Design & development subscriptions for startups.
-                Designify streamlines the design process with a fixed monthly rate
-                and limitless design requests. Say goodbye to phone calls and
-                extensive contracts; reach out to Designify directly at any time.
-                Embrace flexibility, pause or terminate your subscription whenever
-                you need.
-              </p>
-              <img 
-                src="/images/Desginifynew.png"
-                className='rounded-3xl hover:scale-105 duration-300 w-[250px] '
-                alt="designify" 
-              />
-            </Link>
-
-           {/* Skills Section */}
-           <div className='lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 hover:ring-primary/5 bg-[#1A1A1A] dark:bg-secondary dark:hover:ring-white/20 overflow-hidden duration-300 shadow-xl dark:shadow-thick rounded-3xl p-8'>
-            <a href="#">
-              <div className='-mr-28 pr-4 '>
-                <img src="./public/images/skills3.png" class="rounded-2xl object-cover ring-1 h-64 w-[75%] lg:h-auto dark:ring-white/10 ring-primary/5 bg-tertiary hover:scale-105 duration-300" alt="" />
-              </div>
-            </a>
-            <div className='mt-8 grid grid-cols-2 gap-4 text-white p-4 border-2 border-zinc-500 rounded-xl'>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-6xl hover:scale-125 duration-300 text-teal-200 ri-java-fill"></i>
-                <p className='text-[14px] mt-2 w-full text-center'>Java</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <img className='w-14 h-14 object-cover hover:scale-125 duration-300 rounded-lg' src="https://th.bing.com/th/id/OIG4.li6EO7EIwdkpRxQeS81B?pid=ImgGn" alt="" />
-                <p className='text-[14px] mt-2 w-full text-center'>DSA</p>
-              </div>
-            </div>
-
-            <div className='grid grid-cols-3 gap-10 mt-8 text-white'>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-5xl hover:scale-125 duration-300 text-yellow-300 fa-brands fa-html5"></i>
-                <p className='text-[12px] mt-2 w-full text-center'>HTML</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-5xl hover:scale-125 duration-300 text-yellow-300 fa-brands fa-css3"></i>
-                <p className='text-[12px] mt-2 w-full text-center'>CSS</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-5xl hover:scale-125 duration-300 text-blue-400 ri-tailwind-css-fill "></i>
-                <p className='text-[12px] mt-2 w-full text-center'>Tailwind CSS</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-5xl hover:scale-125 duration-300 text-green-600 fa-brands fa-js"></i>
-                <p className='text-[12px] mt-2 w-full text-center'>JAVASCRIPT</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-5xl hover:scale-125 duration-300 text-sky-300 fa-brands fa-react"></i>
-                <p className='text-[12px] mt-2 w-full text-center'>React</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-5xl hover:scale-125 duration-300 text-indigo-500 ri-nextjs-fill"></i>
-                <p className='text-[12px] mt-2 w-full text-center'>Next JS</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <i className="text-5xl hover:scale-125 duration-300 text-orange-300 fa-brands fa-node"></i>
-                <p className='text-[12px] mt-2 w-full text-center'>Node Js</p>
-              </div>
-              <div className='flex flex-col items-center justify-center'>
-                <img
-                className='w-12 h-12 object-cover hover:scale-125 duration-300 rounded-lg' 
-                src="https://th.bing.com/th/id/OIP.1fZjQpkRMKTBGN_7H5YnFwHaGL?w=212&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="" />
-                <p className='text-[12px] mt-2 w-full text-center'>Express Js</p>
-              </div>
-            </div>
-          </div>
+          <Link 
+            to="/designify"
+            className='ring-1 lg:row-start-3 items-center h-full flex px-8 pb-8 pt-2 flex-col justify-center hover:ring-primary/5 dark:hover:ring-white/20 dark:ring-white/10 ring-primary/5 relative rounded-3xl overflow-hidden bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'
+          >
+            <p className='text-xl hover:underline hover:scale-105 duration-500 text-primary w-full text-start dark:text-white lg:text-2xl mt-2'>
+              Designify
+            </p>
+            <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
+              Design & development subscriptions for startups. Streamlined process with fixed monthly rates and unlimited design requests.
+            </p>
+            <img 
+              src="/images/Desginifynew.png"
+              className='rounded-3xl hover:scale-105 duration-300 w-[250px] mt-4'
+              alt="Designify" 
+            />
+          </Link>
 
           {/* Newsletter Section */}
           <div className='ring-1 dark:ring-white/10 ring-primary/5 flex flex-col p-8 h-full justify-center items-center rounded-3xl overflow-hidden relative lg:col-span-2 lg:row-start-4 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'>
             <div className='relative p-8 text-center w-full'>
-              <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-6xl'>
-                Subscribe <span className='lg:block'>to my newsletter</span>
+              <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-4xl'>
+                Subscribe to my newsletter
               </p>
               <form className='mt-6 sm:flex w-full lg:max-w-sm mx-auto'>
                 <label htmlFor="email-address" className='sr-only'>Email address</label>
-                <input 
-                  type="email"
+                <input type="email"
                   name='email-address'
                   id='email-address'
                   autoComplete='email'
@@ -242,38 +208,26 @@ function Home() {
 
           {/* Testimonials Section */}
           <div className='ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-8 lg:row-start-4 h-full flex flex-col justify-between bg-[#1A1A1A] dark:bg-secondary'>
-            <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-5xl'>
+            <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-4xl mb-4'>
               Testimonials
             </p> 
-            <div className='md:grid md:grid-cols-2 gap-6 lg:grid-cols-1'>
+            <div className='space-y-4'>
               <div className='mt-2'>
                 <p className='text-sm text-pink-500 dark:text-pink-400'>
-                  "Big fan of your themes. They're well-organized, look clean, and
-                  are fast."
+                  "Prateek's designs are not just visually appealing, but also highly functional. His attention to detail is impressive."
                 </p>
                 <p className='text-xs mt-2 text-zinc-500'>
-                  <span className='block text-xs'>Yuvraj Bali</span>
-                  <span className='block text-xs'>Developer</span>
-                </p>
-              </div>
-              <div className='mt-2'>
-                <p className='text-sm text-pink-500 dark:text-pink-400'>
-                  "Big fan of your themes. They're well-organized, look clean, and
-                  are fast."
-                </p>
-                <p className='text-xs mt-2 text-zinc-500'>
-                  <span className='block text-xs'>Yuvraj Bali</span>
-                  <span className='block text-xs'>Developer</span>
+                  <span className='block text-xs'>Sarah Johnson</span>
+                  <span className='block text-xs'>UX Researcher</span>
                 </p>
               </div>
               <div className='mt-2'>
                 <p className='text-sm text-orange-500 dark:text-orange-300'>
-                  "Amazing resource using @react and @tailwindcss! I got it
-                  a week ago and have found the contents really useful.
+                  "Working with Prateek was a game-changer for our startup. His full-stack skills brought our vision to life."
                 </p>
                 <p className='text-xs mt-2 text-zinc-500'>
-                  <span className='block text-xs'>Ayush</span>
-                  <span className='block text-xs'>Entrepreneur</span>
+                  <span className='block text-xs'>Alex Chen</span>
+                  <span className='block text-xs'>Tech Entrepreneur</span>
                 </p>    
               </div>
             </div> 
@@ -281,15 +235,17 @@ function Home() {
 
           {/* About Section */}
           <div className='lg:col-span-2 xl:col-span-1 h-full flex flex-col justify-between lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick rounded-3xl p-8'>
-            <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-3xl'>
-              As a digital designer, my expertise lies in crafting distinctive
-              visual identities for digital products.
-              <br />
-              <br />
-              I hold the belief that an engaging design begins with shared values,
-              transparent communication, and a genuine respect for the audience.
-            </p>
-            <p className='text-primary dark:text-white '>Prateek Singh Chouhan</p>
+            <div>
+              <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-3xl mb-4'>
+                About Me
+              </p>
+              <p className='text-sm text-zinc-500 dark:text-zinc-400'>
+                As a digital designer and full-stack developer, I specialize in creating unique visual identities and functional interfaces for digital products. My approach combines aesthetics with user-centric design principles, ensuring that each project not only looks great but also delivers an exceptional user experience.
+                <br /><br />
+                I believe that great design stems from a deep understanding of the client's vision, open communication, and a genuine respect for the end-users. My goal is to bridge the gap between complex functionalities and intuitive user interfaces, making technology more accessible and enjoyable for everyone.
+              </p>
+            </div>
+            <p className='text-primary dark:text-white mt-4'>Prateek Singh Chouhan</p>
           </div>
         </div>
       </div>
