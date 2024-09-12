@@ -28,7 +28,7 @@ const Testimonial = ({ text, name, role, textColor }) => (
   </div>
 );
 
-function App() {
+function Home() {
   return (
     <section className='dark:bg-[#101010] w-full min-h-screen'>
       <div className='p-4'>
@@ -90,7 +90,7 @@ function App() {
               <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-6xl'>
               Projects   
               </p>
-              <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
+              {/* <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
                 Design & development subscriptions for startups.
                 <br />
                 <br />
@@ -99,12 +99,12 @@ function App() {
                 extensive contracts; reach out to Designify directly at any time.
                 Embrace flexibility, pause or terminate your subscription whenever
                 you need.
-              </p>
+              </p> */}
             </div>
             <div className='mt-8'>
               <img 
                 src="/images/Projectsnew.png"
-                className='rounded-2xl group-hover:ring-white/20 duration-300 invert dark:invert-0 aspect-[4/4] bg-primary/5 dark:bg-primary ring-1 ring-white/10 object-cover' 
+                className='rounded-2xl h-auto group-hover:ring-white/20 duration-300 invert dark:invert-0 aspect-[4/4] bg-primary/5 dark:bg-primary ring-1 ring-white/10 object-cover' 
                 alt="Designify" 
               />
             </div>
@@ -144,8 +144,6 @@ function App() {
               </p>
               <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400'>
                 Design & development subscriptions for startups.
-                <br />
-                <br />
                 Designify streamlines the design process with a fixed monthly rate
                 and limitless design requests. Say goodbye to phone calls and
                 extensive contracts; reach out to Designify directly at any time.
@@ -299,4 +297,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
