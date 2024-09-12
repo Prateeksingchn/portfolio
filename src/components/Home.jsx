@@ -1,6 +1,8 @@
 import React from 'react';
 import { IoMdMail } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import CodePlaygroundSection from './CodePlaygroundSection';
+import GitHubActivitySection from './GitHubActivitySection';
 
 const SocialIcon = ({ href, icon }) => (
   <a 
@@ -180,58 +182,9 @@ function Home() {
             />
           </Link>
 
-          {/* Newsletter Section */}
-          <div className='ring-1 dark:ring-white/10 ring-primary/5 flex flex-col p-8 h-full justify-center items-center rounded-3xl overflow-hidden relative lg:col-span-2 lg:row-start-4 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick'>
-            <div className='relative p-8 text-center w-full'>
-              <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-4xl'>
-                Subscribe to my newsletter
-              </p>
-              <form className='mt-6 sm:flex w-full lg:max-w-sm mx-auto'>
-                <label htmlFor="email-address" className='sr-only'>Email address</label>
-                <input type="email"
-                  name='email-address'
-                  id='email-address'
-                  autoComplete='email'
-                  required=''
-                  className='block w-full h-12 px-4 py-2 text-sm text-zinc-500 bg-[#262626] dark:bg-tertiary ring-1 dark:ring-white/10 ring-primary/5 rounded-lg appearance-none focus:ring-white/20 placeholder-zinc-400 focus:border-zinc-300 focus:bg-primary focus:outline-none focus:ring-indigo-500 sm:text-sm'
-                  placeholder='Enter your email' />
-                <div className='mt-4 sm:ml-2 sm:mt-0 sm:flex-shrink-0'>
-                  <button
-                    type='submit'
-                    className='text-sm py-2 w-full px-4 h-12 font-semibold focus:ring-2 rounded-lg bg-primary dark:bg-white dark:text-primary dark:hover:text-white hover:text-primary dark:hover:bg-white/5 hover:bg-primary/10 text-black flex duration-200 focus:ring-offset-2 focus:ring-inline-flex items-center justify-between'>
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+          <CodePlaygroundSection />
 
-          {/* Testimonials Section */}
-          <div className='ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-8 lg:row-start-4 h-full flex flex-col justify-between bg-[#1A1A1A] dark:bg-secondary'>
-            <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-4xl mb-4'>
-              Testimonials
-            </p> 
-            <div className='space-y-4'>
-              <div className='mt-2'>
-                <p className='text-sm text-pink-500 dark:text-pink-400'>
-                  "Prateek's designs are not just visually appealing, but also highly functional. His attention to detail is impressive."
-                </p>
-                <p className='text-xs mt-2 text-zinc-500'>
-                  <span className='block text-xs'>Sarah Johnson</span>
-                  <span className='block text-xs'>UX Researcher</span>
-                </p>
-              </div>
-              <div className='mt-2'>
-                <p className='text-sm text-orange-500 dark:text-orange-300'>
-                  "Working with Prateek was a game-changer for our startup. His full-stack skills brought our vision to life."
-                </p>
-                <p className='text-xs mt-2 text-zinc-500'>
-                  <span className='block text-xs'>Alex Chen</span>
-                  <span className='block text-xs'>Tech Entrepreneur</span>
-                </p>    
-              </div>
-            </div> 
-          </div>
+          <GitHubActivitySection />
 
           {/* About Section */}
           <div className='lg:col-span-2 xl:col-span-1 h-full flex flex-col justify-between lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick rounded-3xl p-8'>
@@ -239,7 +192,7 @@ function Home() {
               <p className='text-xl tracking-tight font-medium text-primary dark:text-white md:text-3xl mb-4'>
                 About Me
               </p>
-              <p className='text-sm text-zinc-500 dark:text-zinc-400'>
+              <p className='text-lg text-zinc-500 dark:text-zinc-400'>
                 As a digital designer and full-stack developer, I specialize in creating unique visual identities and functional interfaces for digital products. My approach combines aesthetics with user-centric design principles, ensuring that each project not only looks great but also delivers an exceptional user experience.
                 <br /><br />
                 I believe that great design stems from a deep understanding of the client's vision, open communication, and a genuine respect for the end-users. My goal is to bridge the gap between complex functionalities and intuitive user interfaces, making technology more accessible and enjoyable for everyone.
