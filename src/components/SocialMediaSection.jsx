@@ -30,7 +30,7 @@ const socialLinks = [
 
 function SocialMediaSection() {
   return (
-    <Card className='ring-1 dark:ring-white/10 ring-primary/5 rounded-3xl justify-between shadow-xl dark:shadow-thick items-center flex flex-col p-8 h-full bg-[#1A1A1A] dark:bg-secondary'>
+    <Card className='ring-1 dark:ring-white/10 ring-primary/5 rounded-3xl justify-between shadow-xl dark:shadow-thick items-center flex flex-col p-8 h-full bg-[#1A1A1A] dark:bg-secondary border-none'>
       <CardContent className='w-full p-0 flex flex-col justify-between h-full'>
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
