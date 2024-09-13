@@ -20,10 +20,10 @@ function ProfileSection() {
           </p>
         </div>
       </div>
-      <p className='text-3xl mt-6 font-medium lg:text-4xl tracking-tight leading-16 text-primary dark:text-white'>
+      <p className='text-3xl mt-6 font-medium lg:text-3xl tracking-tight leading-14 text-primary dark:text-white'>
         Hey, I'm Prateek, welcome to my site!
       </p>
-      <p className='mt-8 leading-16 text-sm text-zinc-500 dark:text-zinc-400 font-light lg:text-xl'>
+      <p className='mt-6 leading-16 text-sm text-zinc-500 dark:text-zinc-400 font-light lg:text-xl'>
         I am a digital designer and developer based in Bhopal, India. My passion lies in crafting user interfaces and exploring the intricacies of coding. 
         <br />
         <br />
