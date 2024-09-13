@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
+import { FaSpaceShuttle } from "react-icons/fa";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
+import { Link } from 'react-router-dom';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
 
 const projectsData = [
   {
@@ -13,7 +22,8 @@ const projectsData = [
     image: 'https://images.unsplash.com/photo-1652456374997-1781458e2a8a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8M2QlMjByZW5kZXJ8ZW58MHx8MHx8fDA%3D',
     technologies: ['Portfolio', 'Next.js', 'Framer motion', 'TypeScript', 'Shadcn UI', 'TailwindCSS'],
     sourceCode: 'https://github.com/yourusername/space',
-    liveDemo: 'https://space.yourdomain.com'
+    liveDemo: 'https://space.yourdomain.com',
+    type: 'frontend',
   },
   {
     id: 2,
@@ -23,7 +33,8 @@ const projectsData = [
     image: 'https://images.unsplash.com/photo-1654015064357-0437ef521b0e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
     technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind', 'TailwindCSS', 'Shadcn UI'],
     sourceCode: 'https://github.com/yourusername/fit-flow',
-    liveDemo: 'https://fitflow.yourdomain.com'
+    liveDemo: 'https://fitflow.yourdomain.com',
+    type: 'fullstack',
   },
   {
     id: 3,
@@ -33,7 +44,8 @@ const projectsData = [
     image: 'https://images.unsplash.com/photo-1652992252915-f9b6592a61a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
     technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind', 'TailwindCSS', 'Shadcn UI'],
     sourceCode: 'https://github.com/yourusername/fit-flow',
-    liveDemo: 'https://fitflow.yourdomain.com'
+    liveDemo: 'https://fitflow.yourdomain.com',
+    type: 'frontend',
   },
   {
     id: 4,
@@ -43,7 +55,8 @@ const projectsData = [
     image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
     technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind', 'TailwindCSS', 'Shadcn UI'],
     sourceCode: 'https://github.com/yourusername/fit-flow',
-    liveDemo: 'https://fitflow.yourdomain.com'
+    liveDemo: 'https://fitflow.yourdomain.com',
+    type: 'frontend',
   },
   // ... (other projects)
 ];
@@ -59,8 +72,40 @@ const BrowserContainer = ({ children }) => (
   </div>
 );
 
+const PlanetFilter = ({ activeOption, onToggle }) => {
+  const options = ['all', 'frontend', 'backend', 'fullstack', 'mern'];
+  
+  return (
+    <Select onValueChange={onToggle} defaultValue={activeOption}>
+      <SelectTrigger className="w-[180px] bg-black text-white border-gray-900">
+        <SelectValue placeholder="Select a planet" />
+      </SelectTrigger>
+      <SelectContent className="bg-black text-white border-gray-900">
+        {options.map((option) => (
+          <SelectItem key={option} value={option} className="hover:bg-[#121212]">
+            {option.charAt(0).toUpperCase() + option.slice(1)}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+
+const SpaceShuttleBackButton = () => (
+  <Link to="/" className="group flex items-center">
+    <motion.div
+      whileHover={{ scale: 1.1, x: -5 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+    >
+      <FaSpaceShuttle className="text-white text-3xl transform -rotate-90" />
+    </motion.div>
+    <span className="ml-2 text-white group-hover:underline">Back to Launch Pad</span>
+  </Link>
+);
+
 const Projects = () => {
   const [stars, setStars] = useState([]);
+  const [projectType, setProjectType] = useState('all');
 
   useEffect(() => {
     const generateStars = () => {
@@ -87,8 +132,36 @@ const Projects = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const filteredProjects = projectsData.filter(project => {
+    if (projectType === 'all') return true;
+    return project.type === projectType;
+  });
+
   return (
     <div className="relative min-h-screen bg-black text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Space Shuttle Back button */}
+      <motion.div
+        className="absolute top-4 left-4 z-20"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <SpaceShuttleBackButton />
+      </motion.div>
+
+      {/* Planet Filter in top right corner */}
+      <motion.div
+        className="absolute top-4 right-4 z-20"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <PlanetFilter
+          activeOption={projectType}
+          onToggle={setProjectType}
+        />
+      </motion.div>
+
       {/* Animated starfield */}
       <div className="absolute inset-0 overflow-hidden">
         {stars.map((star, index) => (
@@ -160,7 +233,7 @@ const Projects = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          {projectsData.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
               className="flex flex-col md:flex-row gap-8 items-center"

@@ -65,7 +65,7 @@ const ProjectsSection = () => {
   const renderMarqueeText = useMemo(() => (
     <>
       {[...Array(10)].map((_, index) => (
-        <span key={index} className="text-[20rem] font-bold opacity-10 inline-block mr-8 text-white">
+        <span key={index} className="text-[15rem] font-bold opacity-10 inline-block mr-8 text-white">
           Projects
         </span>
       ))}
