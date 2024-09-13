@@ -6,8 +6,9 @@ import ResumeSection from './ResumeSection';
 import SkillsSection from './SkillsSection';
 import DesignifySection from './DesignifySection';
 import AnimatedInfographic from './AnimatedInfographic';
-import GitHubActivitySection from './GitHubActivitySection';
+import HoursOfCodingSection from './HoursOfCodingSection';
 import AboutSection from './AboutSection';
+import ContactSection from './ContactSection';
 
 function Home() {
   return (
@@ -21,8 +22,11 @@ function Home() {
           <SkillsSection />
           <DesignifySection />
           <AnimatedInfographic />
-          <GitHubActivitySection />
-          <AboutSection />
+          <HoursOfCodingSection />
+          <div className='lg:col-span-2 xl:col-span-1 lg:row-span-2 flex flex-col gap-4'>
+            <AboutSection />
+            <ContactSection />
+          </div>
         </div>
       </div>
     </section>
