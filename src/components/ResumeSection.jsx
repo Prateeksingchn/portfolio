@@ -4,7 +4,7 @@ function ResumeSection() {
   return (
     <div className='ring-1 dark:ring-white/10 ring-primary/5 flex flex-col justify-between items-center rounded-3xl shadow-xl dark:shadow-thick p-8 bg-[#1A1A1A] dark:bg-secondary overflow-hidden text-center lg:text-left'>
       <div> 
-        <p className='text-xl text-primary dark:text-white lg:text-5xl tracking-tight'>
+        <p className='text-xl text-primary dark:text-white lg:text-6xl font-medium tracking-tight'>
           Grab my résumé!
         </p>
         <p className='mt-4 text-sm text-zinc-500 dark:text-zinc-400 md:max-w-xs lg:max-w-none'>

@@ -5,7 +5,7 @@ import ProjectsSection from './ProjectsSection';
 import ResumeSection from './ResumeSection';
 import SkillsSection from './SkillsSection';
 import DesignifySection from './DesignifySection';
-import CodePlaygroundSection from './CodePlaygroundSection';
+import AnimatedInfographic from './AnimatedInfographic';
 import GitHubActivitySection from './GitHubActivitySection';
 import AboutSection from './AboutSection';
 
@@ -20,7 +20,7 @@ function Home() {
           <ResumeSection />
           <SkillsSection />
           <DesignifySection />
-          <CodePlaygroundSection />
+          <AnimatedInfographic />
           <GitHubActivitySection />
           <AboutSection />
         </div>

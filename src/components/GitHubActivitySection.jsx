@@ -1,75 +1,60 @@
-import React, { useState } from 'react';
-import { Code, CheckCircle, XCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Code2, GitBranch } from 'lucide-react';
 
-const CodeChallengesSection = () => {
-  const [currentChallenge, setCurrentChallenge] = useState(0);
-  const [userAnswer, setUserAnswer] = useState('');
-  const [result, setResult] = useState(null);
+const HoursOfCodingSection = () => {
+  const [hours, setHours] = useState(10);
 
-  const challenges = [
-    {
-      question: "What's the output of this code?\n\nconst arr = [1, 2, 3];\nconsole.log([...arr, 4, 5]);",
-      answer: "[1, 2, 3, 4, 5]"
-    },
-    {
-      question: "Complete this function to return the factorial of n:\n\nfunction factorial(n) {\n  // Your code here\n}",
-      answer: "function factorial(n) {\n  return n <= 1 ? 1 : n * factorial(n - 1);\n}"
-    }
-    // Add more challenges as needed
-  ];
+  useEffect(() => {
+    const targetHours = 137;
+    const duration = 2000; // 2 seconds
+    const increment = (targetHours - 10) / (duration / 16); // 60 FPS
 
-  const checkAnswer = () => {
-    setResult(userAnswer.trim() === challenges[currentChallenge].answer.trim());
-  };
+    let currentHours = 10;
+    const timer = setInterval(() => {
+      currentHours += increment;
+      if (currentHours >= targetHours) {
+        clearInterval(timer);
+        setHours(targetHours);
+      } else {
+        setHours(Math.floor(currentHours));
+      }
+    }, 16);
 
-  const nextChallenge = () => {
-    setCurrentChallenge((prev) => (prev + 1) % challenges.length);
-    setUserAnswer('');
-    setResult(null);
-  };
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-8 lg:row-start-4 h-full flex flex-col justify-between bg-[#1A1A1A] dark:bg-secondary">
-      <h2 className="text-xl tracking-tight font-medium text-primary dark:text-white md:text-4xl mb-6 flex items-center">
-        <Code className="mr-2" size={28} />
-        Code Challenge
-      </h2>
-      
-      <div className="flex-grow">
-        <pre className="bg-gray-800 p-4 rounded-lg text-sm text-zinc-300 whitespace-pre-wrap mb-4">
-          {challenges[currentChallenge].question}
-        </pre>
-        <textarea
-          className="w-full bg-gray-700 text-white p-2 rounded-lg"
-          rows="4"
-          value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
-          placeholder="Type your answer here..."
-        />
-        {result !== null && (
-          <div className={`mt-2 ${result ? 'text-green-500' : 'text-red-500'} flex items-center`}>
-            {result ? <CheckCircle className="mr-2" size={16} /> : <XCircle className="mr-2" size={16} />}
-            {result ? 'Correct!' : 'Try again!'}
-          </div>
-        )}
+    <div className="relative ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-8 lg:row-start-4 h-full flex flex-col justify-between bg-[#1A1A1A] dark:bg-secondary overflow-hidden group">
+      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+        <svg className="w-32 h-32 text-blue-500 opacity-10 blur-sm group-hover:opacity-20 group-hover:blur-none transition-all duration-300" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M95.9 2.9c-2.3-1.3-5.2-1.3-7.6 0L3.4 47.4c-2.3 1.3-3.7 3.8-3.4 6.5.3 2.7 2.1 4.9 4.7 5.7l20.8 6.1v23.9c0 2.8 1.5 5.3 3.9 6.6 2.4 1.3 5.3 1.2 7.6-.3l14.2-9.5 18.2 5.3c.7.2 1.4.3 2.1.3 1.6 0 3.2-.5 4.5-1.4 1.8-1.3 2.9-3.3 3-5.5l4.6-76.9c.3-3.1-1.4-6-4.1-7.3zM78.5 80.5L32.9 66.7 68.4 31c1.4-1.4.4-3.7-1.5-3.7-.5 0-1 .2-1.4.6L25.8 68.5l-20.3-6L90.4 17.9l-11.9 62.6z"/>
+        </svg>
       </div>
       
-      <div className="flex justify-between mt-4">
-        <button 
-          className="text-sm py-2 px-4 font-semibold rounded-lg bg-primary dark:bg-white dark:text-primary dark:hover:text-white hover:text-primary dark:hover:bg-white/5 hover:bg-primary/10 text-gray-600 flex items-center justify-center duration-200"
-          onClick={checkAnswer}
-        >
-          Check Answer
-        </button>
-        <button 
-          className="text-sm py-2 px-4 font-semibold rounded-lg bg-primary dark:bg-white dark:text-primary dark:hover:text-white hover:text-primary dark:hover:bg-white/5 hover:bg-primary/10 text-gray-600 flex items-center justify-center duration-200"
-          onClick={nextChallenge}
-        >
-          Next Challenge
-        </button>
+      <div className="absolute top-4 left-4">
+        <Code2 className="text-gray-600" size={24} />
+      </div>
+      
+      <div className="absolute bottom-4 right-4">
+        <GitBranch className="text-gray-600" size={24} />
+      </div>
+      
+      <div className="flex-grow flex flex-col items-center justify-center relative z-10">
+        <div className="text-7xl font-bold text-primary dark:text-white mb-2">
+          {hours}
+        </div>
+        <div className="text-xl text-green-500">
+          hrs
+        </div>
+        <div className="text-sm text-gray-400 mt-2">
+          coding
+        </div>
+        <div className="text-xs text-blue-400 mt-1">
+          (Wakatime)
+        </div>
       </div>
     </div>
   );
 };
 
-export default CodeChallengesSection;
+export default HoursOfCodingSection;
