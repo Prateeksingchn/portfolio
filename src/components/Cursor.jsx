@@ -73,33 +73,27 @@ const Cursor = () => {
     const projectsCursor = projectsCursorRef.current;
     const projectsCursorAfter = projectsCursor.querySelector('::after');
 
+    let mouseX = 0;
+    let mouseY = 0;
+    let projectsCursorX = 0;
+    let projectsCursorY = 0;
+
     const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
       gsap.to(mainCursor, {
-        x: e.clientX,
-        y: e.clientY,
+        x: mouseX,
+        y: mouseY,
         duration: 0.1,
         ease: 'power2.out',
       });
 
       gsap.to(mainCursorAfter, {
-        x: e.clientX,
-        y: e.clientY,
+        x: mouseX,
+        y: mouseY,
         duration: 0.3,
         ease: 'power2.out',
-      });
-
-      gsap.to(projectsCursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1,
-        ease: 'power2.out'
-      });
-
-      gsap.to(projectsCursorAfter, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.3,
-        ease: 'power2.out'
       });
     };
 
@@ -116,6 +110,40 @@ const Cursor = () => {
       gsap.to(projectsCursor, { scale: 1, duration: 0.2 });
       gsap.to(projectsCursorAfter, { scale: 1, opacity: 0.8, duration: 0.2 });
     };
+
+    const followMainCursor = () => {
+      const dx = mouseX - projectsCursorX;
+      const dy = mouseY - projectsCursorY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const maxDistance = 50; // Maximum distance between cursors
+      const minDistance = 50;  // Minimum distance between cursors
+
+      if (distance > minDistance) {
+        const angle = Math.atan2(dy, dx);
+        const targetX = mouseX - Math.cos(angle) * maxDistance;
+        const targetY = mouseY - Math.sin(angle) * maxDistance;
+
+        // Increase this value to make the following faster
+        const easingFactor = 0.2; // Changed from 0.1 to 0.2
+
+        projectsCursorX += (targetX - projectsCursorX) * easingFactor;
+        projectsCursorY += (targetY - projectsCursorY) * easingFactor;
+      }
+
+      gsap.set(projectsCursor, {
+        x: projectsCursorX,
+        y: projectsCursorY,
+      });
+
+      gsap.set(projectsCursorAfter, {
+        x: projectsCursorX,
+        y: projectsCursorY,
+      });
+
+      requestAnimationFrame(followMainCursor);
+    };
+
+    followMainCursor();
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mousedown', onMouseDown);
