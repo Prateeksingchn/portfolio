@@ -35,7 +35,7 @@ const NextImageContainer = styled(ImageContainer)`
   animation: ${nextImageAnimation} 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 `;
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ onMouseEnter, onMouseLeave }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isChanging, setIsChanging] = useState(false);
   const [nextImageIndex, setNextImageIndex] = useState(1);
@@ -73,7 +73,12 @@ const ProjectsSection = () => {
   ), []);
 
   return (
-    <Link to="/projects" className="this-ring-1 lg:row-span-2 flex flex-col justify-between group hover:ring-primary/10 dark:hover:ring-white/20 duration-300 h-full dark:ring-white/10 ring-primary/5 lg:row-start-2 md:grid-cols-2 md:grid lg:gap-0 md:items-center md:gap-12 lg:grid-cols-none lg:col-start-2 lg:col-span-2 rounded-3xl p-8 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick relative overflow-hidden">
+    <Link 
+      to="/projects" 
+      className="this-ring-1 lg:row-span-2 flex flex-col justify-between group hover:ring-primary/10 dark:hover:ring-white/20 duration-300 h-full dark:ring-white/10 ring-primary/5 lg:row-start-2 md:grid-cols-2 md:grid lg:gap-0 md:items-center md:gap-12 lg:grid-cols-none lg:col-start-2 lg:col-span-2 rounded-3xl p-8 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick relative overflow-hidden"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {/* Background text */}
       <div className="absolute z-0 inset-0 flex items-center justify-center overflow-hidden pointer-events-none mt-20">
         <MarqueeText>
@@ -84,7 +89,7 @@ const ProjectsSection = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
         <h2 className="text-6xl font-bold mb-4 text-white">Projects</h2>
-        <p className="text-md mb-8 text-white">
+        <p className="text-sm mb-8 text-gray-400 font-sans">
           EXPLORE INNOVATIVE EXCELLENCE WITH OUR PORTFOLIO - MODERN, CLEAR, 
           AND MINIMALIST. FROM WEB APPS TO DESIGNS, REDEFINE YOUR 
           JOURNEY EFFORTLESSLY.

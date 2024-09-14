@@ -1,6 +1,7 @@
 import React from 'react';
-import '../App.css'; // Import the CSS file
+import '../App.css';
 
+import Cursor from './Cursor';
 import ProfileSection from './ProfileSection';
 import SocialMediaSection from './SocialMediaSection';
 import ProjectsSection from './ProjectsSection';
@@ -13,13 +14,16 @@ import AboutSection from './AboutSection';
 import ContactSection from './ContactSection';
 
 function Home() {
+  const { cursorJSX, handleProjectsMouseEnter, handleProjectsMouseLeave } = Cursor();
+
   return (
     <section className='dark:bg-[#101010] w-full min-h-screen'>
+      {cursorJSX}
       <div className='p-4'>
         <div className='grid grid-cols-1 gap-4 list-none lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4'>
           <ProfileSection />
           <SocialMediaSection />
-          <ProjectsSection />
+          <ProjectsSection onMouseEnter={handleProjectsMouseEnter} onMouseLeave={handleProjectsMouseLeave} />
           <ResumeSection />
           <SkillsSection />
           <DesignifySection />
