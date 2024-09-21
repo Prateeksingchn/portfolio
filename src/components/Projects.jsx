@@ -61,26 +61,50 @@ const projectsData = [
   // ... (other projects)
 ];
 
+// Browser Container
 const BrowserContainer = ({ children }) => (
-  <div className="rounded-lg overflow-hidden bg-[#121212] shadow-lg">
-    <div className="bg-[#121212] px-4 py-2 flex items-center space-x-1">
-      <div className="w-2 h-2 rounded-full bg-red-500"></div>
-      <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+  <div className="rounded-lg overflow-hidden bg-gradient-to-b from-[#1e1e1e] to-[#121212] shadow-2xl">
+
+    {/* Browser Header */}
+
+    <div className="bg-[#0f0f0f] px-[12px] py-1 flex items-center justify-between border-b border-black">
+      <div className="flex space-x-2">
+        <div className="w-2 h-2 rounded-full bg-red-500 opacity-80 hover:opacity-100 transition-opacity"></div>
+        <div className="w-2 h-2 rounded-full bg-yellow-500 opacity-80 hover:opacity-100 transition-opacity"></div>
+        <div className="w-2 h-2 rounded-full bg-green-500 opacity-80 hover:opacity-100 transition-opacity"></div>
+      </div>
+      <div className="flex-grow mx-4">
+        <div className="w-2/3 h-2 bg-[#2a2a2a] rounded-full mx-auto"></div>
+      </div>
+      <div className="flex space-x-2">
+        <div className="w-[16px] h-[16px] rounded-md border border-gray-700 flex items-center justify-center">
+          <div className="w-[5px] h-[5px] bg-gray-400"></div>
+        </div>
+        <div className="w-[16px] h-[16px] rounded-md border border-gray-700 flex items-center justify-center">
+          <svg className="w-3 h-3 text-gray-400 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </div>
     </div>
-    {children}
+    
+    {/* Browser Content */}
+    <div className="p-1">
+      {children}
+    </div>
   </div>
 );
 
+// Planet Filter
 const PlanetFilter = ({ activeOption, onToggle }) => {
   const options = ['all', 'frontend', 'backend', 'fullstack', 'mern'];
   
   return (
     <Select onValueChange={onToggle} defaultValue={activeOption}>
-      <SelectTrigger className="w-[180px] bg-black text-white border-gray-900">
+      <SelectTrigger className="w-[180px] bg-black text-white border-2 border-zinc-500">
         <SelectValue placeholder="Select a planet" />
       </SelectTrigger>
-      <SelectContent className="bg-black text-white border-gray-900">
+      <SelectContent className="bg-black text-white border-zinc-500">
         {options.map((option) => (
           <SelectItem key={option} value={option} className="hover:bg-[#121212]">
             {option.charAt(0).toUpperCase() + option.slice(1)}
@@ -91,15 +115,31 @@ const PlanetFilter = ({ activeOption, onToggle }) => {
   );
 };
 
+
+// Space Shuttle Back Button
 const SpaceShuttleBackButton = () => (
-  <Link to="/" className="group flex items-center">
+  <Link to="/" className="group flex items-center space-x-3 px-5 py-3 rounded-full transition-all duration-300">
     <motion.div
-      whileHover={{ scale: 1.1, x: -5 }}
+      whileHover={{ rotate: -90, scale: 1.2 }}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      className="group-hover:text-blue-400"
+    >
+      <FaSpaceShuttle className="text-white text-2xl transition-colors duration-300" />
+    </motion.div>
+    <motion.span 
+      className="text-white font-medium relative text-base tracking-wide transition-colors duration-300 group-hover:text-blue-400"
+      whileHover={{ x: -3 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
-      <FaSpaceShuttle className="text-white text-3xl transform -rotate-90" />
-    </motion.div>
-    <span className="ml-2 text-white group-hover:underline">Back to Launch Pad</span>
+      Return to Launch Pad
+      <motion.span
+        className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400 origin-left"
+        initial={{ scaleX: 0 }}
+        whileHover={{ scaleX: 1 }}
+        transition={{ duration: 0.3 }}
+      />
+    </motion.span>
   </Link>
 );
 
@@ -227,8 +267,10 @@ const Projects = () => {
           Top Projects
         </motion.h2>
 
+
+        {/* Projects  */}
         <motion.div 
-          className="space-y-4"
+          className="space-y-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
@@ -236,41 +278,44 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="flex flex-col md:flex-row gap-8 items-center"
+              className="flex flex-col md:flex-row gap-8 items-start"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="md:w-1/2 p-10">
+              <div className="md:w-1/2">
                 <BrowserContainer>
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-[200px] object-cover rounded-lg"
-                  />
+                  <Link to={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-[220px] object-cover rounded-lg cursor-pointer transition-opacity duration-300 hover:opacity-80"
+                    />
+                  </Link>
                 </BrowserContainer>
               </div>
-              <div className="md:w-1/2 pr-20">
-                <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-400 mb-4">{project.date}</p>
-                <p className="text-gray-300 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-6">
+              <div className="md:w-1/2 space-y-4">
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-cyan-100 to-pink-600 bg-clip-text text-transparent">{project.title}</h3>
+                <p className="text-gray-500 text-sm">{project.date}</p>
+                <p className="text-gray-300">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, index) => (
-                    <Badge key={index} variant="secondary" className="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded">
+                    <Badge key={index} variant="secondary" className="bg-zinc-900 text-gray-100 px-3 py-[3px] text-xs rounded-lg border border-black">
                       {tech}
                     </Badge>
                   ))}
                 </div>
-                <div className="flex gap-4">
-                  <Button variant="outline" size="sm" asChild className="border-gray-700 hover:bg-gray-800">
-                    <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
+                <div className="flex gap-4 mt-6">
+                  <Button variant="ghost" size="sm" asChild>
+                    <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
                       <Github className="mr-2" size={16} />
-                      Source Code
+                      Source
                     </a>
                   </Button>
-                  <Button variant="outline" size="sm" asChild className="border-gray-700 hover:bg-gray-800">
-                    <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
-                      Live Demo <ExternalLink className="ml-2" size={16} />
+                  <Button variant="ghost" size="sm" asChild>
+                    <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
+                      Demo
+                      <ExternalLink className="ml-2" size={16} />
                     </a>
                   </Button>
                 </div>
