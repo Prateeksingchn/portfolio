@@ -1,35 +1,60 @@
 /* Webkit browsers (Chrome, Safari, newer versions of Edge) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 5px;
+  width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background: black;
-  border-radius: 4px;
+  background: #000000;
+  border-radius: 1.5px;
 }
 
-
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #5cf4ff, #2196f3);
-  border-radius: 4px;
-  border: 2px solid black;
+  background: linear-gradient(180deg, #8e2de2, #4a00e0);
+  border-radius: 1.5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #f3f7f3, #1e88e5);
+  background: linear-gradient(180deg, #a44ce7, #6a11cb);
 }
 
 /* Firefox */
 * {
-  scrollbar-width: thick;
-  scrollbar-color: #565cd7 black;
+  scrollbar-width: thin;
+  scrollbar-color: #8e2de2 #000000;
 }
 
 /* For Internet Explorer and Edge (older versions) */
 body {
-  scrollbar-face-color: #4fff4b;
-  scrollbar-track-color: #0a0a0a;
-  scrollbar-arrow-color: #4fff4b;
-  scrollbar-shadow-color: #2196f3;
+  scrollbar-face-color: #8e2de2;
+  scrollbar-track-color: #000000;
+  scrollbar-arrow-color: #ffffff;
+  scrollbar-shadow-color: #4a00e0;
+}
+
+/* Add subtle star-like effect to the scrollbar track */
+::-webkit-scrollbar-track::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 16px 16px, 32px 32px;
+  background-position: 0 0, 8px 8px;
+}
+
+/* Add a subtle glow effect to the scrollbar thumb */
+::-webkit-scrollbar-thumb::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(142, 45, 226, 0.4) 0%, rgba(142, 45, 226, 0) 70%);
+  filter: blur(1px);
 }

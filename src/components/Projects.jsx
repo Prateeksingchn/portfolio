@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, ChevronDown } from 'lucide-react';
 import { FaSpaceShuttle } from "react-icons/fa";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
 import { Link } from 'react-router-dom';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../components/ui/select";
 
 const projectsData = [
   {
@@ -23,7 +16,7 @@ const projectsData = [
     technologies: ['Portfolio', 'Next.js', 'Framer motion', 'TypeScript', 'Shadcn UI', 'TailwindCSS'],
     sourceCode: 'https://github.com/yourusername/space',
     liveDemo: 'https://space.yourdomain.com',
-    type: 'frontend',
+    filters: ['frontend', 'top'],
   },
   {
     id: 2,
@@ -34,31 +27,33 @@ const projectsData = [
     technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind', 'TailwindCSS', 'Shadcn UI'],
     sourceCode: 'https://github.com/yourusername/fit-flow',
     liveDemo: 'https://fitflow.yourdomain.com',
-    type: 'fullstack',
+    filters: ['fullstack', 'top'],
   },
   {
     id: 3,
     title: 'Recipes App',
     date: 'Jan 2024 - July 2024',
-    description: 'StackOverFlow for Gym rat',
+    description: 'A comprehensive recipe management application',
     image: 'https://images.unsplash.com/photo-1652992252915-f9b6592a61a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
-    technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind', 'TailwindCSS', 'Shadcn UI'],
-    sourceCode: 'https://github.com/yourusername/fit-flow',
-    liveDemo: 'https://fitflow.yourdomain.com',
-    type: 'frontend',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'TailwindCSS'],
+    sourceCode: 'https://github.com/yourusername/recipes-app',
+    liveDemo: 'https://recipes-app.yourdomain.com',
+    filters: ['frontend', 'mern', 'top'],
   },
   {
+
     id: 4,
     title: 'Image Gallery',
     date: 'Jan 2024 - July 2024',
-    description: 'StackOverFlow for Gym rat',
+    description: 'A responsive image gallery with advanced filtering',
     image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
-    technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind', 'TailwindCSS', 'Shadcn UI'],
-    sourceCode: 'https://github.com/yourusername/fit-flow',
-    liveDemo: 'https://fitflow.yourdomain.com',
-    type: 'frontend',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend', 'top'],
   },
-  // ... (other projects)
+  // ... (you can add more projects here)
+
 ];
 
 // Browser Container
@@ -95,23 +90,32 @@ const BrowserContainer = ({ children }) => (
   </div>
 );
 
-// Planet Filter
-const PlanetFilter = ({ activeOption, onToggle }) => {
-  const options = ['all', 'frontend', 'backend', 'fullstack', 'mern'];
+// Galaxy Filter
+const GalaxyFilter = ({ activeOption, onToggle }) => {
+  const options = ['top projects', 'all projects', 'frontend', 'backend', 'fullstack', 'mern'];
   
   return (
-    <Select onValueChange={onToggle} defaultValue={activeOption}>
-      <SelectTrigger className="w-[180px] bg-black text-white border-2 border-zinc-500">
-        <SelectValue placeholder="Select a planet" />
-      </SelectTrigger>
-      <SelectContent className="bg-black text-white border-zinc-500">
+    <div className="relative group">
+      <button
+        className="flex items-center justify-between w-[150px] px-4 py-2 text-white bg-[#0a0a0a] border-2 border-[#333] rounded-lg hover:bg-[#252525] transition-colors duration-300"
+      >
+        <span>{activeOption.charAt(0).toUpperCase() + activeOption.slice(1)}</span>
+        <ChevronDown className="ml-2 transition-transform duration-300 group-hover:transform group-hover:rotate-180" size={16} />
+      </button>
+      <div className="absolute right-0 mt-2 w-[150px] bg-[#1a1a1a] border-2 border-[#333] rounded-lg shadow-lg overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         {options.map((option) => (
-          <SelectItem key={option} value={option} className="hover:bg-[#121212]">
+          <button
+            key={option}
+            onClick={() => onToggle(option)}
+            className={`block w-full text-left px-4 py-2 hover:bg-[#252525] transition-colors duration-300 ${
+              option === activeOption ? 'text-blue-400' : 'text-white'
+            }`}
+          >
             {option.charAt(0).toUpperCase() + option.slice(1)}
-          </SelectItem>
+          </button>
         ))}
-      </SelectContent>
-    </Select>
+      </div>
+    </div>
   );
 };
 
@@ -145,7 +149,7 @@ const SpaceShuttleBackButton = () => (
 
 const Projects = () => {
   const [stars, setStars] = useState([]);
-  const [projectType, setProjectType] = useState('all');
+  const [projectType, setProjectType] = useState('top projects');
 
   useEffect(() => {
     const generateStars = () => {
@@ -173,9 +177,15 @@ const Projects = () => {
   }, []);
 
   const filteredProjects = projectsData.filter(project => {
-    if (projectType === 'all') return true;
-    return project.type === projectType;
+    if (projectType === 'top projects') return project.filters.includes('top');
+    if (projectType === 'all projects') return true;
+    return project.filters.includes(projectType);
   });
+
+  // Function to capitalize the first letter of each word
+  const capitalizeWords = (str) => {
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  };
 
   return (
     <div className="relative min-h-screen bg-black text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -189,14 +199,14 @@ const Projects = () => {
         <SpaceShuttleBackButton />
       </motion.div>
 
-      {/* Planet Filter in top right corner */}
+      {/* Galaxy Filter */}
       <motion.div
-        className="absolute top-4 right-4 z-20"
+        className="absolute top-60 right-4 z-20"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <PlanetFilter
+        <GalaxyFilter
           activeOption={projectType}
           onToggle={setProjectType}
         />
@@ -259,12 +269,13 @@ const Projects = () => {
         </motion.div>
 
         <motion.h2 
+          key={projectType} // Add this to trigger animation on change
           className="text-3xl font-semibold mb-8"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          Top Projects
+          {capitalizeWords(projectType)}
         </motion.h2>
 
 
@@ -300,7 +311,7 @@ const Projects = () => {
                 <p className="text-gray-300">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, index) => (
-                    <Badge key={index} variant="secondary" className="bg-zinc-900 text-gray-100 px-3 py-[3px] text-xs rounded-lg border border-black">
+                    <Badge key={index} variant="secondary" className="bg-zinc-900 text-gray-100 px-3 py-[6px] text-xs rounded-lg border border-black">
                       {tech}
                     </Badge>
                   ))}

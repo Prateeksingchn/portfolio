@@ -1,21 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const marquee = keyframes`
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
-`;
-
-const nextImageAnimation = keyframes`
-  0% { 
-    transform: translateY(50%) scale(0.8) rotate(-10deg);
-    opacity: 0;
-  }
-  100% { 
-    transform: translateY(0) scale(1) rotate(4deg);
-    opacity: 1;
-  }
 `;
 
 const MarqueeText = styled.div`
@@ -24,21 +14,8 @@ const MarqueeText = styled.div`
   animation: ${marquee} 20s linear infinite;
 `;
 
-const ImageContainer = styled.div`
-  position: absolute;
-  width: 350px;
-  height: 470px;
-  transition: all 0.5s ease-in-out;
-`;
-
-const NextImageContainer = styled(ImageContainer)`
-  animation: ${nextImageAnimation} 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-`;
-
 const ProjectsSection = ({ onMouseEnter, onMouseLeave }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isChanging, setIsChanging] = useState(false);
-  const [nextImageIndex, setNextImageIndex] = useState(1);
 
   const images = useMemo(() => [
     "https://images.unsplash.com/photo-1658211208906-429cd4aa0e5b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8M2QlMjByZW5kZXJ8ZW58MHwxfDB8fHww",
@@ -49,13 +26,8 @@ const ProjectsSection = ({ onMouseEnter, onMouseLeave }) => {
   ], []);
 
   const changeImage = useCallback(() => {
-    setIsChanging(true);
-    setNextImageIndex((currentImageIndex + 1) % images.length);
-    setTimeout(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      setIsChanging(false);
-    }, 500);
-  }, [currentImageIndex, images.length]);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
     const intervalId = setInterval(changeImage, 3000);
@@ -95,35 +67,38 @@ const ProjectsSection = ({ onMouseEnter, onMouseLeave }) => {
           JOURNEY EFFORTLESSLY.
         </p>
         <div className="relative w-full h-[470px] flex items-center justify-center mt-20">
-          {images.map((image, index) => (
-            <ImageContainer
-              key={index}
-              style={{
-                zIndex: index === currentImageIndex ? 20 : 10 - ((index - currentImageIndex + images.length) % images.length),
-                opacity: index === currentImageIndex ? 1 : 0.5,
-                transform: `rotate(${((index - currentImageIndex + images.length) % images.length) * 2}deg)`,
-              }}
-            >
-              <img
-                src={image}
-                alt={`Project Preview ${index + 1}`}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            </ImageContainer>
-          ))}
-          {isChanging && (
-            <NextImageContainer
-              style={{
-                zIndex: 30,
-              }}
-            >
-              <img
-                src={images[nextImageIndex]}
-                alt={`Next Project Preview`}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            </NextImageContainer>
-          )}
+          <AnimatePresence>
+            {images.map((image, index) => {
+              const offset = (index - currentImageIndex + images.length) % images.length;
+              return (
+                <motion.div
+                  key={index}
+                  className="absolute w-[350px] h-[470px]"
+                  initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
+                  animate={{
+                    opacity: offset === 0 ? 1 : 0.5,
+                    scale: offset === 0 ? 1 : 0.9,
+                    rotate: offset * 2, // This adds the rotation from the old code
+                    zIndex: images.length - offset,
+                    x: offset === 0 ? 0 : offset * 20,
+                  }}
+                  exit={{ opacity: 0, scale: 0.8, rotate: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                    duration: 0.5
+                  }}
+                >
+                  <img
+                    src={image}
+                    alt={`Project Preview ${index + 1}`}
+                    className="w-full h-full object-cover rounded-lg shadow-lg"
+                  />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
     </Link>
