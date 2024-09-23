@@ -52,7 +52,9 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
   }, [photosControls]);
 
   return (
-    <div className="bg-black text-white min-h-screen pt-32 pb-14 relative overflow-hidden">
+    <div className="bg-black text-white min-h-screen pt-32 pb-14 relative overflow-hidden font-[Roboto] ">
+      
+      {/* back to home button */}
       <Link to="/" className="absolute top-4 left-4 z-10">
         <motion.svg
           width="24"
@@ -102,24 +104,30 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
           <span className="ml-2 text-5xl">🐳</span>
         </h1>
         
-        {/* image section - made smaller */}
-        <div className="grid grid-cols-3 gap-6 mb-12">
-          <div className="relative">
-            <div className="absolute inset-0 bg-white transform rotate-3 shadow-lg"></div>
-            <div className="relative bg-gray-200 aspect-[3/4] overflow-hidden">
-              <img src="./images/avatardp.jpg" alt="My First Capture" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
+        {/* image section - polaroid style with rotation */}
+        <div className="grid grid-cols-3 gap-8 mb-16">
+          <div className="relative group">
+            <div className="bg-white p-2 shadow-lg transform transition-all duration-300 rotate-3 group-hover:shadow-xl">
+              <div className="relative overflow-hidden">
+                <img src="./images/avatardp.jpg" alt="My First Capture" className="w-full h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
+              </div>
+              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] ">Me</p>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute inset-0 bg-white transform -rotate-2 shadow-lg"></div>
-            <div className="relative bg-gray-200 aspect-[3/4] overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Solitary Wanderer" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
+          <div className="relative group">
+            <div className="bg-white p-2 shadow-lg transform transition-all duration-300 -rotate-2 group-hover:shadow-xl">
+              <div className="relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Solitary Wanderer" className="w-full h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
+              </div>
+              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] ">Wanderlust</p>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute inset-0 bg-white transform rotate-3 shadow-lg"></div>
-            <div className="relative bg-gray-200 aspect-[3/4] overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Peace" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
+          <div className="relative group">
+            <div className="bg-white p-2 shadow-lg transform transition-all duration-300 rotate-1 group-hover:shadow-xl">
+              <div className="relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Peace" className="w-full h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
+              </div>
+              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] ">Serenity</p>
             </div>
           </div>
         </div>
@@ -150,7 +158,7 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
           </p>
         </section>
 
-        {/* New Hobbies and Interests section */}
+        {/* Updated Hobbies and Interests section */}
         <motion.section 
           className="mb-16"
           initial={{ opacity: 0 }}
@@ -158,55 +166,55 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl font-bold mb-8">Hobbies & Interests</h2>
-          <div className="relative">
-            {/* Hobby cards */}
-            <div className="flex flex-wrap justify-center gap-6 mb-12">
-              {hobbies.map((hobby, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {hobbies.map((hobby, index) => (
+              <motion.div 
+                key={index}
+                className="rounded-lg p-6 shadow-lg"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, backgroundColor: "#1a1a1a" }}
+              >
+                <div className="text-4xl mb-4">{hobby.icon}</div>
+                <h3 className="text-xl font-bold mb-2">{hobby.name}</h3>
+                <p className="text-sm text-gray-400">{hobby.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Updated Photography showcase */}
+        <motion.section 
+          className="mb-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <h2 className="text-2xl font-bold mb-4">My Photography</h2>
+          <p className="text-sm text-gray-400 mb-6">
+            Photography is more than just a hobby for me—it's a way to capture the world's beauty and tell stories through images. 
+            Here's a glimpse into my visual journey:
+          </p>
+          <div className="overflow-hidden">
+            <motion.div 
+              ref={photosRef}
+              className="flex space-x-4 p-2"
+              animate={photosControls}
+            >
+              {[...photos, ...photos].map((photo, index) => (
                 <motion.div 
                   key={index}
-                  className="w-40 h-40 flex flex-col items-center justify-center text-center"
-                  initial={{ y: 50, opacity: 0, rotate: -5 }}
-                  animate={{ y: 0, opacity: 1, rotate: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, rotate: 5 }}
+                  className="flex-shrink-0 w-[200px] h-[200px] relative overflow-hidden rounded-lg group"
+                  whileHover={{ scale: 1.05 }}
                 >
-                  <div className="text-4xl mb-2">{hobby.icon}</div>
-                  <h3 className="text-lg font-bold mb-1">{hobby.name}</h3>
-                  <p className="text-xs text-gray-300">{hobby.description}</p>
+                  <motion.img 
+                    src={photo} 
+                    alt={`Photography sample ${index + 1}`} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
                 </motion.div>
               ))}
-            </div>
-
-            {/* Photography showcase */}
-            <motion.div 
-              className="mt-12 overflow-hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <h3 className="text-2xl font-bold mb-4">My Photography</h3>
-              <motion.div 
-                ref={photosRef}
-                className="flex space-x-4 p-2"
-                animate={photosControls}
-              >
-                {[...photos, ...photos].map((photo, index) => (
-                  <motion.div 
-                    key={index}
-                    className="flex-shrink-0 w-[200px] h-[200px] relative overflow-hidden rounded-lg"
-                    whileHover={{ scale: 1.05, rotate: Math.random() * 5 - 2.5 }}
-                  >
-                    <motion.img 
-                      src={photo} 
-                      alt={`Photography sample ${index + 1}`} 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      initial={{ scale: 1.2 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
             </motion.div>
           </div>
         </motion.section>
@@ -318,15 +326,12 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
             this site:
           </p>
           <ul className="list-disc pl-5 grid grid-cols-2 gap-2">
-            <li>anfu.me</li>
             <li>beta.vimfn.in</li>
-            <li>bopahobby.com</li>
             <li>Pinterest</li>
             <li>Awwwards.com</li>
             <li>Star Wars</li>
             <li>Dribbble.com</li>
             <li>Behance.net</li>
-            <li>Apple.com (for minimalist design)</li>
             <li>acternity ui</li>
           </ul>
         </section>
