@@ -2,16 +2,16 @@ import React from 'react';
 import '../App.css';
 
 import Cursor from './Cursor';
-import ProfileSection from './ProfileSection';
-import SocialMediaSection from './SocialMediaSection';
-import ProjectsSection from './ProjectsSection';
-import ResumeSection from './ResumeSection';
-import SkillsSection from './SkillsSection';
-import DesignifySection from './DesignifySection';
-import AnimatedInfographic from './AnimatedInfographic';
-import HoursOfCodingSection from './HoursOfCodingSection';
-import AboutSection from './AboutSection';
-import ContactSection from './ContactSection';
+import ProfileSection from './home/ProfileSection';
+import SocialMediaSection from './home/SocialMediaSection';
+import ProjectsSection from './home/ProjectsSection';
+import ResumeSection from './home/ResumeSection';
+import SkillsSection from './home/SkillsSection';
+import DesignifySection from './home/DesignifySection';
+import AnimatedInfographic from './home/AnimatedInfographic';
+import HoursOfCodingSection from './home/HoursOfCodingSection';
+import AboutSection from './home/AboutSection';
+import ContactSection from './home/ContactSection';
 
 function Home() {
   const { cursorJSX, handleProjectsMouseEnter, handleProjectsMouseLeave } = Cursor();

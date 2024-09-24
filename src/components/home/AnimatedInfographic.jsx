@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bar } from '../components/ui/Bar';
+import { Bar } from '../../components/ui/Bar';
 import { FaGithub, FaCode, FaStar, FaCodeBranch } from 'react-icons/fa';
 import Spline from '@splinetool/react-spline';
 

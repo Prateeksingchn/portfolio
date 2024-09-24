@@ -9,7 +9,7 @@ function AboutSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className='lg:col-span-2 xl:col-span-1 h-full flex flex-col lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick rounded-3xl p-6 cursor-pointer hover:shadow-2xl transition-shadow duration-300'
+        className='lg:col-span-2 xl:col-span-1 h-[85vh] flex flex-col lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 bg-[#1A1A1A] dark:bg-secondary shadow-xl dark:shadow-thick rounded-3xl p-6 cursor-pointer hover:shadow-2xl transition-shadow duration-300'
       >
         <div className='flex-grow'>
           <motion.h2

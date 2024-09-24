@@ -57,11 +57,9 @@ const projectsData = [
 ];
 
 // Browser Container
-const BrowserContainer = ({ children }) => (
+const BrowserContainer = ({ children, title }) => (
   <div className="rounded-lg overflow-hidden bg-gradient-to-b from-[#1e1e1e] to-[#121212] shadow-2xl">
-
     {/* Browser Header */}
-
     <div className="bg-[#0f0f0f] px-[12px] py-1 flex items-center justify-between border-b border-black">
       <div className="flex space-x-2">
         <div className="w-2 h-2 rounded-full bg-red-500 opacity-80 hover:opacity-100 transition-opacity"></div>
@@ -69,7 +67,9 @@ const BrowserContainer = ({ children }) => (
         <div className="w-2 h-2 rounded-full bg-green-500 opacity-80 hover:opacity-100 transition-opacity"></div>
       </div>
       <div className="flex-grow mx-4">
-        <div className="w-2/3 h-2 bg-[#2a2a2a] rounded-full mx-auto"></div>
+        <div className="w-2/3 h-4 bg-[#2a2a2a] rounded-lg mx-auto flex items-center justify-center">
+          <span className="text-xs text-gray-400 truncate">{title}</span>
+        </div>
       </div>
       <div className="flex space-x-2">
         <div className="w-[16px] h-[16px] rounded-md border border-gray-700 flex items-center justify-center">
@@ -295,7 +295,7 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="md:w-1/2">
-                <BrowserContainer>
+                <BrowserContainer title={project.title}>
                   <Link to={project.liveDemo} target="_blank" rel="noopener noreferrer">
                     <img 
                       src={project.image} 
