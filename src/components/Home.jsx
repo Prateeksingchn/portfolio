@@ -13,6 +13,7 @@ import HoursOfCodingSection from './home/HoursOfCodingSection';
 import AboutSection from './home/AboutSection';
 import ContactSection from './home/ContactSection';
 
+
 function Home() {
   const { cursorJSX, handleProjectsMouseEnter, handleProjectsMouseLeave } = Cursor();
 

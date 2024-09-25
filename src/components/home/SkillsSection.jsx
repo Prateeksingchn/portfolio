@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaReact, FaNodeJs, FaGitAlt, FaGithub, FaHtml5, FaCss3Alt, FaBootstrap, FaJava } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiJavascript, SiExpress, SiMongodb, SiVisualstudiocode, SiRedux, SiGreensock, SiVercel, SiFigma, SiTypescript, SiFirebase, SiOpenai, SiPostman, SiNpm } from 'react-icons/si';
+import { SiNextdotjs, SiTailwindcss, SiJavascript, SiExpress, SiMongodb, SiVisualstudiocode, SiRedux, SiGreensock, SiVercel, SiFigma, SiTypescript, SiFirebase, SiOpenai, SiPostman, SiNpm, SiNotion } from 'react-icons/si';
 import { TbBrandVscode } from 'react-icons/tb';
 
 const FramerIcon = () => (
@@ -79,7 +79,7 @@ const skillCategories = [
       { Icon: FaGitAlt, name: "Git", color: "#F05032" },
       { Icon: FaGithub, name: "GitHub", color: "#181717" },
       { Icon: TbBrandVscode, name: "VS Code", color: "#007ACC" },
-      { Icon: CursorIcon, name: "Cursor", color: "#000000" },
+      { Icon: SiNotion, name: "Notion", color: "#000000" }, // Replace Cursor with Notion
       { Icon: SiFigma, name: "Figma", color: "#F24E1E" },
       { Icon: FramerIcon, name: "Framer", color: "#0055FF" },
       { Icon: SiVercel, name: "Vercel", color: "#000000" },

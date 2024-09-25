@@ -79,6 +79,10 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
     scrollPhotos();
 }, [photosControls]);
 
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
   return (
     <div className="bg-black text-white min-h-screen pt-44 pb-14 relative overflow-hidden font-[Roboto] ">
       
@@ -226,20 +230,20 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
           <div className="overflow-hidden">
             <motion.div 
               ref={photosRef}
-              className="flex space-x-8 p-4"
+              className="flex space-x-6 p-4"
               animate={photosControls}
             >
               {[...photos, ...photos].map((photo, index) => (
                 <motion.div 
                   key={index}
-                  className="flex-shrink-0 w-[220px] h-[280px] bg-white p-2 shadow-lg transform transition-all duration-300 rotate-0 hover:rotate-2"
+                  className="flex-shrink-0 w-[200px] h-[270px] bg-white p-2 shadow-lg transform transition-all duration-300 rotate-0 hover:rotate-2"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="relative overflow-hidden">
                     <img 
                       src={photo} 
                       alt={`Photography sample ${index + 1}`} 
-                      className="w-full h-[240px] object-cover"
+                      className="w-full h-[220px] object-cover"
                     />
                   </div>
                 </motion.div>
