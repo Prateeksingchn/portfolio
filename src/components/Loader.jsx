@@ -1,94 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
-const randomImages = [
-  'https://plus.unsplash.com/premium_vector-1725393400939-11ed984b0b90?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDd8Ym84alFLVGFFMFl8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1547103106-9a0e718bb2d2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDZ8Ym84alFLVGFFMFl8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1726853546092-6a2f2c2cf652?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfGJvOGpRS1RhRTBZfHxlbnwwfHx8fHw%3D',
-  'https://images.unsplash.com/photo-1726767305248-e3cfaf9c98b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDIxfGJvOGpRS1RhRTBZfHxlbnwwfHx8fHw%3D',
-  './public/photography/5.png',
+const images = [
+  'https://images.unsplash.com/photo-1682100615199-93e280d2ca0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDd8Q0R3dXdYSkFiRXd8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1713297158683-fd9ef22160e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDIwfENEd3V3WEpBYkV3fHxlbnwwfHx8fHw%3D',
+  '/path/to/clothes-image.jpg',
+  '/path/to/food-image.jpg',
+  '/path/to/cat-image.jpg',
+  '/path/to/socks-image.jpg',
+  '/path/to/soup-image.jpg',
+  '/path/to/beach-couple-image.jpg',
+  '/path/to/pasta-image.jpg',
 ];
 
-function Loader({ onLoadingComplete }) {
+function Loader() {
   const [count, setCount] = useState(0);
-  const [images, setImages] = useState([]);
+  const [visibleImages, setVisibleImages] = useState([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const countInterval = setInterval(() => {
       setCount((prevCount) => {
-        if (prevCount < 100) {
-          return prevCount + 1;
-        } else {
-          clearInterval(interval);
-          setTimeout(onLoadingComplete, 500);
-          return prevCount;
+        if (prevCount >= 100) {
+          clearInterval(countInterval);
+          return 100;
         }
+        return prevCount + 1;
       });
-    }, 30);
+    }, 50);
 
-    return () => clearInterval(interval);
-  }, [onLoadingComplete]);
-
-  useEffect(() => {
     const imageInterval = setInterval(() => {
-      if (images.length < 5) {
-        setImages((prevImages) => [
-          ...prevImages,
-          {
-            src: randomImages[Math.floor(Math.random() * randomImages.length)],
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          },
-        ]);
-      }
-    }, 800);
+      setVisibleImages((prev) => {
+        if (prev.length >= images.length) {
+          clearInterval(imageInterval);
+          return prev;
+        }
+        return [...prev, images[prev.length]];
+      });
+    }, 500);
 
-    return () => clearInterval(imageInterval);
-  }, [images]);
+    return () => {
+      clearInterval(countInterval);
+      clearInterval(imageInterval);
+    };
+  }, []);
 
   return (
-    <motion.div
-      className="fixed inset-0 bg-black flex justify-center items-center z-50"
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="relative w-full h-full">
-        {images.map((img, index) => (
-          <motion.img
+    <div className="fixed inset-0 flex items-center justify-center bg-[#f5f2e9]">
+      <div className="relative w-[80vw] h-[80vh] max-w-4xl max-h-[600px]">
+        {visibleImages.map((src, index) => (
+          <img
             key={index}
-            src={img.src}
-            className="absolute w-[200px] h-[200px] object-cover"
-            initial={{ opacity: 0, x: img.x, y: img.y, scale: 0 }}
-            animate={{ opacity: 0.7, scale: 1 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            src={src}
+            alt={`Loader image ${index + 1}`}
+            className="absolute object-cover w-1/3 h-1/3 transition-opacity duration-500"
+            style={{
+              top: `${Math.floor(index / 3) * 33.33}%`,
+              left: `${(index % 3) * 33.33}%`,
+              opacity: 1,
+            }}
           />
         ))}
-        <div className="absolute inset-0 flex flex-col justify-center items-center">
-          <motion.div
-            className="text-white text-7xl font-light"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {count}
-          </motion.div>
-          <motion.div
-            className="mt-6 w-48 h-0.5 bg-gray-800 rounded-full overflow-hidden"
-            initial={{ width: 0 }}
-            animate={{ width: '12rem' }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              className="h-full bg-white"
-              initial={{ width: '0%' }}
-              animate={{ width: `${count}%` }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="text-6xl font-bold text-gray-800">{count}%</p>
         </div>
       </div>
-    </motion.div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
+        <h2 className="text-2xl font-serif italic text-gray-800">Welcome to my portfolio</h2>
+      </div>
+    </div>
   );
 }
 
