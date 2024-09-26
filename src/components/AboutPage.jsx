@@ -26,7 +26,6 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
     "./photography/4.jpg",
     "./photography/5.jpg",
     "./photography/9.jpg",
-    "./photography/39.jpg",
     "./photography/6.jpg",
     "./photography/7.jpg",
     "./photography/8.jpg",
@@ -329,6 +328,7 @@ useEffect(() => {
               <li>Dribbble.com</li>
               <li>Behance.net</li>
               <li>acternity ui</li>
+              <li>Apple greeting animation</li>
             </ul>
           </section>
         </section>
