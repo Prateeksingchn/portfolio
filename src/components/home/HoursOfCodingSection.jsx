@@ -32,7 +32,7 @@ const HoursOfCodingSection = () => {
   useEffect(() => {
     if (!isVisible) return;
 
-    const targetHours = 516;
+    const targetHours = 416;
     const duration = 2000; // 2 seconds
     const increment = (targetHours - 10) / (duration / 16); // 60 FPS
 

@@ -10,7 +10,7 @@ const images = [
   'https://images.unsplash.com/photo-1505160984683-51670af82409?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cm9ja3xlbnwwfHwwfHx8MA%3D%3D',
   'https://images.unsplash.com/photo-1727224280190-d7e55acb068e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8TThqVmJMYlRSd3N8fGVufDB8fHx8fA%3D%3D',
   'https://images.unsplash.com/photo-1727091462554-a36e6136b6ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDR8Ym84alFLVGFFMFl8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1727256311277-10cd4c2ac4df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDR8eEh4WVRNSExnT2N8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1673285286254-d0d0e465e0fd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fGphcGFufGVufDB8fDB8fHww',
 ];
 
 const greetings = [
@@ -83,16 +83,16 @@ function Loader({ onLoadingComplete }) {
             key={index}
             src={src}
             alt={`Loader image ${index + 1}`}
-            className="absolute object-cover transition-opacity duration-500"
+            className={`absolute object-cover transition-opacity duration-500 ${getImageClasses(index)}`}
             style={{
               opacity: 1,
-              ...getImageStyle(index)
+              zIndex: images.length - index, // Add this line
             }}
           />
         ))}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-6xl font-bold text-gray-100 mb-4">{count}%</p>
-          <h3 className="text-2xl font-serif italic text-gray-100 transition-opacity duration-500">
+          <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-100 mb-2 sm:mb-4">{count}%</p>
+          <h3 className="text-lg sm:text-xl md:text-2xl font-[Raleway] italic text-gray-100 transition-opacity duration-500">
             {greetings[currentGreeting]}
           </h3>
         </div>
@@ -115,19 +115,66 @@ function Loader({ onLoadingComplete }) {
   );
 }
 
+function getImageClasses(index) {
+  const { mb, sm, md, lg } = getImageStyle(index);
+  return `${mb} ${sm} ${md} ${lg}`;
+}
+
 function getImageStyle(index) {
-  const styles = [
-    { top: '0', left: '0', width: '290px', height: '185px' },
-    { top: '45px', left: '400px', width: '320px', height: '190px' },
-    { top: '0', right: '370px', width: '350px', height: '200px' },
-    { top: '60px', right: '0', width: '220px', height: '370px' },
-    { bottom: '100px', left: '0', width: '190px', height: '270px' },
-    { bottom: '0', left: '270px', width: '220px', height: '270px' },
-    { bottom: '110px', left: '620px', width: '300px', height: '170px' },
-    { bottom: '0', right: '350px', width: '170px', height: '230px' },
-    { bottom: '50px', right: '20px', width: '180px', height: '230px' },
+  const LgStyles = [
+    'lg:top-0 lg:right-[350px] lg:w-[350px] lg:h-[200px]',
+    'lg:top-[45px] lg:left-[400px] lg:w-[320px] lg:h-[190px]',
+    'lg:top-0 lg:left-[800px] lg:w-[350px] lg:h-[200px]',
+    'lg:top-[60px] lg:right-0 lg:w-[220px] lg:h-[370px]',
+    'lg:bottom-[100px] lg:left-0 lg:w-[190px] lg:h-[270px]',
+    'lg:bottom-0 lg:left-[270px] lg:w-[270px] lg:h-[220px]',
+    'lg:bottom-[110px] lg:left-[620px] lg:w-[300px] lg:h-[170px]',
+    'lg:bottom-0 lg:right-[350px] lg:w-[190px] lg:h-[230px]',
+    'lg:bottom-[50px] lg:right-[20px] lg:w-[180px] lg:h-[230px]',
   ];
-  return styles[index] || {};
+
+  const mdStyles = [
+    'md:top-0 md:left-0 md:w-[180px] md:h-[115px]',
+    'md:top-[50px] md:left-[200px] md:w-[190px] md:h-[120px]',
+    'md:top-0 md:right-[140px] md:w-[210px] md:h-[135px]',
+    'md:top-[40px] md:right-0 md:w-[130px] md:h-[230px]',
+    'md:bottom-[260px] md:left-0 md:w-[120px] md:h-[170px]',
+    'md:bottom-0 md:left-[90px] md:w-[170px] md:h-[150px]',
+    'md:bottom-[170px] md:left-[270px] md:w-[185px] md:h-[110px]',
+    'md:bottom-0 md:right-[220px] md:w-[150px] md:h-[155px]',
+    'md:bottom-[65px] md:right-[15px] md:w-[135px] md:h-[155px]',
+  ];
+
+  const smStyles = [
+    'sm:top-0 sm:left-0 sm:w-[150px] sm:h-[155px]',
+    'sm:top-[60px] sm:left-[200px] sm:w-[170px] sm:h-[160px]',
+    'sm:top-[90px] sm:left-[400px] sm:w-[180px] sm:h-[165px]',
+    'sm:top-[5px] sm:right-0 sm:w-[120px] sm:h-[190px]',
+    'sm:bottom-[200px] sm:left-0 sm:w-[130px] sm:h-[175px]',
+    'sm:bottom-0 sm:left-[85px] sm:w-[170px] sm:h-[125px]',
+    'sm:bottom-[155px] sm:left-[260px] sm:w-[180px] sm:h-[135px]',
+    'sm:bottom-0 sm:right-[170px] sm:w-[125px] sm:h-[140px]',
+    'sm:bottom-[90px] sm:right-[10px] sm:w-[150px] sm:h-[220px]',
+  ];
+
+  const mbStyles = [
+    'top-0 left-0 w-[100px] h-[140px]',
+    'top-[35px] left-[180px] w-[140px] h-[125px]',
+    'top-[170px] left-[5px] w-[140px] h-[100px]',
+    'top-[180px] right-0 w-[150px] h-[130px]',
+    'bottom-[270px] left-0 w-[125px] h-[100px]',
+    'bottom-[190px] right-[20px] w-[150px] h-[130px]',
+    'bottom-[100px] left-[5px] w-[90px] h-[110px]',
+    'bottom-[5px] right-[150px] w-[120px] h-[90px]',
+    'bottom-[65px] right-0 w-[115px] h-[80px]',
+  ];
+
+  return {
+    mb: mbStyles[index] || '',
+    sm: smStyles[index] || '',
+    md: mdStyles[index] || '',
+    lg: LgStyles[index] || '',
+  };
 }
 
 export default Loader;
