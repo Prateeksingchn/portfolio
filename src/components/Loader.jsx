@@ -42,7 +42,7 @@ function Loader({ onLoadingComplete }) {
         }
         return prevCount + 1;
       });
-    }, 40);
+    }, 55);
 
     const imageInterval = setInterval(() => {
       setVisibleImages((prev) => {
@@ -52,11 +52,11 @@ function Loader({ onLoadingComplete }) {
         }
         return [...prev, images[prev.length]];
       });
-    }, 400);
+    }, 500);
 
     const greetingInterval = setInterval(() => {
       setCurrentGreeting((prev) => (prev + 1) % greetings.length);
-    }, 500);
+    }, 600);
 
     return () => {
       clearInterval(countInterval);
@@ -71,47 +71,49 @@ function Loader({ onLoadingComplete }) {
   };
 
   return (
-    <motion.div 
-      className="fixed inset-0 flex items-center justify-center bg-black overflow-hidden"
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="relative w-full h-full">
-        {visibleImages.map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`Loader image ${index + 1}`}
-            className={`absolute object-cover transition-opacity duration-500 ${getImageClasses(index)}`}
-            style={{
-              opacity: 1,
-              zIndex: images.length - index, // Add this line
-            }}
-          />
-        ))}
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-100 mb-2 sm:mb-4">{count}%</p>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-[Raleway] italic text-gray-100 transition-opacity duration-500">
-            {greetings[currentGreeting]}
-          </h3>
-        </div>
-      </div>
-      <AnimatePresence>
-        {showRevealAnimation && (
-          <motion.div
-            key="reveal"
-            className="absolute inset-0 bg-black origin-bottom"
-            variants={revealVariants}
-            initial="hidden"
-            animate="visible"
-            onAnimationComplete={() => {
-              onLoadingComplete();
-            }}
-          />
-        )}
-      </AnimatePresence>
-    </motion.div>
+    <AnimatePresence>
+      {!showRevealAnimation && (
+        <motion.div 
+          className="fixed inset-0 flex items-center justify-center bg-black overflow-hidden"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="relative w-full h-full">
+            {visibleImages.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                alt={`Loader image ${index + 1}`}
+                className={`absolute object-cover transition-opacity duration-500 ${getImageClasses(index)}`}
+                style={{
+                  opacity: 1,
+                  zIndex: images.length - index,
+                }}
+              />
+            ))}
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[Raleway] tracking-wider text-gray-100 mb-2 sm:mb-4">{count}%</p>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-[Raleway] italic text-gray-100 transition-opacity duration-500">
+                {greetings[currentGreeting]}
+              </h3>
+            </div>
+          </div>
+        </motion.div>
+      )}
+      {showRevealAnimation && (
+        <motion.div
+          key="reveal"
+          className="fixed inset-0 bg-black origin-bottom"
+          variants={revealVariants}
+          initial="hidden"
+          animate="visible"
+          onAnimationComplete={() => {
+            onLoadingComplete();
+          }}
+        />
+      )}
+    </AnimatePresence>
   );
 }
 
