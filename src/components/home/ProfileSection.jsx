@@ -12,7 +12,7 @@ const ProfileSection = () => {
       >
         <div className="flex items-center mb-8">
           <motion.img
-            className="h-12 w-14 rounded-full object-cover mr-3 shadow-lg"
+            className="h-[50px] w-14 rounded-full object-cover mr-3 shadow-lg"
             src="/images/avatardp.jpg"
             alt="Prateek Singh Chouhan"
             whileHover={{ scale: 1.05 }}
@@ -28,15 +28,15 @@ const ProfileSection = () => {
           </div>
         </div>
 
-        <p className="text-[28px] leading-8 font-semibold text-zinc-400 dark:text-zinc-300 mb-8">
+        <p className="text-2xl font-[roboto] leading-8 font-[500]  text-zinc-400 dark:text-zinc-300 mb-4">
           Building sleek and effective digital experiences
         </p>
 
-        <p className="text-lg text-zinc-500 dark:text-zinc-400 mb-4">
+        <p className="text-lg font-[roboto] text-zinc-500 dark:text-zinc-400 mb-4">
           👋 Hello! I'm Prateek, a versatile full-stack developer with a passion for crafting user-focused experiences. With 50+ projects under my belt, I specialize in:
         </p>
 
-        <ul className="list-none text-lg text-zinc-500 dark:text-zinc-400 mb-4 space-y-2">
+        <ul className="list-none text-lg font-[roboto] text-zinc-500 dark:text-zinc-400 mb-4 space-y-2">
           <li className="flex items-start">
             <span className="mr-2">•</span>
             <span>Debugging: because every superhero needs a nemesis</span>
@@ -47,12 +47,12 @@ const ProfileSection = () => {
           </li>
           <li className="flex items-start">
             <span className="mr-2">•</span>
-            <span>Fluent in JavaScript, HTML, and dad jokes</span>
+            <span>Making websites so smooth, they're basically digital butter</span>
           </li>
         </ul>
 
-        <p className="text-lg text-zinc-500 dark:text-zinc-400">
-          Off-screen: Scoring goals on the football field and at the gym. Balancing life like a well-structured codebase.
+        <p className="text-lg font-[roboto] text-zinc-500 dark:text-zinc-400 mb-4">
+          Off-screen: Scoring goals on the football field and crushing PRs at the gym. Balancing life with the precision of a well-optimized algorithm.
         </p>
       </motion.div>
     </div>

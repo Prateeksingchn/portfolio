@@ -19,7 +19,7 @@ const projectsData = [
   },
   {
     id: 2,
-    title: 'Image Gallery',
+    title: 'Pixel Perfect',
     date: 'Jan 2024 - July 2024',
     description: 'A responsive image gallery with advanced filtering and lazy loading',
     image: 'https://images.unsplash.com/photo-1654015064357-0437ef521b0e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
@@ -30,7 +30,7 @@ const projectsData = [
   },
   {
     id: 3,
-    title: 'Recipes App',
+    title: 'Recipes Ranch',
     date: 'Jan 2024 - July 2024',
     description: 'A comprehensive recipe management application with search and filtering',
     image: 'https://images.unsplash.com/photo-1652992252915-f9b6592a61a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
