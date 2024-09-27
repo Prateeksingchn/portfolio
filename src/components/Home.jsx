@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../App.css';
 
 import Cursor from './Cursor';
@@ -15,6 +15,16 @@ import ContactSection from './home/ContactSection';
 
 function Home() {
   const { cursorJSX, handleProjectsMouseEnter, handleProjectsMouseLeave } = Cursor();
+
+  useEffect(() => {
+    // Apply smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Clean up function to remove the style when component unmounts
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
 
   return (
     <section className='dark:bg-[#101010] w-full min-h-screen'>

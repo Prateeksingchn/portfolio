@@ -260,8 +260,8 @@ const SpaceShuttleBackButton = () => (
     >
       <ChevronLeft className="text-white text-2xl transition-colors duration-300" />
     </motion.div>
-    <motion.span 
-      className="text-white font-medium relative text-base tracking-wide transition-colors duration-300 group-hover:text-blue-400"
+    <motion.span  
+      className="text-white font-medium font-['Space_Mono']  tracking-tight relative text-base transition-colors duration-300 group-hover:text-blue-400"
       whileHover={{ x: -3 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
@@ -392,7 +392,7 @@ const Projects = () => {
 
       {/* Galaxy Filter */}
       <motion.div
-        className="absolute top-48 md:top-60 lg:top-60 right-4 z-20 hidden md:block lg:block xl:block"
+        className="absolute top-48 md:top-60 lg:top-72 right-4 z-20 hidden md:block lg:block xl:block"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -421,9 +421,9 @@ const Projects = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto pt-16">
         <motion.h1 
-          className="text-6xl font-bold text-center mb-4"
+          className="text-6xl font-bold text-center mb-4 font-['Space_Mono']"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -431,7 +431,7 @@ const Projects = () => {
           Projects
         </motion.h1>
         <motion.p 
-          className="text-lg font-bold text-center"
+          className="text-lg font-bold text-center font-['Space_Mono']"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -511,7 +511,7 @@ const Projects = () => {
                 </BrowserContainer>
               </div>
               <div className="w-full md:w-1/2 space-y-4">
-                <h3 className="text-3xl font-bold bg-gradient-to-b from-cyan-100 via-purple-400 to-pink-100 bg-clip-text text-transparent">{project.title}</h3>
+                <h3 className="text-3xl font-bold bg-gradient-to-b from-cyan-50 via-purple-300 to-zinc-900 bg-clip-text text-transparent">{project.title}</h3>
                 <p className="text-gray-500 text-sm">{project.date}</p>
                 <p className="text-gray-300">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
@@ -546,13 +546,13 @@ const Projects = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <a href="https://github.com/prateeksingchn" target="_blank" rel="noopener noreferrer" className="text-[#4fff4b] hover:text-[#4fff4b]/80 inline-flex items-center">
+          <a href="https://github.com/prateeksingchn" target="_blank" rel="noopener noreferrer" className="text-[#4fff4b] hover:text-[#4fff4b]/80 inline-flex items-center font-['space_mono'] ">
             View more on GitHub <ExternalLink className="ml-2" size={16} />
           </a>
         </motion.div>
 
         <motion.h2
-          className="text-6xl font-bold text-center mt-32 mb-16 text-white font-[' Space_Mono']"
+          className="text-6xl font-bold text-center mt-10 mb-16 text-white font-['Space_Mono']"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
