@@ -1,409 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, ChevronDown } from 'lucide-react';
 import { FaSpaceShuttle } from "react-icons/fa";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
 import { Link } from 'react-router-dom';
-
-const projectsData = [
-  {
-    id: 1,
-    title: 'Image Gallery',
-    date: 'Jan 2024',
-    description: 'A responsive image gallery with advanced filtering and lazy loading',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
-    technologies: ['React', 'CSS Grid', 'Intersection Observer API', 'Unsplash API'],
-    sourceCode: 'https://github.com/yourusername/image-gallery',
-    liveDemo: 'https://image-gallery.yourdomain.com',
-    filters: ['frontend', 'top', 'all'],
-  },
-  {
-    id: 2,
-    title: 'Recipe App',
-    date: 'Feb 2024',
-    description: 'A comprehensive recipe management application with search and filtering',
-    image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba',
-    technologies: ['React', 'Redux', 'Firebase', 'Styled Components'],
-    sourceCode: 'https://github.com/yourusername/recipe-app',
-    liveDemo: 'https://recipe-app.yourdomain.com',
-    filters: ['frontend', 'top', 'all'],
-  },
-  {
-    id: 3,
-    title: 'E-commerce Store',
-    date: 'Mar 2024',
-    description: 'Full-stack e-commerce platform with user authentication and payment integration',
-    image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe'],
-    sourceCode: 'https://github.com/yourusername/ecommerce-store',
-    liveDemo: 'https://ecommerce-store.yourdomain.com',
-    filters: ['fullstack', 'mern', 'top', 'all'],
-  },
-  {
-    id: 4,
-    title: 'Social Media (Instagram Clone)',
-    date: 'Apr 2024',
-    description: 'A feature-rich social media platform inspired by Instagram',
-    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io'],
-    sourceCode: 'https://github.com/yourusername/social-media-clone',
-    liveDemo: 'https://social-media-clone.yourdomain.com',
-    filters: ['mern', 'fullstack', 'top', 'all'],
-  },
-  {
-    id: 5,
-    title: 'Blog App',
-    date: 'May 2024',
-    description: 'A full-stack blogging platform with rich text editing and commenting system',
-    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d',
-    technologies: ['Next.js', 'GraphQL', 'PostgreSQL', 'Tailwind CSS'],
-    sourceCode: 'https://github.com/yourusername/blog-app',
-    liveDemo: 'https://blog-app.yourdomain.com',
-    filters: ['fullstack', 'top', 'all'],
-  },
-  {
-    id: 6,
-    title: 'Food Delivery Application',
-    date: 'Jun 2024',
-    description: 'A comprehensive food delivery platform with real-time order tracking',
-    image: 'https://images.unsplash.com/photo-1526367790999-0150786686a2',
-    technologies: ['React Native', 'Node.js', 'Express', 'MongoDB', 'Socket.io'],
-    sourceCode: 'https://github.com/yourusername/food-delivery-app',
-    liveDemo: 'https://food-delivery-app.yourdomain.com',
-    filters: ['mern', 'fullstack', 'top', 'all'],
-  },
-  {
-    id: 7,
-    title: 'Ochi Clone',
-    date: 'Jul 2024',
-    description: 'A pixel-perfect clone of the Ochi design agency website',
-    image: 'https://images.unsplash.com/photo-1517292987719-0369a794ec0f',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/ochi-clone',
-    liveDemo: 'https://ochi-clone.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 8,
-    title: 'S2F',
-    date: 'Aug 2024',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
-    technologies: ['React', 'Tailwind CSS', 'Firebase'],
-    sourceCode: 'https://github.com/yourusername/s2f',
-    liveDemo: 'https://s2f.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 9,
-    title: 'Movie Seat Booking App',
-    date: 'Sep 2024',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a',
-    technologies: ['React', 'CSS', 'HTML'],
-    sourceCode: 'https://github.com/yourusername/movie-seat-booking-app',
-    liveDemo: 'https://movie-seat-booking-app.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 10,
-    title: 'Notes App',
-    date: 'Oct 2024',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
-    sourceCode: 'https://github.com/yourusername/notes-app',
-    liveDemo: 'https://notes-app.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 11,
-    title: 'Netflix Clone',
-    date: 'Nov 2024',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73',
-    technologies: ['React', 'Redux', 'Firebase', 'Styled Components'],
-    sourceCode: 'https://github.com/yourusername/netflix-clone',
-    liveDemo: 'https://netflix-clone.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 12,
-    title: 'Apple Vision Pro Clone',
-    date: 'Dec 2024',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/apple-vision-pro-clone',
-    liveDemo: 'https://apple-vision-pro-clone.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 13,
-    title: 'Apple AirPods Pro',
-    date: 'Jan 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/apple-airpods-pro',
-    liveDemo: 'https://apple-airpods-pro.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 14,
-    title: 'Banana Blossom Salads',
-    date: 'Feb 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/banana-blossom-salads',
-    liveDemo: 'https://banana-blossom-salads.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 15,
-    title: 'Brandium',
-    date: 'Mar 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/brandium',
-    liveDemo: 'https://brandium.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 16,
-    title: 'Duo Studio',
-    date: 'Apr 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/duo-studio',
-    liveDemo: 'https://duo-studio.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 17,
-    title: 'Cuberto',
-    date: 'May 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/cuberto',
-    liveDemo: 'https://cuberto.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 18,
-    title: 'Kikin',
-    date: 'Jun 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/kikin',
-    liveDemo: 'https://kikin.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 19,
-    title: 'Hotel Odisej',
-    date: 'Jul 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/hotel-odisej',
-    liveDemo: 'https://hotel-odisej.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 20,
-    title: 'Miranda Portfolio Clone',
-    date: 'Aug 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/miranda-portfolio-clone',
-    liveDemo: 'https://miranda-portfolio-clone.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 21,
-    title: 'Planet Dial',
-    date: 'Sep 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/planet-dial',
-    liveDemo: 'https://planet-dial.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 22,
-    title: 'Spain Collection',
-    date: 'Oct 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/spain-collection',
-    liveDemo: 'https://spain-collection.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 23,
-    title: 'Sidclub',
-    date: 'Nov 2025',
-    description: 'A fictional project description',
-    image: 'https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a',
-    technologies: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
-    sourceCode: 'https://github.com/yourusername/sidclub',
-    liveDemo: 'https://sidclub.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 24,
-    title: 'Lagunitas',
-    date: 'Dec 2025',
-    description: 'An interactive brewery tour and product showcase',
-    image: 'https://images.unsplash.com/photo-1505075106905-fb052892c116',
-    technologies: ['Gatsby.js', 'WebGL', 'Framer Motion', 'GraphQL'],
-    sourceCode: 'https://github.com/yourusername/lagunitas-experience',
-    liveDemo: 'https://lagunitas-experience.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 25,
-    title: 'Ames Foundation',
-    date: 'Jan 2026',
-    description: 'A non-profit organization website with donation integration',
-    image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6',
-    technologies: ['WordPress', 'PHP', 'SCSS', 'Stripe API'],
-    sourceCode: 'https://github.com/yourusername/ames-foundation',
-    liveDemo: 'https://ames-foundation.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 26,
-    title: 'Mario Game',
-    date: 'Feb 2026',
-    description: 'A browser-based tribute to the classic Super Mario Bros.',
-    image: 'https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd',
-    technologies: ['JavaScript', 'HTML5 Canvas', 'Howler.js', 'Webpack'],
-    sourceCode: 'https://github.com/yourusername/mario-tribute',
-    liveDemo: 'https://mario-tribute.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 27,
-    title: 'Parallax Effect GSAP',
-    date: 'Mar 2026',
-    description: 'A showcase of advanced parallax scrolling techniques',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f',
-    technologies: ['React', 'GSAP', 'ScrollTrigger', 'CSS Modules'],
-    sourceCode: 'https://github.com/yourusername/parallax-gsap',
-    liveDemo: 'https://parallax-gsap.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 28,
-    title: 'Sundown',
-    date: 'Apr 2026',
-    description: 'A weather app with beautiful sunset predictions',
-    image: 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869',
-    technologies: ['React Native', 'Expo', 'OpenWeatherMap API', 'Redux'],
-    sourceCode: 'https://github.com/yourusername/sundown-app',
-    liveDemo: 'https://sundown-app.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 29,
-    title: 'Two Good Co',
-    date: 'May 2026',
-    description: 'An e-commerce site for a social enterprise',
-    image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad',
-    technologies: ['Next.js', 'Stripe', 'Contentful', 'Tailwind CSS'],
-    sourceCode: 'https://github.com/yourusername/two-good-co',
-    liveDemo: 'https://two-good-co.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 30,
-    title: 'Budget App',
-    date: 'Jun 2026',
-    description: 'A comprehensive personal finance management tool',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f',
-    technologies: ['Vue.js', 'Vuex', 'Chart.js', 'Firebase'],
-    sourceCode: 'https://github.com/yourusername/budget-tracker',
-    liveDemo: 'https://budget-tracker.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 31,
-    title: 'QR Code Generator',
-    date: 'Jul 2026',
-    description: 'A simple yet powerful QR code creation tool',
-    image: 'https://images.unsplash.com/photo-1595079676077-f88a2029f979',
-    technologies: ['JavaScript', 'qrcode.js', 'HTML5', 'CSS3'],
-    sourceCode: 'https://github.com/yourusername/qr-code-generator',
-    liveDemo: 'https://qr-code-generator.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 32,
-    title: 'To-Do List',
-    date: 'Aug 2026',
-    description: 'A feature-rich task management application',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b',
-    technologies: ['React', 'Redux Toolkit', 'Material-UI', 'LocalStorage API'],
-    sourceCode: 'https://github.com/yourusername/to-do-list',
-    liveDemo: 'https://todo-app.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 33,
-    title: 'Password Generator',
-    date: 'Sep 2026',
-    description: 'A secure password generation tool with customizable options',
-    image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7',
-    technologies: ['JavaScript', 'Crypto API', 'CSS Grid', 'PWA'],
-    sourceCode: 'https://github.com/yourusername/password-generator',
-    liveDemo: 'https://password-generator.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 34,
-    title: 'BMI Calculator',
-    date: 'Oct 2026',
-    description: 'An interactive Body Mass Index calculator with health insights',
-    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438',
-    technologies: ['Svelte', 'Chart.js', 'CSS Variables', 'Web Animations API'],
-    sourceCode: 'https://github.com/yourusername/bmi-calculator',
-    liveDemo: 'https://bmi-calculator.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 35,
-    title: 'TinyWins Clone',
-    date: 'Nov 2026',
-    description: 'A productivity app inspired by the TinyWins methodology',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b',
-    technologies: ['React Native', 'Redux', 'Async Storage', 'React Navigation'],
-    sourceCode: 'https://github.com/yourusername/tinywins-clone',
-    liveDemo: 'https://tinywins-clone.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-  {
-    id: 36,
-    title: 'Finsense (All-In-One Financial Assistant)',
-    date: 'Dec 2026',
-    description: 'A comprehensive financial management and advisory platform',
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e',
-    technologies: ['Angular', 'NgRx', 'D3.js', 'Node.js', 'MongoDB'],
-    sourceCode: 'https://github.com/yourusername/finsense',
-    liveDemo: 'https://finsense.yourdomain.com',
-    filters: ['frontend', 'all'],
-  },
-];
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { db } from '../firebase';
+import { collection, query, where, getDocs, limit, orderBy } from "firebase/firestore";
 
 // Browser Container
 const BrowserContainer = ({ children, title }) => (
@@ -498,6 +103,10 @@ const SpaceShuttleBackButton = () => (
 const Projects = () => {
   const [stars, setStars] = useState([]);
   const [projectType, setProjectType] = useState('top projects');
+  const [projects, setProjects] = useState([]);
+  const [visibleProjects, setVisibleProjects] = useState(5);
+  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     const generateStars = () => {
@@ -524,11 +133,53 @@ const Projects = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const filteredProjects = projectsData.filter(project => {
-    if (projectType === 'top projects') return project.filters.includes('top');
-    if (projectType === 'all projects') return true;
-    return project.filters.includes(projectType);
-  });
+  const loadProjects = useCallback(async () => {
+    setLoading(true);
+    try {
+      let q;
+      if (projectType === 'top projects') {
+        q = query(
+          collection(db, "projects"),
+          where("filters", "array-contains", "top"),
+          orderBy("date", "desc"),
+          limit(visibleProjects)
+        );
+      } else if (projectType === 'all projects') {
+        q = query(
+          collection(db, "projects"),
+          orderBy("date", "desc"),
+          limit(visibleProjects)
+        );
+      } else {
+        q = query(
+          collection(db, "projects"),
+          where("filters", "array-contains", projectType),
+          orderBy("date", "desc"),
+          limit(visibleProjects)
+        );
+      }
+
+      const querySnapshot = await getDocs(q);
+      const fetchedProjects = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setProjects(fetchedProjects);
+      setHasMore(fetchedProjects.length === visibleProjects);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [projectType, visibleProjects]);
+
+  useEffect(() => {
+    loadProjects();
+  }, [loadProjects]);
+
+  const loadMoreProjects = () => {
+    setVisibleProjects(prevVisible => prevVisible + 5);
+  };
 
   // Function to capitalize the first letter of each word
   const capitalizeWords = (str) => {
@@ -652,54 +303,80 @@ const Projects = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="flex flex-col md:flex-row gap-8 items-start"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="w-full md:w-1/2">
-                <BrowserContainer title={project.title}>
-                  <Link to={project.liveDemo} target="_blank" rel="noopener noreferrer">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-[220px] object-cover rounded-lg cursor-pointer transition-opacity duration-300 hover:opacity-80"
-                    />
-                  </Link>
-                </BrowserContainer>
-              </div>
-              <div className="w-full md:w-1/2 space-y-4">
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-cyan-100 to-pink-600 bg-clip-text text-transparent">{project.title}</h3>
-                <p className="text-gray-500 text-sm">{project.date}</p>
-                <p className="text-gray-300">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, index) => (
-                    <Badge key={index} variant="secondary" className="bg-zinc-900 text-gray-100 px-3 py-[6px] text-xs rounded-lg border border-black">
-                      {tech}
-                    </Badge>
-                  ))}
+          {loading ? (
+            <div className="text-center">Loading projects...</div>
+          ) : projects.length > 0 ? (
+            projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                className="flex flex-col md:flex-row gap-8 items-start"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="w-full md:w-1/2">
+                  <BrowserContainer title={project.title}>
+                    <Link to={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                      <LazyLoadImage 
+                        src={project.image} 
+                        alt={project.title} 
+                        effect="blur"
+                        className="w-[425px] h-[220px] object-cover rounded-lg cursor-pointer transition-opacity duration-300 hover:opacity-80"
+                      />
+                    </Link>
+                  </BrowserContainer>
                 </div>
-                <div className="flex gap-4 mt-6">
-                  <Button variant="ghost" size="sm" asChild>
-                    <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
-                      <Github className="mr-2" size={16} />
-                      Source
-                    </a>
-                  </Button>
-                  <Button variant="ghost" size="sm" asChild>
-                    <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
-                      Demo
-                      <ExternalLink className="ml-2" size={16} />
-                    </a>
-                  </Button>
+                <div className="w-full md:w-1/2 space-y-4">
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-cyan-100 to-pink-600 bg-clip-text text-transparent">{project.title}</h3>
+                  <p className="text-gray-500 text-sm">{project.date}</p>
+                  <p className="text-gray-300">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, index) => (
+                      <Badge key={index} variant="secondary" className="bg-zinc-900 text-gray-100 px-3 py-[6px] text-xs rounded-lg border border-black">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex gap-4 mt-6">
+                    <Button variant="ghost" size="sm" asChild>
+                      <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
+                        <Github className="mr-2" size={16} />
+                        Source
+                      </a>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild>
+                      <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
+                        Demo
+                        <ExternalLink className="ml-2" size={16} />
+                      </a>
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))
+          ) : (
+            <div className="text-center">No projects found for the selected filter.</div>
+          )}
         </motion.div>
+
+        {/* View More Projects button */}
+        {hasMore && (
+          <motion.div
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={loadMoreProjects}
+              className="bg-zinc-800 text-white hover:bg-zinc-700"
+            >
+              View More Projects
+            </Button>
+          </motion.div>
+        )}
 
         <motion.div
           className="text-center mt-16"
