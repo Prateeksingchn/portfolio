@@ -1,14 +1,190 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, ChevronDown } from 'lucide-react';
-import { FaSpaceShuttle } from "react-icons/fa";
+import { Github, ExternalLink, ChevronDown, ChevronUp, ChevronLeft } from 'lucide-react';
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
 import { Link } from 'react-router-dom';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
-import { db } from '../firebase';
-import { collection, query, where, getDocs, limit, orderBy } from "firebase/firestore";
+
+const projectsData = [
+  {
+    id: 1,
+    title: 'Space',
+    date: 'Aug 2024',
+    description: 'My personal portfolio website',
+    image: 'https://images.unsplash.com/photo-1652456374997-1781458e2a8a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8M2QlMjByZW5kZXJ8ZW58MHx8MHx8fDA%3D',
+    technologies: ['Portfolio', 'Next.js', 'Framer motion', 'TypeScript', 'Shadcn UI', 'TailwindCSS'],
+    sourceCode: 'https://github.com/yourusername/space',
+    liveDemo: 'https://space.yourdomain.com',
+    filters: ['frontend', 'top'],
+  },
+  {
+    id: 2,
+    title: 'Image Gallery',
+    date: 'Jan 2024 - July 2024',
+    description: 'A responsive image gallery with advanced filtering and lazy loading',
+    image: 'https://images.unsplash.com/photo-1654015064357-0437ef521b0e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind', 'TailwindCSS', 'Shadcn UI'],
+    sourceCode: 'https://github.com/yourusername/fit-flow',
+    liveDemo: 'https://fitflow.yourdomain.com',
+    filters: ['fullstack', 'top'],
+  },
+  {
+    id: 3,
+    title: 'Recipes App',
+    date: 'Jan 2024 - July 2024',
+    description: 'A comprehensive recipe management application with search and filtering',
+    image: 'https://images.unsplash.com/photo-1652992252915-f9b6592a61a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'TailwindCSS'],
+    sourceCode: 'https://github.com/yourusername/recipes-app',
+    liveDemo: 'https://recipes-app.yourdomain.com',
+    filters: ['frontend', 'mern', 'top'],
+  },
+  {
+    id: 4,
+    title: 'E-commerce Store',
+    date: 'Jan 2024 - July 2024',
+    description: 'Full-stack e-commerce platform with user authentication and payment integration',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend', 'top'],
+  },
+  {
+    id: 5,
+    title: 'Social Media',
+    date: 'Jan 2024 - July 2024',
+    description: 'A feature-rich social media platform inspired by Instagram',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend', 'top'],
+  },
+  {
+    id: 6,
+    title: 'Blog Application',
+    date: 'Jan 2024 - July 2024',
+    description: 'A full-stack blogging platform with rich text editing and commenting system',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend', 'top'],
+  },
+  {
+    id: 7,
+    title: 'Food Delivery Application',
+    date: 'Jan 2024 - July 2024',
+    description: 'A comprehensive food delivery platform with real-time order tracking',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend'],
+  },
+  {
+    id: 8,
+    title: 'S2F',
+    date: 'Jan 2024 - July 2024',
+    description: 'Website for a local gym',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend'],
+  },
+  {
+    id: 9,
+    title: 'Movie Seat Booking App',
+    date: 'Jan 2024 - July 2024',
+    description: 'A movie seat booking app with seat selection and seat reservation',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend'],
+  },
+  {
+    id: 10,
+    title: 'Notes App',
+    date: 'Jan 2024 - July 2024',
+    description: 'A notes app with note creation, deletion, and editing',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend'],
+  },
+  {
+    id: 11,
+    title: 'Netflix Clone',
+    date: 'Jan 2024 - July 2024',
+    description: 'A Netflix clone with movie browsing and search functionality',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend'],
+  },
+  {
+    id: 12,
+    title: 'Apple Vision Pro Clone',
+    date: 'Jan 2024 - July 2024',
+    description: 'A clone of the Apple Vision Pro website',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Vue.js', 'Vuex', 'Firebase', 'Sass'],
+    sourceCode: 'https://github.com/yourusername/image-gallery',
+    liveDemo: 'https://image-gallery.yourdomain.com',
+    filters: ['frontend'],
+  },
+  // javascript projects
+  {
+    id: 13,
+    title: 'Budget App',
+    date: 'Jan 2024 - July 2024',
+    description: 'A budget app with expense and income tracking',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB'],
+    sourceCode: 'https://github.com/yourusername/javascript-projects',
+    liveDemo: 'https://javascript-projects.yourdomain.com',
+    filters: ['javascript', 'frontend'],
+  },
+  {
+    id: 14,
+    title: 'To-Do List',
+    date: 'Jan 2024 - July 2024',
+    description: 'A feature-rich task management application',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB'],
+    sourceCode: 'https://github.com/yourusername/javascript-projects',
+    liveDemo: 'https://javascript-projects.yourdomain.com',
+    filters: ['javascript', 'frontend'],
+  },
+  {
+    id: 15,
+    title: 'BMI Calculator',
+    date: 'Jan 2024 - July 2024',
+    description: 'An interactive Body Mass Index calculator with health insights',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['Svelte', 'Chart.js', 'CSS Variables', 'Web Animations API'],
+    sourceCode: 'https://github.com/yourusername/bmi-calculator',
+    liveDemo: 'https://bmi-calculator.yourdomain.com',
+    filters: ['javascript', 'frontend'],
+  },
+  {
+    id: 16,
+    title: 'Password Generator',
+    date: 'Jan 2024 - July 2024',
+    description: 'A password generator with customizable options',
+    image: 'https://images.unsplash.com/photo-1653393337202-81b93e1e316c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fDNkJTIwcmVuZGVyfGVufDB8fDB8fHww',
+    technologies: ['React Native', 'Redux', 'Async Storage', 'React Navigation'],
+    sourceCode: 'https://github.com/yourusername/tinywins-clone',
+    liveDemo: 'https://tinywins-clone.yourdomain.com',
+    filters: ['javascript', 'frontend'],
+  }
+  // ... (you can add more projects here)
+];
 
 // Browser Container
 const BrowserContainer = ({ children, title }) => (
@@ -46,7 +222,7 @@ const BrowserContainer = ({ children, title }) => (
 
 // Galaxy Filter
 const GalaxyFilter = ({ activeOption, onToggle }) => {
-  const options = ['top projects', 'all projects', 'frontend', 'backend', 'fullstack', 'mern'];
+  const options = ['top projects', 'all projects', 'frontend', 'javascript', 'fullstack', 'mern'];
   
   return (
     <div className="relative group">
@@ -73,23 +249,23 @@ const GalaxyFilter = ({ activeOption, onToggle }) => {
   );
 };
 
-// Space Shuttle Back Button
+// Back Button
 const SpaceShuttleBackButton = () => (
   <Link to="/" className="group flex items-center space-x-3 px-5 py-3 rounded-full transition-all duration-300">
     <motion.div
-      whileHover={{ rotate: -90, scale: 1.2 }}
+      whileHover={{ x: -3 }}
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       className="group-hover:text-blue-400"
     >
-      <FaSpaceShuttle className="text-white text-2xl transition-colors duration-300" />
+      <ChevronLeft className="text-white text-2xl transition-colors duration-300" />
     </motion.div>
     <motion.span 
       className="text-white font-medium relative text-base tracking-wide transition-colors duration-300 group-hover:text-blue-400"
       whileHover={{ x: -3 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
-      Return to Launch Pad
+      Back to Home
       <motion.span
         className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400 origin-left"
         initial={{ scaleX: 0 }}
@@ -100,13 +276,58 @@ const SpaceShuttleBackButton = () => (
   </Link>
 );
 
+// Scroll to Top Button
+const ScrollToTopButton = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <>
+      {isVisible && (
+        <motion.button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 p-3 bg-black bg-opacity-50 text-white rounded-full shadow-lg border border-gray-600 backdrop-blur-sm group"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(59, 130, 246, 0.5)' }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <ChevronUp 
+            size={24} 
+            className="transition-transform duration-300 group-hover:-translate-y-1"
+          />
+          <div className="absolute inset-0 rounded-full bg-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+        </motion.button>
+      )}
+    </>
+  );
+};
+
 const Projects = () => {
   const [stars, setStars] = useState([]);
   const [projectType, setProjectType] = useState('top projects');
-  const [projects, setProjects] = useState([]);
-  const [visibleProjects, setVisibleProjects] = useState(5);
-  const [loading, setLoading] = useState(true);
-  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     const generateStars = () => {
@@ -133,53 +354,11 @@ const Projects = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const loadProjects = useCallback(async () => {
-    setLoading(true);
-    try {
-      let q;
-      if (projectType === 'top projects') {
-        q = query(
-          collection(db, "projects"),
-          where("filters", "array-contains", "top"),
-          orderBy("date", "desc"),
-          limit(visibleProjects)
-        );
-      } else if (projectType === 'all projects') {
-        q = query(
-          collection(db, "projects"),
-          orderBy("date", "desc"),
-          limit(visibleProjects)
-        );
-      } else {
-        q = query(
-          collection(db, "projects"),
-          where("filters", "array-contains", projectType),
-          orderBy("date", "desc"),
-          limit(visibleProjects)
-        );
-      }
-
-      const querySnapshot = await getDocs(q);
-      const fetchedProjects = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setProjects(fetchedProjects);
-      setHasMore(fetchedProjects.length === visibleProjects);
-    } catch (error) {
-      console.error("Error fetching projects:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [projectType, visibleProjects]);
-
-  useEffect(() => {
-    loadProjects();
-  }, [loadProjects]);
-
-  const loadMoreProjects = () => {
-    setVisibleProjects(prevVisible => prevVisible + 5);
-  };
+  const filteredProjects = projectsData.filter(project => {
+    if (projectType === 'top projects') return project.filters.includes('top');
+    if (projectType === 'all projects') return true;
+    return project.filters.includes(projectType);
+  });
 
   // Function to capitalize the first letter of each word
   const capitalizeWords = (str) => {
@@ -187,7 +366,16 @@ const Projects = () => {
   };
 
   useEffect(() => {
+    // Enable smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Scroll to top when component mounts
     window.scrollTo(0, 0);
+
+    // Clean up function to reset scroll behavior
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
   }, []);
 
   return (
@@ -303,80 +491,54 @@ const Projects = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          {loading ? (
-            <div className="text-center">Loading projects...</div>
-          ) : projects.length > 0 ? (
-            projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                className="flex flex-col md:flex-row gap-8 items-start"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="w-full md:w-1/2">
-                  <BrowserContainer title={project.title}>
-                    <Link to={project.liveDemo} target="_blank" rel="noopener noreferrer">
-                      <LazyLoadImage 
-                        src={project.image} 
-                        alt={project.title} 
-                        effect="blur"
-                        className="w-[425px] h-[220px] object-cover rounded-lg cursor-pointer transition-opacity duration-300 hover:opacity-80"
-                      />
-                    </Link>
-                  </BrowserContainer>
-                </div>
-                <div className="w-full md:w-1/2 space-y-4">
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-cyan-100 to-pink-600 bg-clip-text text-transparent">{project.title}</h3>
-                  <p className="text-gray-500 text-sm">{project.date}</p>
-                  <p className="text-gray-300">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, index) => (
-                      <Badge key={index} variant="secondary" className="bg-zinc-900 text-gray-100 px-3 py-[6px] text-xs rounded-lg border border-black">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex gap-4 mt-6">
-                    <Button variant="ghost" size="sm" asChild>
-                      <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
-                        <Github className="mr-2" size={16} />
-                        Source
-                      </a>
-                    </Button>
-                    <Button variant="ghost" size="sm" asChild>
-                      <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
-                        Demo
-                        <ExternalLink className="ml-2" size={16} />
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
-            ))
-          ) : (
-            <div className="text-center">No projects found for the selected filter.</div>
-          )}
-        </motion.div>
-
-        {/* View More Projects button */}
-        {hasMore && (
-          <motion.div
-            className="text-center mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={loadMoreProjects}
-              className="bg-zinc-800 text-white hover:bg-zinc-700"
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              className="flex flex-col md:flex-row gap-8 items-start"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              View More Projects
-            </Button>
-          </motion.div>
-        )}
+              <div className="w-full md:w-1/2">
+                <BrowserContainer title={project.title}>
+                  <Link to={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-[220px] object-cover rounded-lg cursor-pointer transition-opacity duration-300 hover:opacity-80"
+                    />
+                  </Link>
+                </BrowserContainer>
+              </div>
+              <div className="w-full md:w-1/2 space-y-4">
+                <h3 className="text-3xl font-bold bg-gradient-to-b from-cyan-100 via-purple-400 to-pink-100 bg-clip-text text-transparent">{project.title}</h3>
+                <p className="text-gray-500 text-sm">{project.date}</p>
+                <p className="text-gray-300">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, index) => (
+                    <Badge key={index} variant="secondary" className="bg-zinc-900 text-gray-100 px-3 py-[6px] text-xs rounded-lg border border-black">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex gap-4 mt-6">
+                  <Button variant="ghost" size="sm" asChild>
+                    <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
+                      <Github className="mr-2" size={16} />
+                      Source
+                    </a>
+                  </Button>
+                  <Button variant="ghost" size="sm" asChild>
+                    <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors duration-300">
+                      Demo
+                      <ExternalLink className="ml-2" size={16} />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
         <motion.div
           className="text-center mt-16"
@@ -390,7 +552,7 @@ const Projects = () => {
         </motion.div>
 
         <motion.h2
-          className="text-6xl font-bold text-center mt-32 mb-16 text-white font-[anton]"
+          className="text-6xl font-bold text-center mt-32 mb-16 text-white font-[' Space_Mono']"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
@@ -398,6 +560,9 @@ const Projects = () => {
           Shipping More Soon
         </motion.h2>
       </div>
+
+      {/* Scroll to Top Button */}
+      <ScrollToTopButton />
     </div>
   );
 };
