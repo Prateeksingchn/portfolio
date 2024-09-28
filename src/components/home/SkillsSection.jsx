@@ -45,12 +45,6 @@ const CursorIcon = () => (
   <img src="../public/images/cursorlogo.png" alt="Cursor AI" className="w-6 h-6" />
 );
 
-// const SplineIcon = () => (
-//   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em">
-//     <path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.18c5.423 0 9.82 4.397 9.82 9.82 0 5.423-4.397 9.82-9.82 9.82-5.423 0-9.82-4.397-9.82-9.82 0-5.423 4.397-9.82 9.82-9.82zm-1.64 4.36c-1.268 0-2.296 1.028-2.296 2.296v6.328c0 1.268 1.028 2.296 2.296 2.296h3.28c1.268 0 2.296-1.028 2.296-2.296V8.836c0-1.268-1.028-2.296-2.296-2.296h-3.28zm0 1.148h3.28c.633 0 1.148.515 1.148 1.148v6.328c0 .633-.515 1.148-1.148 1.148h-3.28c-.633 0-1.148-.515-1.148-1.148V8.836c0-.633.515-1.148 1.148-1.148z"/>
-//   </svg>
-// );
-
 const skillCategories = [
   {
     name: "Skills",
@@ -92,21 +86,21 @@ const skillCategories = [
 
 const SkillItem = ({ Icon, name, color }) => (
   <motion.div
-    className="flex flex-col items-center justify-center p-2 w-16 h-[70px] bg-zinc-800 text-gray-300 rounded-lg transition-colors duration-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+    className="flex flex-col items-center justify-center p-2 w-14 sm:w-16 h-[60px] sm:h-[70px] md:h-[70px] bg-zinc-800 text-gray-300 rounded-lg transition-colors duration-300 hover:bg-gray-700 hover:text-white cursor-pointer"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
   >
-    <Icon className="w-6 h-6 mb-[5px]" style={{ color }} />
-    <span className="text-[10px] text-center">{name}</span>
+    <Icon className="w-5 h-5 sm:w-6 sm:h-6 mb-[3px] sm:mb-[3px] md:mb-[3px] " style={{ color }} />
+    <span className="text-[8px] sm:text-[10px] text-center">{name}</span>
   </motion.div>
 );
 
 function SkillsSection() {
   return (
-    <div className="lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 hover:ring-primary/5 bg-gradient-to-b from-[#1A1A1A] via-[#141414] to-[#141414] dark:bg-secondary dark:hover:ring-white/20 overflow-hidden duration-300 shadow-xl dark:shadow-thick rounded-3xl py-12 px-6">
+    <div className="lg:row-span-2 ring-1 dark:ring-white/10 ring-primary/5 hover:ring-primary/5 bg-gradient-to-b from-[#1A1A1A] via-[#141414] to-[#141414] dark:bg-secondary dark:hover:ring-white/20 overflow-hidden duration-300 shadow-xl dark:shadow-thick rounded-3xl py-8 sm:py-10 md:py-12 px-4 sm:px-5 md:px-6">
       <div>
         <motion.h2
-          className="text-4xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-purple-100"
+          className="text-3xl sm:text-[2rem] md:text-5xl lg:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-purple-100"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -114,17 +108,17 @@ function SkillsSection() {
           Skills & Expertise
         </motion.h2>
         <motion.div
-          className="space-y-6"
+          className="space-y-4 sm:space-y-5 md:space-y-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           {skillCategories.map((category, index) => (
-            <div key={index} className="mb-8">
-              <h3 className="text-2xl font-medium text-gray-100 mb-4">
+            <div key={index} className="mb-6 sm:mb-7 md:mb-8">
+              <h3 className="text-xl sm:text-2xl font-medium text-gray-100 mb-3 sm:mb-4">
                 {category.name}
               </h3>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
                 {category.skills.map((skill, skillIndex) => (
                   <SkillItem key={`${skill.name}-${skillIndex}`} Icon={skill.Icon} name={skill.name} color={skill.color} />
                 ))}

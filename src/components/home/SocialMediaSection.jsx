@@ -25,11 +25,11 @@ const socialLinks = [
 
 function SocialMediaSection() {
   return (
-    <div className="ring-1 dark:ring-white/10 ring-primary/5 rounded-3xl justify-between shadow-xl dark:shadow-thick items-center flex flex-col p-8 h-full bg-[#1A1A1A] dark:bg-secondary border-none">
-      <h2 className="text-7xl w-full text-start font-semibold mb-8 text-white">
+    <div className="ring-1 dark:ring-white/10 ring-primary/5 rounded-3xl justify-between shadow-xl dark:shadow-thick items-center flex flex-col p-8 md:p-8 h-full bg-[#1A1A1A] dark:bg-secondary border-none">
+      <h2 className="text-6xl md:text-7xl lg:text-7xl w-full text-start font-semibold mb-8 text-white">
         Find <br /> mé on
       </h2>
-      <div className="grid grid-cols-4 gap-4 w-full">
+      <div className="grid grid-cols-4 md:flex md:flex-wrap md:justify-between gap-4 w-full">
         {socialLinks.map((link, index) => (
           <SocialIcon key={index} {...link} />
         ))}

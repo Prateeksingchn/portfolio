@@ -155,11 +155,11 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className="bg-black text-white min-h-screen pt-44 pb-14 relative overflow-hidden font-[Roboto] ">
+    <div className="bg-black text-white min-h-screen pt-20 sm:pt-28 md:pt-36 lg:pt-44 pb-14 relative overflow-hidden font-[Roboto] ">
       <StarField />
       
       {/* Modern and aesthetic back to home button */}
-      <Link to="/" className="fixed top-6 left-6 z-50">
+      <Link to="/" className="absolute top-4 left-4 sm:top-6 sm:left-6">
         <motion.div
           className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-full p-3 shadow-lg"
           whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
@@ -187,42 +187,42 @@ useEffect(() => {
         </motion.div>
       </Link>
 
-      <div className="max-w-3xl mx-auto px-10 relative z-10">
-        <h1 className="text-[3.75rem] font-bold text-start mb-8 flex items-center">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 relative z-10">
+        <h1 className="text-[2.6rem] sm:text-[3rem] md:text-[3rem] lg:text-[3.75rem] font-bold text-start mb-6 sm:mb-8 md:mb-5 flex items-center">
           about me 
-          <span className="ml-2 text-5xl">🐳</span>
+          <span className="ml-2 text-3xl sm:text-4xl md:text-5xl lg:text-5xl">🐳</span>
         </h1>
         
         {/* image section - polaroid style with rotation */}
-        <div className="grid grid-cols-3 gap-8 mb-16">
-          <div className="relative group">
+        <div className="flex sm:flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-x-visible gap-6 sm:gap-8 mb-12 sm:mb-16 pb-4 sm:pb-4 py-4 px-3" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="relative group flex-shrink-0 md:flex-shrink w-[200px] sm:w-[200px] md:w-auto">
             <div className="bg-white p-2 shadow-lg transform transition-all duration-300 rotate-3 group-hover:shadow-xl">
               <div className="relative overflow-hidden">
-                <img src="./images/avatardp.jpg" alt="My First Capture" className="w-full h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
+                <img src="./images/avatardp.jpg" alt="My First Capture" className="w-full h-[210px] sm:h-[220px] md:h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
               </div>
-              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] ">Me</p>
+              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] text-sm sm:text-base">Me</p>
             </div>
           </div>
-          <div className="relative group">
+          <div className="relative group flex-shrink-0 md:flex-shrink w-[200px] sm:w-[200px] md:w-auto">
             <div className="bg-white p-2 shadow-lg transform transition-all duration-300 -rotate-2 group-hover:shadow-xl">
               <div className="relative overflow-hidden">
-                <img src="./photography/1.jpg" alt="Solitary Wanderer" className="w-full h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
+                <img src="./photography/1.jpg" alt="Solitary Wanderer" className="w-full h-[210px] sm:h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
               </div>
-              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] ">Wanderlust</p>
+              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] text-sm sm:text-base">Wanderlust</p>
             </div>
           </div>
-          <div className="relative group">
+          <div className="relative group flex-shrink-0 md:flex-shrink w-[200px] sm:w-[200px] md:w-auto">
             <div className="bg-white p-2 shadow-lg transform transition-all duration-300 rotate-1 group-hover:shadow-xl">
               <div className="relative overflow-hidden">
-                <img src="./photography/17.jpg" alt="Peace" className="w-full h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
+                <img src="./photography/17.jpg" alt="Peace" className="w-full h-[210px] sm:h-[220px] object-cover mb-2 filter grayscale transition-all duration-300 group-hover:filter-none" />
               </div>
-              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] ">Serenity</p>
+              <p className="text-center text-gray-700 font-['Gloria_Hallelujah'] text-sm sm:text-base">Serenity</p>
             </div>
           </div>
         </div>
         
         {/* about me section */}
-        <section className="mb-12">
+        <section className="mb-10 sm:mb-12">
           <p className="mb-4 text-[15px]">
             Hey there! I'm Prateek Singh Chouhan, a 20-year-old Full-Stack developer from Bhopal, India who
             thrives on crafting intuitive and dynamic UIs, especially with React.
@@ -255,19 +255,19 @@ useEffect(() => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl font-bold mb-2">Hobbies & Interests</h2>
-          <div className="flex overflow-x-auto space-x-6 p-1">
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">Hobbies & Interests</h2>
+          <div className="flex flex-wrap justify-start sm:justify-start gap-4">
             {hobbies.map((hobby, index) => (
               <motion.div 
                 key={index}
-                className="flex-shrink-0 w-auto rounded-lg p-2 shadow-lg"
+                className="w-20 lg:w-24 sm:w-auto rounded-lg p-2 shadow-lg flex flex-col items-center"
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.2, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, backgroundColor: "#1a1a1a" }}
               >
-                <div className="text-4xl mb-4">{hobby.icon}</div>
-                <h3 className="text-sm font-bold mb-2">{hobby.name}</h3>
+                <div className="text-3xl sm:text-4xl mb-2 sm:mb-4">{hobby.icon}</div>
+                <h3 className="text-xs sm:text-sm font-bold">{hobby.name}</h3>
               </motion.div>
             ))}
           </div>
@@ -275,32 +275,32 @@ useEffect(() => {
 
         {/* Updated Photography showcase with Polaroid style */}
         <motion.section 
-          className="mb-16"
+          className="mb-12 sm:mb-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <h2 className="text-2xl font-bold mb-4">Visual Journey</h2>
-          <p className="text-sm text-gray-400 mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Visual Journey</h2>
+          <p className="text-sm sm:text-sm text-gray-400 mb-4 sm:mb-6">
             This collection captures both the world through my lens and moments from my personal life. It's a visual representation of my experiences, creativity, and the beauty I've encountered along the way.
           </p>
           <div className="overflow-hidden">
             <motion.div 
               ref={photosRef}
-              className="flex space-x-6 p-4"
+              className="flex space-x-4 sm:space-x-6 p-2 sm:p-4"
               animate={photosControls}
             >
               {[...photos, ...photos].map((photo, index) => (
                 <motion.div 
                   key={index}
-                  className="flex-shrink-0 w-[225px] h-[290px] bg-white p-2 shadow-lg transform transition-all duration-300 rotate-0 hover:rotate-2"
+                  className="flex-shrink-0 w-[150px] sm:w-[200px] md:w-[225px] h-[200px] sm:h-[260px] md:h-[290px] bg-white p-2 shadow-lg transform transition-all duration-300 rotate-0 hover:rotate-2"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="relative overflow-hidden">
                     <img 
                       src={photo} 
                       alt={`Photography sample ${index + 1}`} 
-                      className="w-full h-[250px] object-cover"
+                      className="w-full h-[170px] sm:h-[220px] md:h-[250px] object-cover"
                     />
                   </div>
                 </motion.div>
@@ -311,13 +311,13 @@ useEffect(() => {
 
         {/* Values & Work Philosophy */}
         <motion.section 
-          className="mb-16"
+          className="mb-12 sm:mb-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h2 className="text-2xl font-bold mb-2">Values & Work Philosophy</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">Values & Work Philosophy</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 md:gap-6">
             {[
               { title: "User-Centric Design", description: "I believe in creating intuitive and accessible interfaces that prioritize the end-user's experience." },
               { title: "Continuous Learning", description: "I'm committed to staying updated with the latest technologies and best practices in web development." },
@@ -326,12 +326,12 @@ useEffect(() => {
             ].map((item, index) => (
               <motion.div 
                 key={index}
-                className="p-6 rounded-lg shadow-lg"
+                className="p-4 lg:p-6 rounded-lg shadow-lg"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
               >
-                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <h3 className="text-[1rem] md:text-lg font-bold mb-2">{item.title}</h3>
                 <p className="text-gray-300 text-sm">{item.description}</p>
               </motion.div>
             ))}
@@ -340,15 +340,15 @@ useEffect(() => {
 
         {/* about this site section */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-2">About this site</h2>
-          <p className="text-sm mb-8">Curious about this site? It features:</p>
-          <section className="mb-10">
-            <h2 className="text-xl font-bold mb-1">Tech stack</h2>
-            <p className="mb-4 text-sm">
+          <h2 className="text-[1.6rem] sm:text-2xl font-bold mb-2">About this site</h2>
+          <p className="text-sm sm:text-sm mb-6 sm:mb-8">Curious about this site? It features:</p>
+          <section className="mb-8 sm:mb-10">
+            <h2 className="text-lg sm:text-xl font-bold mb-1">Tech stack</h2>
+            <p className="mb-4 text-sm sm:text-sm">
               This site is crafted with React, Tailwind CSS, Framer Motion, Shadcn, GSAP, and Locomotive Scroll. 
               It uses Vercel for analytics and hosting. Check out the code on GitHub!
             </p>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4">
               {[ 
                 { Icon: FaReact, name: "React" },
                 { Icon: SiTailwindcss, name: "Tailwind" },
@@ -365,31 +365,58 @@ useEffect(() => {
                   onMouseEnter={handleProjectsMouseEnter}
                   onMouseLeave={handleProjectsMouseLeave}
                 >
-                  <Icon className="text-xl sm:text-2xl md:text-4xl lg:text-3xl mb-2" />
-                  <span className="text-xs sm:text-base md:text-sm lg:text-sm">{name}</span>
+                  <Icon className="text-[1.7rem] sm:text-[2rem] md:text-3xl lg:text-3xl mb-1 sm:mb-2" />
+                  <span className="text-[10px] sm:text-xs md:text-sm">{name}</span>
                 </div>
               ))}
             </div>    
           </section>
         
-          <section className="mb-8">
-            <h2 className="text-xl font-bold mb-2">Inspiration</h2>
-            <p className="mb-4">
+          <section className="mb-6 sm:mb-8">
+            <h2 className="text-lg sm:text-xl font-bold mb-2">Inspiration</h2>
+            <p className="mb-3 sm:mb-4 text-sm sm:text-sm">
               I'm thankful to the fantastic websites listed below for sparking the inspiration behind
               this site:
             </p>
-            <ul className="list-disc pl-5 grid grid-cols-1 gap-2">
+            <ul className="list-disc pl-5 grid grid-cols-2 sm:grid-cols-1 gap-1 sm:gap-2 text-xs sm:text-sm">
               <li>beta.vimfn.in</li>
+              <li>antfu.me</li>
+              <li>magicui.design</li>
               <li>Pinterest</li>
               <li>Awwwards.com</li>
               <li>Star Wars</li>
               <li>Dribbble.com</li>
               <li>Behance.net</li>
               <li>acternity ui</li>
-              <li>Apple greeting animation</li>
+              <li>Apple</li>
+              <li>Bento grid</li>
+              <li>The Pande</li>
+              <li>rohitsinghrawat.tech</li>
+              <li>darkmodedesign</li>
             </ul>
           </section>
         </section>
+
+        {/* Made with Love section */}
+        <motion.footer 
+          className="text-center pt-5 mt-12 bg-black border-t border-[#808080]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="flex justify-between items-center max-w-3xl mx-auto px-4 text-sm text-gray-200">
+            <p className="text-sm text-[#808080]">2024 © Prateek Singh Chouhan</p>
+            <a 
+              href="https://github.com/Prateeksingchn/portfolio" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-white transition-colors duration-300"
+            >
+              <FaGithub className="mr-2" />
+              <span>Space#4b67bbb</span>
+            </a>
+          </div>
+        </motion.footer>
         
       </div>
     </div>

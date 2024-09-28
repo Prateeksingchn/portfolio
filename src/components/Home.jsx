@@ -14,7 +14,7 @@ import AboutSection from './home/AboutSection';
 import ContactSection from './home/ContactSection';
 
 function Home() {
-  const { cursorJSX, handleProjectsMouseEnter, handleProjectsMouseLeave } = Cursor();
+  const { cursorJSX, handleProjectsMouseEnter, handleProjectsMouseLeave, handleAboutMouseEnter, handleAboutMouseLeave } = Cursor();
 
   useEffect(() => {
     // Apply smooth scrolling
@@ -40,7 +40,7 @@ function Home() {
           <AnimatedInfographic />
           <HoursOfCodingSection />
           <div className='lg:col-span-2 xl:col-span-1 lg:row-span-2 flex flex-col gap-4'>
-            <AboutSection />
+            <AboutSection onMouseEnter={handleAboutMouseEnter} onMouseLeave={handleAboutMouseLeave} />
             <ContactSection />
           </div>
         </div>

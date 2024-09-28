@@ -32,7 +32,7 @@ const HoursOfCodingSection = () => {
   useEffect(() => {
     if (!isVisible) return;
 
-    const targetHours = 416;
+    const targetHours = 521;
     const duration = 2000; // 2 seconds
     const increment = (targetHours - 10) / (duration / 16); // 60 FPS
 
@@ -51,9 +51,9 @@ const HoursOfCodingSection = () => {
   }, [isVisible]);
 
   return (
-    <div ref={sectionRef} className="relative ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-8 lg:row-start-4 h-full flex flex-col justify-between bg-gradient-to-r from-[1A1A1A] to-black dark:bg-secondary overflow-hidden group">
-      <div className="absolute bottom-20 left-20 w-full h-full flex items-center justify-center">
-        <TbBrandVscode className="w-32 h-32 text-[#007ACC] opacity-10 blur-sm group-hover:opacity-20 group-hover:blur-none transition-all duration-300" />
+    <div ref={sectionRef} className="relative ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-14 md:p-20 lg:p-10 lg:row-start-4 h-full flex flex-col justify-between bg-gradient-to-r from-[1A1A1A] to-black dark:bg-secondary overflow-hidden group">
+      <div className="absolute bottom-20 left-28 sm:bottom-20 sm:left-32 md:bottom-20 md:left-32 lg:bottom-28 lg:left-24 w-full h-full flex items-center justify-center">
+        <TbBrandVscode className="w-20 h-20 md:w-28 md:h-28 lg:w-24 lg:h-24 text-[#007ACC] opacity-10 blur-sm group-hover:opacity-20 group-hover:blur-none transition-all duration-300" />
       </div>
       
       <div className="absolute top-4 left-4">
@@ -74,9 +74,9 @@ const HoursOfCodingSection = () => {
         <div className="text-sm text-gray-400 mt-2">
           coding
         </div>
-        <div className="text-xs text-blue-400 mt-1">
+        {/* <div className="text-xs text-blue-400 mt-1">
           (Wakatime)
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -552,7 +552,7 @@ const Projects = () => {
         </motion.div>
 
         <motion.h2
-          className="text-6xl font-bold text-center mt-10 mb-16 text-white font-['Space_Mono']"
+          className="text-5xl md:text-5xl lg:text-6xl font-bold text-center mt-10 mb-16 text-white font-['Space_Mono']"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
