@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Designify from './components/Designify';
 import AboutPage from './components/AboutPage';
 import Loader from './components/Loader';
+import ContactPage from './components/ContactPage';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -34,6 +35,7 @@ function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/designify" element={<Designify />} />
                   <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
                 </Routes>
               </Layout>
             </motion.div>

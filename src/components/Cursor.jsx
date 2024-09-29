@@ -136,6 +136,21 @@ const Cursor = () => {
         duration: 0.3,
         ease: 'power2.out',
       });
+
+      // Update positions for projectsCursor and aboutCursor
+      gsap.to(projectsCursor, {
+        x: mouseX,
+        y: mouseY,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+
+      gsap.to(aboutCursor, {
+        x: mouseX,
+        y: mouseY,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
     };
 
     const onMouseDown = () => {
@@ -264,6 +279,17 @@ const Cursor = () => {
     });
   };
 
+  // Add these new functions
+  const handleInputFocus = () => {
+    gsap.to(mainCursor, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+    gsap.to(mainCursorAfter, { scale: 0.5, opacity: 0.3, duration: 0.3 });
+  };
+
+  const handleInputBlur = () => {
+    gsap.to(mainCursor, { scale: 1, opacity: 1, duration: 0.3 });
+    gsap.to(mainCursorAfter, { scale: 1, opacity: 0.5, duration: 0.3 });
+  };
+
   return {
     cursorJSX: (
       <>
@@ -275,7 +301,9 @@ const Cursor = () => {
     handleProjectsMouseEnter,
     handleProjectsMouseLeave,
     handleAboutMouseEnter,
-    handleAboutMouseLeave
+    handleAboutMouseLeave,
+    handleInputFocus,
+    handleInputBlur
   };
 };
 
