@@ -325,6 +325,29 @@ const ScrollToTopButton = () => {
   );
 };
 
+// Updated Navigation component
+const Navigation = () => (
+  <nav className="absolute top-4 right-4 z-20">
+    <ul className="flex space-x-6">
+      <li>
+        <Link to="/" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to="/about" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
+          About
+        </Link>
+      </li>
+      <li>
+        <Link to="/contact" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
+          Contact
+        </Link>
+      </li>
+    </ul>
+  </nav>
+);
+
 const Projects = () => {
   const [stars, setStars] = useState([]);
   const [projectType, setProjectType] = useState('top projects');
@@ -380,6 +403,9 @@ const Projects = () => {
 
   return (
     <div className="relative min-h-screen bg-black text-white py-16 px-4 sm:px-16 lg:px-8 overflow-hidden">
+      {/* Navigation */}
+      <Navigation />
+
       {/* Space Shuttle Back button */}
       <motion.div
         className="absolute top-4 left-4 z-20"

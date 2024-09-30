@@ -145,12 +145,12 @@ function ContactPage() {
       {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className={`fixed top-4 right-4 z-20 p-2 rounded-full ${
+        className={`absolute top-4 right-4 z-20 p-2 rounded-full ${
           isDarkMode ? "text-white" : "text-black"
         } transition-colors duration-300 focus:outline-none hover:opacity-80`}
         aria-label="Toggle Dark Mode"
       >
-        {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+        {isDarkMode ? <FiSun size={16} /> : <FiMoon size={16} />}
       </button>
 
       {/* Navigation */}
@@ -166,6 +166,7 @@ function ContactPage() {
           <ul className="space-y-2 text-lg">
             {[
               { to: "/", label: "Home" },
+              { to: "/projects", label: "Projects" },
               { to: "/about", label: "About me" },
               { to: "/contact", label: "Contact me" },
             ].map(({ to, label }) => (

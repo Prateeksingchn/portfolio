@@ -52,6 +52,29 @@ const StarField = () => {
   );
 };
 
+// New Navigation component
+const Navigation = () => (
+  <nav className="absolute top-4 right-4 z-20">
+    <ul className="flex space-x-6">
+      <li>
+        <Link to="/" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to="/projects" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
+          Projects
+        </Link>
+      </li>
+      <li>
+        <Link to="/contact" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
+          Contact
+        </Link>
+      </li>
+    </ul>
+  </nav>
+);
+
 function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
   const photosRef = useRef(null);
   const photosControls = useAnimation();
@@ -157,6 +180,9 @@ useEffect(() => {
   return (
     <div className="bg-black text-white min-h-screen pt-20 sm:pt-28 md:pt-36 lg:pt-44 pb-14 relative overflow-hidden font-[Roboto] ">
       <StarField />
+      
+      {/* Navigation */}
+      <Navigation />
       
       {/* Modern and aesthetic back to home button */}
       <Link to="/" className="absolute top-4 left-4 sm:top-6 sm:left-6">

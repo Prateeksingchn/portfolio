@@ -1,3 +1,5 @@
+@import 'locomotive-scroll/dist/locomotive-scroll.css';
+
 /* Webkit browsers (Chrome, Safari, newer versions of Edge) */
 ::-webkit-scrollbar {
   width: 3px;
