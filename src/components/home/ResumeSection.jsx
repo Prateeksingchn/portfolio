@@ -12,7 +12,7 @@ function ResumeSection() {
         </p>
       </div>
       <div className='w-full mt-6 sm:mt-8'>
-        <a href="https://drive.google.com/file/d/14Kgva0jVB4b-4knPzhpDPGV5rtkJVnsI/view?usp=drive_link">
+        <a href="https://drive.google.com/file/d/1GlntIajImQl_20EJiCHMVF-A8VgbXPSo/view?usp=sharing">
           <button 
             type='button'
             className='text-sm py-2 w-full px-4 h-10 sm:h-12 font-semibold focus:ring-2 rounded-lg bg-primary dark:bg-[#ECECEC] dark:text-black dark:hover:text-white hover:text-primary dark:hover:bg-white/5 hover:bg-primary/10 text-white flex duration-200 focus:ring-offset-2 focus:ring-inline-flex items-center justify-between'> 
