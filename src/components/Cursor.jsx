@@ -77,7 +77,9 @@ const AboutCursor = styled.div`
   mix-blend-mode: difference;
   transition: opacity 0.3s ease;
   &::after {
-    content: 'About Me';
+    content: 'More About Me';
+    text-align: center;
+    padding: 10px;
     width: 100px;
     height: 100px;
     border-radius: 50%;

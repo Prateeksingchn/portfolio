@@ -8,6 +8,7 @@ import Designify from './components/Designify';
 import AboutPage from './components/AboutPage';
 import Loader from './components/Loader';
 import ContactPage from './components/ContactPage';
+import './App.css';
 
 function App() {
   const [loading, setLoading] = useState(true);

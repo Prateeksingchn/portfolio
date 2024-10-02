@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Bar } from '../../components/ui/Bar';
 import { FaGithub, FaCode, FaStar, FaCodeBranch } from 'react-icons/fa';
@@ -14,6 +14,16 @@ const projectStats = [
 const COLORS = ['#6366F1', '#10B981', '#F59E0B', '#EF4444'];
 
 const AnimatedInfographic = () => {
+  const [splineLoaded, setSplineLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSplineLoaded(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <motion.div
       className="ring-1 dark:ring-white/10 ring-primary/5 flex flex-col p-4 sm:p-6 h-full justify-between items-start rounded-3xl overflow-hidden relative lg:col-span-2 lg:row-start-4 bg-[#04040475] dark:bg-secondary shadow-xl dark:shadow-thick"
@@ -26,10 +36,23 @@ const AnimatedInfographic = () => {
         <div className='flex flex-col md:flex-row gap-6'>
           <div className='w-full md:w-1/2 space-y-4'>
             <p className="text-sm sm:text-base text-gray-400">A snapshot of my development journey and impact</p>
-            <div className="h-64 sm:h-64 w-full mx-auto overflow-hidden rounded-2xl bg-black/20">
-              <div className="transform scale-[0.5] origin-top-left w-[200%] h-[200%]">
-                <Spline scene="https://prod.spline.design/wb47z7mtEN-uBLKY/scene.splinecode" />
-              </div>
+            <div className="h-64 sm:h-64 w-full mx-auto overflow-hidden rounded-2xl bg-black/20 relative">
+              {splineLoaded && (
+                <div style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  width: '200%',
+                  height: '200%',
+                  transform: 'translate(-50%, -50%) scale(0.5)',
+                  overflow: 'hidden',
+                }}>
+                  <Spline 
+                    scene="https://prod.spline.design/wb47z7mtEN-uBLKY/scene.splinecode"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                </div>
+              )}
             </div>
           </div>
           {/* GitHub Statistics */}

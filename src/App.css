@@ -1,37 +1,51 @@
 @import 'locomotive-scroll/dist/locomotive-scroll.css';
+html, body, #root {
+  min-height: 100vh;
+  background-color: #101010;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.home-container {
+  min-height: 100vh;
+  background-color: #101010;
+}
 
 /* Webkit browsers (Chrome, Safari, newer versions of Edge) */
 ::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
-  border-radius: 1.5px;
+  background: rgba(20, 20, 20, 0.8);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #8e2de2, #4a00e0);
-  border-radius: 1.5px;
+  background: linear-gradient(45deg, #2c3e50, #34495e);
+  border-radius: 4px;
+  border: 2px solid rgba(30, 30, 30, 0.8);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #a44ce7, #6a11cb);
+  background: linear-gradient(45deg, #34495e, #3498db);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #8e2de2 #000000;
+  scrollbar-color: #2c3e50 rgba(20, 20, 20, 0.8);
 }
 
 /* For Internet Explorer and Edge (older versions) */
 body {
-  scrollbar-face-color: #8e2de2;
-  scrollbar-track-color: #000000;
-  scrollbar-arrow-color: #ffffff;
-  scrollbar-shadow-color: #4a00e0;
+  scrollbar-face-color: #2c3e50;
+  scrollbar-track-color: rgba(20, 20, 20, 0.8);
+  scrollbar-arrow-color: #34495e;
+  scrollbar-shadow-color: #34495e;
 }
 
 /* Add subtle star-like effect to the scrollbar track */
@@ -43,10 +57,10 @@ body {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 16px 16px, 32px 32px;
-  background-position: 0 0, 8px 8px;
+    radial-gradient(circle, rgba(52, 73, 94, 0.2) 1px, transparent 1px),
+    radial-gradient(circle, rgba(52, 73, 94, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px;
+  background-position: 0 0, 10px 10px;
 }
 
 /* Add a subtle glow effect to the scrollbar thumb */
@@ -57,6 +71,23 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(ellipse at center, rgba(142, 45, 226, 0.4) 0%, rgba(142, 45, 226, 0) 70%);
-  filter: blur(1px);
+  background: radial-gradient(ellipse at center, rgba(52, 152, 219, 0.3) 0%, rgba(52, 152, 219, 0) 70%);
+  filter: blur(2px);
+}
+
+/* Add pulsating animation to scrollbar thumb */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  animation: pulse 2s infinite;
 }

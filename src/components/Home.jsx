@@ -17,17 +17,32 @@ function Home() {
   const { cursorJSX, handleProjectsMouseEnter, handleProjectsMouseLeave, handleAboutMouseEnter, handleAboutMouseLeave } = Cursor();
 
   useEffect(() => {
-    // Apply smooth scrolling
+    // Apply smooth scrolling and set background color
     document.documentElement.style.scrollBehavior = 'smooth';
+    document.body.style.backgroundColor = '#101010';
+    document.documentElement.style.backgroundColor = '#101010';
 
-    // Clean up function to remove the style when component unmounts
+    // Ensure the content pushes the body to full height
+    const setFullHeight = () => {
+      const vh = window.innerHeight;
+      document.body.style.minHeight = `${vh}px`;
+    };
+
+    setFullHeight();
+    window.addEventListener('resize', setFullHeight);
+
+    // Clean up function
     return () => {
       document.documentElement.style.scrollBehavior = '';
+      document.body.style.backgroundColor = '';
+      document.documentElement.style.backgroundColor = '';
+      document.body.style.minHeight = '';
+      window.removeEventListener('resize', setFullHeight);
     };
   }, []);
 
   return (
-    <section className='dark:bg-[#101010] w-full min-h-screen'>
+    <div className="home-container">
       {cursorJSX}
       <div className='p-4'>
         <div className='grid grid-cols-1 gap-4 list-none lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4'>
@@ -45,7 +60,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
