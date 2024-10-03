@@ -93,7 +93,7 @@ function Loader({ onLoadingComplete }) {
               />
             ))}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[Raleway] tracking-wider text-gray-100 mb-2 sm:mb-4">{count}%</p>
+              <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-['Raleway'] tracking-wider text-gray-100 mb-2 sm:mb-4">{count}%</p>
               <h3 className="text-sm sm:text-xl md:text-xl font-['Atkinson_Hyperlegible'] italic text-gray-100 transition-opacity duration-500">
                 {greetings[currentGreeting]}
               </h3>

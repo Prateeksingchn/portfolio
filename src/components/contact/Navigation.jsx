@@ -4,13 +4,11 @@ import { Link } from "react-router-dom";
 function Navigation({ isDarkMode }) {
   return (
     <div className="fixed top-10 left-10 z-10 w-1/4">
-      <h2
-        className={`text-[1.6rem] mb-5 font-[500] font-['roboto'] ${
-          isDarkMode ? "text-white" : "text-[#000000]"
-        }`}
-      >
-        Prateeksingchn
-      </h2>
+      <Link to="/" className="flex w-[420px] -ml-[67px]">
+        <img src="./public/Signature/signature.png" alt="Prateek Singh Chouhan" className="w-56 h-auto" />
+        <img src="./public/Signature/signature2.png" alt="Prateek Singh Chouhan" className="w-56 h-auto -ml-32" />
+        <img src="./public/Signature/signature3.png" alt="Prateek Singh Chouhan" className="w-56 h-auto -ml-32" />
+      </Link>
       <nav>
         <ul className="space-y-2 text-lg">
           {[
