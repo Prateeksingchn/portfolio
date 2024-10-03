@@ -3,12 +3,18 @@ import { Link } from "react-router-dom";
 
 function Navigation({ isDarkMode }) {
   return (
-    <div className="fixed top-10 left-10 z-10 w-1/4">
-      <Link to="/" className="flex w-[420px] -ml-[67px]">
+    <div className="fixed top-10 left-10 z-10 w-1/4 ">
+      <Link to="/" className={`justify-center w-[420px] -ml-[67px] ${isDarkMode ? 'hidden' : 'flex'}`}>
         <img src="./public/Signature/signature.png" alt="Prateek Singh Chouhan" className="w-56 h-auto" />
         <img src="./public/Signature/signature2.png" alt="Prateek Singh Chouhan" className="w-56 h-auto -ml-32" />
         <img src="./public/Signature/signature3.png" alt="Prateek Singh Chouhan" className="w-56 h-auto -ml-32" />
       </Link>
+      <Link to="/" className={`grid grid-cols-3 w-[420px] -ml-[30px] -mt-6 -mb-4 ${isDarkMode ? 'block' : 'hidden'}`}>
+        <img src="./public/images/Prateek_cocosign.png" alt="Prateek Singh Chouhan" className="w-auto h-auto " />
+        <img src="./public/images/singh_cocosign.png" alt="Prateek Singh Chouhan" className="w-auto h-auto -ml-9 " />
+        <img src="./public/images/chouhan_cocosign.png" alt="Prateek Singh Chouhan" className="w-auto h-auto -ml-[68px]" />
+      </Link>
+
       <nav>
         <ul className="space-y-2 text-lg">
           {[
