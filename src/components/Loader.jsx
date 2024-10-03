@@ -30,89 +30,194 @@ function Loader({ onLoadingComplete }) {
   const [count, setCount] = useState(0);
   const [visibleImages, setVisibleImages] = useState([]);
   const [currentGreeting, setCurrentGreeting] = useState(0);
-  const [showRevealAnimation, setShowRevealAnimation] = useState(false);
+  const [loaderComplete, setLoaderComplete] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
 
   useEffect(() => {
-    const countInterval = setInterval(() => {
+    const totalDuration = 5700; // 5.7 seconds for the entire loading process
+    const countInterval = 55; // Update count every 55ms
+    const imageInterval = 600; // Show a new image every 600ms (5400ms total for 9 images)
+    const greetingInterval = totalDuration / greetings.length;
+
+    const countTimer = setInterval(() => {
       setCount((prevCount) => {
         if (prevCount >= 100) {
-          clearInterval(countInterval);
-          setShowRevealAnimation(true);
+          clearInterval(countTimer);
           return 100;
         }
         return prevCount + 1;
       });
-    }, 55);
+    }, countInterval);
 
-    const imageInterval = setInterval(() => {
+    const imageTimer = setInterval(() => {
       setVisibleImages((prev) => {
-        if (prev.length >= images.length) {
-          clearInterval(imageInterval);
+        if (prev.length >= 9) {
+          clearInterval(imageTimer);
           return prev;
         }
         return [...prev, images[prev.length]];
       });
-    }, 500);
+    }, imageInterval);
 
-    const greetingInterval = setInterval(() => {
+    const greetingTimer = setInterval(() => {
       setCurrentGreeting((prev) => (prev + 1) % greetings.length);
-    }, 600);
+    }, greetingInterval);
+
+    const loaderCompleteTimer = setTimeout(() => {
+      setLoaderComplete(true);
+    }, totalDuration);
+
+    const welcomeTimer = setTimeout(() => {
+      setShowWelcome(true);
+    }, totalDuration + 500); // Show welcome screen 0.5s after loader completes
+
+    const completionTimer = setTimeout(() => {
+      onLoadingComplete();
+    }, totalDuration + 2500); // Call onLoadingComplete 2.5s after loader completes
 
     return () => {
-      clearInterval(countInterval);
-      clearInterval(imageInterval);
-      clearInterval(greetingInterval);
+      clearInterval(countTimer);
+      clearInterval(imageTimer);
+      clearInterval(greetingTimer);
+      clearTimeout(loaderCompleteTimer);
+      clearTimeout(welcomeTimer);
+      clearTimeout(completionTimer);
     };
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    },
+    exit: { 
+      opacity: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   const revealVariants = {
-    hidden: { scaleY: 0 },
-    visible: { scaleY: 1, transition: { duration: 0.8, ease: [0.645, 0.045, 0.355, 1] } },
+    initial: { scaleY: 1 },
+    animate: {
+      scaleY: 0,
+      transition: { 
+        duration: 1.5,
+        ease: [0.645, 0.045, 0.355, 1],
+        when: "afterChildren",
+      }
+    }
+  };
+
+  const textVariants = {
+    initial: { opacity: 0, y: 50 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.215, 0.61, 0.355, 1],
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -50,
+      transition: {
+        duration: 0.5,
+        ease: [0.55, 0.055, 0.675, 0.19],
+      }
+    }
+  };
+
+  const lineVariants = {
+    initial: { scaleX: 0 },
+    animate: { 
+      scaleX: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.215, 0.61, 0.355, 1],
+      }
+    }
   };
 
   return (
-    <AnimatePresence>
-      {!showRevealAnimation && (
+    <AnimatePresence mode="wait">
+      {!loaderComplete ? (
         <motion.div 
+          key="loader"
           className="fixed inset-0 flex items-center justify-center bg-black overflow-hidden"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
           <div className="relative w-full h-full">
             {visibleImages.map((src, index) => (
-              <img
+              <motion.img
                 key={index}
                 src={src}
                 alt={`Loader image ${index + 1}`}
-                className={`absolute object-cover transition-opacity duration-500 ${getImageClasses(index)}`}
-                style={{
-                  opacity: 1,
-                  zIndex: images.length - index,
-                }}
+                className={`absolute object-cover ${getImageClasses(index)}`}
+                style={{ zIndex: 9 - index }} // Ensure correct stacking order
+                variants={itemVariants}
               />
             ))}
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-['Raleway'] tracking-wider text-gray-100 mb-2 sm:mb-4">{count}%</p>
-              <h3 className="text-sm sm:text-xl md:text-xl font-['Atkinson_Hyperlegible'] italic text-gray-100 transition-opacity duration-500">
+            <motion.div 
+              className="absolute inset-0 flex flex-col items-center justify-center"
+              variants={itemVariants}
+            >
+              <motion.p 
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-['Raleway'] tracking-wider text-gray-100 mb-2 sm:mb-4"
+                variants={itemVariants}
+              >
+                {count}%
+              </motion.p>
+              <motion.h3 
+                className="text-sm sm:text-xl md:text-xl font-['Atkinson_Hyperlegible'] italic text-gray-100"
+                variants={itemVariants}
+              >
                 {greetings[currentGreeting]}
-              </h3>
-            </div>
+              </motion.h3>
+            </motion.div>
           </div>
         </motion.div>
-      )}
-      {showRevealAnimation && (
+      ) : showWelcome ? (
         <motion.div
-          key="reveal"
-          className="fixed inset-0 bg-black origin-bottom"
+          key="welcome"
+          className="fixed inset-0 flex items-center justify-center overflow-hidden bg-black"
+          initial="initial"
+          animate="animate"
+          exit="exit"
           variants={revealVariants}
-          initial="hidden"
-          animate="visible"
-          onAnimationComplete={() => {
-            onLoadingComplete();
-          }}
-        />
-      )}
+        >
+          <div className="relative z-10 text-white text-center px-4">
+            <motion.div variants={textVariants} className="overflow-hidden">
+              <motion.h2 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-['Raleway'] font-bold mb-4" variants={textVariants}>
+                Welcome to My Digital World
+              </motion.h2>
+            </motion.div>
+            <motion.div className="w-24 h-1 bg-white mx-auto mb-4" variants={lineVariants} />
+            <motion.div variants={textVariants} className="overflow-hidden">
+              <motion.p className="text-xl sm:text-xl md:text-xl font-['Atkinson_Hyperlegible'] px-44" variants={textVariants}>
+                Explore my work and let's create something amazing together
+              </motion.p>
+            </motion.div>
+          </div>
+        </motion.div>
+      ) : null}
     </AnimatePresence>
   );
 }

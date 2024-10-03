@@ -40,7 +40,7 @@ function FAQSection({ isDarkMode, faqData, openFAQ, setOpenFAQ }) {
           isDarkMode ? "border-[#d7cdcd71]" : "border-gray-300"
         } flex flex-col items-end justify-start`}
       >
-        <span className="text-3xl tracking-widest transform -rotate-90 origin-top-left inline-block mt-56">
+        <span className="text-[1.80rem] tracking-widest transform -mr-4 -rotate-90 origin-top-left inline-block mt-[13.8rem]">
           FAQ
         </span>
       </div>

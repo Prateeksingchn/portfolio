@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 
 const MainCursor = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -14,8 +14,8 @@ const MainCursor = styled.div`
   opacity: ${props => props.isVisible ? 1 : 0};
   &::after {
     content: '';
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     border: 2px solid white;
     position: absolute;
