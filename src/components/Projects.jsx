@@ -270,7 +270,7 @@ const Projects = () => {
       <ProjectsHeader />
 
       <motion.div
-        className="absolute top-48 md:top-60 lg:top-72 right-4 z-20 hidden md:block lg:block xl:block"
+        className="absolute top-48 md:top-60 lg:top-[20.5rem] right-4 z-20 hidden md:block lg:block xl:block"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

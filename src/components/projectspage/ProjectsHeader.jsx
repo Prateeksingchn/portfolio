@@ -75,7 +75,7 @@ const ProjectsHeader = () => {
       >
         <SpaceShuttleBackButton />
       </motion.div>
-      <div className="pt-32">
+      <div className="pt-24">
         <motion.h1
           className="text-6xl font-bold text-center mb-4 font-['Space_Mono']"
           initial={{ y: -20, opacity: 0 }}
