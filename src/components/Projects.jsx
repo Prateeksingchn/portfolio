@@ -281,7 +281,7 @@ const Projects = () => {
         />
       </motion.div>
 
-      <div className="relative z-10 max-w-4xl mx-auto pt-16">
+      <div className="relative z-10 max-w-4xl mx-auto">
         <div className='flex flex-col sm:flex-row-reverse md:flex-col gap-4 items-center justify-center sm:items-center sm:justify-between md:items-start md:justify-start lg:items-start lg:justify-start xl:items-start xl:justify-start'>
           <motion.div
             className="mb-4 block md:hidden lg:hidden xl:hidden z-20"
