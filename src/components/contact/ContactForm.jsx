@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
-function ContactForm({ isDarkMode, formData, handleChange, handleSubmit, handleInputFocus, handleInputBlur }) {
+function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, handleInputBlur, resetForm }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mvgopzyd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        resetForm(); // Reset the form after successful submission
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="px-6">
       <div className="space-y-20">
@@ -152,6 +182,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleSubmit, handleI
                 : "border-gray-700 focus:border-gray-600"
             } focus:outline-none text-2xl font-light transition-colors peer`}
             placeholder=" "
+            required
           />
           <label
             htmlFor="name"
@@ -183,6 +214,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleSubmit, handleI
                 : "border-gray-700 focus:border-gray-600"
             } focus:outline-none text-xl font-light transition-colors peer`}
             placeholder=" "
+            required
           />
           <label
             htmlFor="email"
@@ -214,6 +246,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleSubmit, handleI
                 : "border-gray-700 focus:border-gray-600"
             } focus:outline-none text-xl font-light transition-colors peer`}
             placeholder=" "
+            required
           ></textarea>
           <label
             htmlFor="projectDescription"
@@ -232,14 +265,24 @@ function ContactForm({ isDarkMode, formData, handleChange, handleSubmit, handleI
 
       <button
         type="submit"
+        disabled={isSubmitting}
         className={`text-5xl font-['space_mono'] ${
           isDarkMode
             ? "text-white hover:text-gray-300"
             : "text-[#000000] hover:text-gray-600"
-        } focus:outline-none transition-all mt-12`}
+        } focus:outline-none transition-all mt-12 ${
+          isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-        Send request →
+        {isSubmitting ? "Sending..." : "Send request →"}
       </button>
+
+      {submitStatus === "success" && (
+        <p className="mt-4 text-green-500">Message sent successfully!</p>
+      )}
+      {submitStatus === "error" && (
+        <p className="mt-4 text-red-500">Error sending message. Please try again.</p>
+      )}
     </form>
   );
 }

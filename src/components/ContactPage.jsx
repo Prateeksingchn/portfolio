@@ -67,9 +67,15 @@ function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const resetForm = () => {
+    setFormData({
+      projectType: "",
+      interestedIn: "",
+      budget: "",
+      name: "",
+      email: "",
+      projectDescription: "",
+    });
   };
 
   const toggleDarkMode = () => {
@@ -175,9 +181,9 @@ function ContactPage() {
               isDarkMode={isDarkMode}
               formData={formData}
               handleChange={handleChange}
-              handleSubmit={handleSubmit}
               handleInputFocus={handleInputFocus}
               handleInputBlur={handleInputBlur}
+              resetForm={resetForm}
             />
           </div>
         </div>
