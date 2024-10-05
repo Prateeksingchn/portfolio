@@ -8,6 +8,7 @@ import Designify from './components/Designify';
 import AboutPage from './components/AboutPage';
 import Loader from './components/Loader';
 import ContactPage from './components/ContactPage';
+import ComingSoon from './components/ComingSoon';
 import './App.css';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/designify" element={<Designify />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/comingsoon" element={<ComingSoon />} />
                 </Routes>
               </Layout>
             </motion.div>
