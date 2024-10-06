@@ -77,7 +77,7 @@ const skillCategories = [
       { Icon: SiFigma, name: "Figma", color: "#F24E1E" },
       { Icon: FramerIcon, name: "Framer", color: "#0055FF" },
       { Icon: SiVercel, name: "Vercel", color: "#000000" },
-      { Icon: SiOpenai, name: "AI Assistants", color: "#412991" },
+      { Icon: SiOpenai, name: "LLM", color: "#412991" }, // Replace AI Assistants with LLM
       { Icon: SiPostman, name: "Postman", color: "#FF6C37" },
       { Icon: SiNpm, name: "npm", color: "#CB3837" },
     ],
