@@ -62,9 +62,9 @@ const ProjectsSection = ({ onMouseEnter, onMouseLeave }) => {
       <div className="relative z-10 flex flex-col h-full w-auto md:w-[87.4vw] lg:w-auto">
         <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-4 text-white">Projects</h2>
         <p className="text-xs sm:text-sm md:text-sm mb-4 sm:mb-6 lg:mb-8 text-gray-400 font-['roboto']">
-          EXPLORE INNOVATIVE EXCELLENCE WITH OUR PORTFOLIO - MODERN, CLEAR, 
-          AND MINIMALIST. FROM WEB APPS TO DESIGNS, REDEFINE YOUR 
-          JOURNEY EFFORTLESSLY.
+          Explore innovative excellence with our portfolio - modern, clear, 
+          and minimalist. From web apps to designs, redefine your 
+          journey effortlessly.
         </p>
         <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[520px] flex items-center justify-center mt-4 sm:mt-12 md:mt-16 lg:mt-20 pb-4 md:pb-5 lg:pb-0">
           <AnimatePresence>

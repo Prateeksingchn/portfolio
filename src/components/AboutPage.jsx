@@ -10,28 +10,7 @@ import VisualJourneySection from "./about/VisualJourneySection";
 import ValuesSection from "./about/ValuesSection";
 import AboutThisSiteSection from "./about/AboutThisSiteSection";
 import AboutFooter from "./about/AboutFooter";
-
-const Navigation = () => (
-  <nav className="absolute top-4 right-4 z-20">
-    <ul className="flex space-x-6">
-      <li>
-        <Link to="/" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
-          Home
-        </Link>
-      </li>
-      <li>
-        <Link to="/projects" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
-          Projects
-        </Link>
-      </li>
-      <li>
-        <Link to="/contact" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
-          Contact
-        </Link>
-      </li>
-    </ul>
-  </nav>
-);
+import Navigation from "./about/Navigation"; // Import the new Navigation component
 
 const BackToHomeButton = () => (
   <Link to="/" className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
@@ -93,9 +72,9 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
   }, []);
 
   return (
-    <div className="bg-black text-white min-h-screen pt-20 sm:pt-28 md:pt-36 lg:pt-44 pb-14 relative overflow-hidden font-[Roboto]">
+    <div className="bg-black text-white min-h-screen pt-44 sm:pt-28 md:pt-36 lg:pt-44 pb-14 relative overflow-hidden font-[Roboto]">
       <StarField />
-      <Navigation />
+      <Navigation /> {/* Use the new Navigation component */}
       <BackToHomeButton />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 relative z-10">
         <AboutHeader />
