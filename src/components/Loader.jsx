@@ -211,7 +211,7 @@ function Loader({ onLoadingComplete }) {
             </motion.div>
             <motion.div className="w-24 h-1 bg-white mx-auto mb-4" variants={lineVariants} />
             <motion.div variants={textVariants} className="overflow-hidden">
-              <motion.p className="text-xl sm:text-xl md:text-xl font-['Atkinson_Hyperlegible'] px-44" variants={textVariants}>
+              <motion.p className="text-xl sm:text-xl md:text-xl font-['Atkinson_Hyperlegible']" variants={textVariants}>
                 Explore my work and let's create something amazing together
               </motion.p>
             </motion.div>

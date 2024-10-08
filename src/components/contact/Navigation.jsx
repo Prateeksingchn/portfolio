@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useState } from "react"; // Import useState for managing toggle state
 import { Link } from "react-router-dom";
 
 function Navigation({ isDarkMode }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu toggle
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen); // Toggle the menu open/close state
+  };
+
   return (
-    <div className="fixed top-10 left-10 z-10 w-1/4 ">
-      <Link to="/" className={`justify-center w-[420px] -ml-[67px] ${isDarkMode ? 'hidden' : 'flex'}`}>
-        <img src="./public/Signature/signature.png" alt="Prateek Singh Chouhan" className="w-56 h-auto" />
-        <img src="./public/Signature/signature2.png" alt="Prateek Singh Chouhan" className="w-56 h-auto -ml-32" />
-        <img src="./public/Signature/signature3.png" alt="Prateek Singh Chouhan" className="w-56 h-auto -ml-32" />
-      </Link>
-      <Link to="/" className={`grid grid-cols-3 w-[420px] -ml-[30px] -mt-6 -mb-4 ${isDarkMode ? 'block' : 'hidden'}`}>
-        <img src="./public/images/Prateek_cocosign.png" alt="Prateek Singh Chouhan" className="w-auto h-auto " />
-        <img src="./public/images/singh_cocosign.png" alt="Prateek Singh Chouhan" className="w-auto h-auto -ml-9 " />
-        <img src="./public/images/chouhan_cocosign.png" alt="Prateek Singh Chouhan" className="w-auto h-auto -ml-[68px]" />
+    <div className="fixed top-10 left-10 z-10 w-1/4">
+      <Link to="/" className={`flex items-center mb-4 ${isDarkMode ? 'text-white' : 'text-[#000000]'}`}>
+        <span className={`font-['Dancing_Script'] text-3xl ${isDarkMode ? 'text-white' : 'text-[#000000]'}`}> {/* Reduced font size */}
+          Prateek Singh Chouhan
+        </span>
       </Link>
 
-      <nav>
+      {/* Menu Button for smaller screens */}
+      <button 
+        onClick={toggleMenu} 
+        className={`md:hidden p-2 rounded ${isDarkMode ? 'text-white' : 'text-black'} transition-colors`}
+        aria-label="Toggle Navigation Menu"
+      >
+        {isMenuOpen ? 'Close Menu' : 'Menu'} {/* Button text changes based on menu state */}
+      </button>
+
+      {/* Navigation Links */}
+      <nav className={`${isMenuOpen ? 'block' : 'hidden'} md:block`}> {/* Show/Hide based on toggle state */}
         <ul className="space-y-2 text-lg">
           {[
             { to: "/", label: "Home" },

@@ -72,7 +72,7 @@ function AboutPage({ handleProjectsMouseEnter, handleProjectsMouseLeave }) {
   }, []);
 
   return (
-    <div className="bg-black text-white min-h-screen pt-44 sm:pt-28 md:pt-36 lg:pt-44 pb-14 relative overflow-hidden font-[Roboto]">
+    <div className="bg-black text-white min-h-screen px-3  pt-44 sm:pt-28 md:pt-36 lg:pt-44 pb-14 relative overflow-hidden font-[Roboto]">
       <StarField />
       <Navigation /> {/* Use the new Navigation component */}
       <BackToHomeButton />

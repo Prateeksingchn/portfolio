@@ -35,11 +35,15 @@ function Home() {
     // Ensure the content pushes the body to full height
     const setFullHeight = () => {
       const vh = window.innerHeight;
-      document.body.style.minHeight = `${vh}px`;
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        document.body.style.minHeight = `${vh}px`;
+      });
     };
 
     setFullHeight();
-    window.addEventListener("resize", setFullHeight);
+    // Removed the resize event listener for better performance on mobile
+    // window.addEventListener("resize", setFullHeight);
 
     // Clean up function
     return () => {
@@ -47,7 +51,7 @@ function Home() {
       document.body.style.backgroundColor = "";
       document.documentElement.style.backgroundColor = "";
       document.body.style.minHeight = "";
-      window.removeEventListener("resize", setFullHeight);
+      // window.removeEventListener("resize", setFullHeight); // Removed
     };
   }, []);
 

@@ -19,7 +19,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
 
       if (response.ok) {
         setSubmitStatus("success");
-        resetForm(); // Reset the form after successful submission
+        resetForm();
       } else {
         setSubmitStatus("error");
       }
@@ -32,23 +32,16 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
   };
 
   return (
-    <form onSubmit={handleSubmit} className="px-6">
-      <div className="space-y-20">
+    <form onSubmit={handleSubmit} className="px-4 md:px-6">
+      <div className="space-y-8 md:space-y-20">
         {/* Project type section */}
         <div>
-          <p
-            className={`text-[1rem] mb-4 ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
-            } uppercase tracking-wide`}
-          >
+          <p className={`text-sm md:text-[1rem] mb-4 ${isDarkMode ? "text-gray-300" : "text-gray-700"} uppercase tracking-wide`}>
             Project type
           </p>
-          <div className="flex space-x-16">
+          <div className="flex flex-col md:flex-row md:space-x-16 space-y-4 md:space-y-0">
             {["Website", "Webapp", "Other"].map((type) => (
-              <label
-                key={type}
-                className="flex flex-col items-center cursor-pointer group"
-              >
+              <label key={type} className="inline-flex flex-col items-start cursor-pointer group">
                 <input
                   type="radio"
                   name="projectType"
@@ -57,22 +50,10 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
                   onChange={handleChange}
                   className="sr-only"
                 />
-                <span
-                  className={`text-3xl ${
-                    isDarkMode
-                      ? "text-white group-hover:text-gray-300"
-                      : "text-[#000000] group-hover:text-gray-600"
-                  } transition-colors`}
-                >
+                <span className={`text-lg md:text-3xl ${isDarkMode ? "text-white group-hover:text-gray-300" : "text-[#000000] group-hover:text-gray-600"} transition-colors`}>
                   {type}
                 </span>
-                <span
-                  className={`block h-0.5 w-0 ${
-                    isDarkMode ? "bg-white" : "bg-[#000000]"
-                  } transition-all duration-300 ${
-                    formData.projectType === type ? "w-full" : ""
-                  }`}
-                ></span>
+                <span className={`h-0.5 w-0 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transition-all duration-300 ${formData.projectType === type ? "w-full" : ""}`}></span>
               </label>
             ))}
           </div>
@@ -80,19 +61,12 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
 
         {/* Interested in section */}
         <div>
-          <p
-            className={`text-[1rem] ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
-            } mb-4 uppercase tracking-wide`}
-          >
+          <p className={`text-sm md:text-[1rem] mb-4 ${isDarkMode ? "text-gray-300" : "text-gray-700"} uppercase tracking-wide`}>
             Interested in...
           </p>
-          <div className="flex space-x-12">
+          <div className="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0">
             {["Design", "Development", "Design & dev"].map((interest) => (
-              <label
-                key={interest}
-                className="flex flex-col items-center cursor-pointer group"
-              >
+              <label key={interest} className="inline-flex flex-col items-start cursor-pointer group">
                 <input
                   type="radio"
                   name="interestedIn"
@@ -101,22 +75,10 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
                   onChange={handleChange}
                   className="sr-only"
                 />
-                <span
-                  className={`text-3xl ${
-                    isDarkMode
-                      ? "text-white group-hover:text-gray-300"
-                      : "text-[#000000] group-hover:text-gray-600"
-                  } transition-colors`}
-                >
+                <span className={`text-lg md:text-3xl ${isDarkMode ? "text-white group-hover:text-gray-300" : "text-[#000000] group-hover:text-gray-600"} transition-colors`}>
                   {interest}
                 </span>
-                <span
-                  className={`block h-0.5 w-0 ${
-                    isDarkMode ? "bg-white" : "bg-[#000000]"
-                  } transition-all duration-300 ${
-                    formData.interestedIn === interest ? "w-full" : ""
-                  }`}
-                ></span>
+                <span className={`h-0.5 w-0 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transition-all duration-300 ${formData.interestedIn === interest ? "w-full" : ""}`}></span>
               </label>
             ))}
           </div>
@@ -124,19 +86,12 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
 
         {/* Project budget section */}
         <div>
-          <p
-            className={`text-lg ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
-            } mb-4 uppercase tracking-wide`}
-          >
+          <p className={`text-sm md:text-lg mb-4 ${isDarkMode ? "text-gray-300" : "text-gray-700"} uppercase tracking-wide`}>
             Project budget (USD)
           </p>
-          <div className="flex space-x-12">
+          <div className="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0">
             {["< 2k", "2-5k", "5-10k", "> 10k"].map((budget) => (
-              <label
-                key={budget}
-                className="flex flex-col items-center cursor-pointer group"
-              >
+              <label key={budget} className="inline-flex flex-col items-start cursor-pointer group">
                 <input
                   type="radio"
                   name="budget"
@@ -145,22 +100,10 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
                   onChange={handleChange}
                   className="sr-only"
                 />
-                <span
-                  className={`text-2xl ${
-                    isDarkMode
-                      ? "text-white group-hover:text-gray-300"
-                      : "text-[#000000] group-hover:text-gray-600"
-                  } transition-colors`}
-                >
+                <span className={`text-lg md:text-2xl ${isDarkMode ? "text-white group-hover:text-gray-300" : "text-[#000000] group-hover:text-gray-600"} transition-colors`}>
                   {budget}
                 </span>
-                <span
-                  className={`block h-0.5 w-0 ${
-                    isDarkMode ? "bg-white" : "bg-[#000000]"
-                  } transition-all duration-300 ${
-                    formData.budget === budget ? "w-full" : ""
-                  }`}
-                ></span>
+                <span className={`h-0.5 w-0 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transition-all duration-300 ${formData.budget === budget ? "w-full" : ""}`}></span>
               </label>
             ))}
           </div>
@@ -176,23 +119,13 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
             onChange={handleChange}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            className={`w-full p-3 bg-transparent border-b-2 ${
-              isDarkMode
-                ? "border-gray-400 focus:border-gray-500"
-                : "border-gray-700 focus:border-gray-600"
-            } focus:outline-none text-2xl font-light transition-colors peer`}
+            className={`w-full p-3 bg-transparent border-b-2 ${isDarkMode ? "border-gray-400 focus:border-gray-500" : "border-gray-700 focus:border-gray-600"} focus:outline-none text-lg md:text-2xl font-light transition-colors peer`}
             placeholder=" "
             required
           />
           <label
             htmlFor="name"
-            className={`absolute left-0 -top-5 ${
-              isDarkMode ? "text-gray-200" : "text-gray-500"
-            } text-sm transition-all peer-placeholder-shown:text-2xl peer-placeholder-shown:${
-              isDarkMode ? "text-gray-400" : "text-gray-900"
-            } peer-placeholder-shown:top-3 peer-focus:-top-5 peer-focus:${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
-            } peer-focus:text-sm`}
+            className={`absolute left-0 -top-5 ${isDarkMode ? "text-gray-200" : "text-gray-500"} text-sm transition-all peer-placeholder-shown:text-lg md:peer-placeholder-shown:text-2xl peer-placeholder-shown:${isDarkMode ? "text-gray-400" : "text-gray-900"} peer-placeholder-shown:top-3 peer-focus:-top-5 peer-focus:${isDarkMode ? "text-gray-300" : "text-gray-600"} peer-focus:text-sm`}
           >
             Your name
           </label>
@@ -208,23 +141,13 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
             onChange={handleChange}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            className={`w-full p-2 bg-transparent border-b-2 ${
-              isDarkMode
-                ? "border-gray-400 focus:border-gray-500"
-                : "border-gray-700 focus:border-gray-600"
-            } focus:outline-none text-xl font-light transition-colors peer`}
+            className={`w-full p-2 bg-transparent border-b-2 ${isDarkMode ? "border-gray-400 focus:border-gray-500" : "border-gray-700 focus:border-gray-600"} focus:outline-none text-lg md:text-xl font-light transition-colors peer`}
             placeholder=" "
             required
           />
           <label
             htmlFor="email"
-            className={`absolute left-0 -top-3.5 ${
-              isDarkMode ? "text-gray-200" : "text-gray-500"
-            } text-sm transition-all peer-placeholder-shown:text-2xl peer-placeholder-shown:${
-              isDarkMode ? "text-gray-400" : "text-gray-900"
-            } peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
-            } peer-focus:text-sm`}
+            className={`absolute left-0 -top-3.5 ${isDarkMode ? "text-gray-200" : "text-gray-500"} text-sm transition-all peer-placeholder-shown:text-lg md:peer-placeholder-shown:text-2xl peer-placeholder-shown:${isDarkMode ? "text-gray-400" : "text-gray-900"} peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:${isDarkMode ? "text-gray-300" : "text-gray-600"} peer-focus:text-sm`}
           >
             Your email
           </label>
@@ -240,23 +163,13 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             rows="4"
-            className={`w-full p-2 bg-transparent border-b-2 ${
-              isDarkMode
-                ? "border-gray-400 focus:border-gray-500"
-                : "border-gray-700 focus:border-gray-600"
-            } focus:outline-none text-xl font-light transition-colors peer`}
+            className={`w-full p-2 bg-transparent border-b-2 ${isDarkMode ? "border-gray-400 focus:border-gray-500" : "border-gray-700 focus:border-gray-600"} focus:outline-none text-lg md:text-xl font-light transition-colors peer`}
             placeholder=" "
             required
           ></textarea>
           <label
             htmlFor="projectDescription"
-            className={`absolute left-0 -top-3.5 ${
-              isDarkMode ? "text-gray-200" : "text-gray-500"
-            } text-sm transition-all peer-placeholder-shown:text-2xl peer-placeholder-shown:${
-              isDarkMode ? "text-gray-400" : "text-gray-900"
-            } peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
-            } peer-focus:text-sm`}
+            className={`absolute left-0 -top-3.5 ${isDarkMode ? "text-gray-200" : "text-gray-500"} text-sm transition-all peer-placeholder-shown:text-lg md:peer-placeholder-shown:text-2xl peer-placeholder-shown:${isDarkMode ? "text-gray-400" : "text-gray-900"} peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:${isDarkMode ? "text-gray-300" : "text-gray-600"} peer-focus:text-sm`}
           >
             Tell me about your project
           </label>
@@ -266,13 +179,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`text-5xl font-['space_mono'] ${
-          isDarkMode
-            ? "text-white hover:text-gray-300"
-            : "text-[#000000] hover:text-gray-600"
-        } focus:outline-none transition-all mt-12 ${
-          isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-        }`}
+        className={`text-3xl md:text-5xl font-['space_mono'] ${isDarkMode ? "text-white hover:text-gray-300" : "text-[#000000] hover:text-gray-600"} focus:outline-none transition-all mt-8 md:mt-12 ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         {isSubmitting ? "Sending..." : "Send request →"}
       </button>

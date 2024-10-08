@@ -4,13 +4,13 @@ import { FaGithub } from "react-icons/fa";
 
 const AboutFooter = () => (
   <motion.footer 
-    className="text-center pt-5 mt-12 bg-black border-t border-[#808080]"
+    className="text-center pt-5 mt-12 bg-black border-t border-[#808080] px-4 sm:px-6 lg:px-8"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
   >
-    <div className="flex justify-between items-center max-w-3xl mx-auto px-4 text-sm text-gray-200">
-      <p className="text-sm text-[#808080]">2024 © Prateek Singh Chouhan</p>
+    <div className="flex flex-col sm:flex-row justify-between items-center max-w-3xl mx-auto text-sm text-gray-200">
+      <p className="text-sm text-[#808080] mb-2 sm:mb-0">2024 © Prateek Singh Chouhan</p>
       <a 
         href="https://github.com/Prateeksingchn/portfolio" 
         target="_blank" 

@@ -147,9 +147,9 @@ function ContactPage() {
       {/* Main Content */}
       <div ref={scrollRef} className="flex flex-col w-full" data-scroll-container>
         {/* Contact Section */}
-        <div className="w-full flex">
+        <div className="w-full flex flex-col md:flex-row"> {/* Updated for responsiveness */}
           <div
-            className={`w-1/4 p-8 border-r ${
+            className={`w-full md:w-1/4 p-4 md:p-8 border-r ${
               isDarkMode ? "border-[#d7cdcd71]" : "border-gray-300"
             }`}
           >
@@ -157,17 +157,17 @@ function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="w-3/4 pt-32 pb-32">
+          <div className="w-full md:w-3/4 pt-72 md:pt-32 pb-16 md:pb-32"> {/* Updated for responsiveness */}
             <div
               className={`border-b-2 ${
                 isDarkMode ? "border-gray-200" : "border-gray-900"
-              } pb-8 mb-20 px-6`}
+              } pb-8 mb-20 px-4 md:px-6`} // Updated for responsiveness
             >
-              <h1 className="text-8xl tracking-tight leading-[90px] font-['space_mono'] font-bold mb-4">
+              <h1 className="text-4xl md:text-8xl tracking-tight leading-[60px] md:leading-[90px] font-['space_mono'] font-bold mb-4"> {/* Updated for responsiveness */}
                 Contact
               </h1>
               <p
-                className={`text-xl mb-12 font-normal leading-relaxed ${
+                className={`text-lg md:text-xl mb-12 font-normal leading-relaxed ${
                   isDarkMode ? "text-gray-300" : "text-gray-700"
                 }`}
               >

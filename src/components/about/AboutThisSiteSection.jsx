@@ -41,7 +41,7 @@ const InspirationSection = () => (
       I'm thankful to the fantastic websites listed below for sparking the inspiration behind
       this site:
     </p>
-    <ul className="list-disc pl-5 grid grid-cols-2 sm:grid-cols-1 gap-1 sm:gap-2 text-xs sm:text-sm">
+    <ul className="list-disc pl-5 grid grid-cols-1 sm:grid-cols-1 gap-1 sm:gap-2 text-sm sm:text-sm">
       <li>beta.vimfn.in</li>
       <li>antfu.me</li>
       <li>magicui.design</li>

@@ -25,6 +25,9 @@ const MainCursor = styled.div`
     opacity: 0.5;
     transition: all 0.2s ease;
   }
+  @media (max-width: 768px) { // Adjust the max-width as needed
+    display: none; // Hide cursor on smaller devices
+  }
 `;
 
 const ProjectsCursor = styled.div`
@@ -58,6 +61,9 @@ const ProjectsCursor = styled.div`
     background-color: rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
     text-align: center;
+  }
+  @media (max-width: 768px) { // Adjust the max-width as needed
+    display: none; // Hide cursor on smaller devices
   }
 `;
 
@@ -95,6 +101,9 @@ const AboutCursor = styled.div`
     background-color: rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
     text-align: center;
+  }
+  @media (max-width: 768px) { // Adjust the max-width as needed
+    display: none; // Hide cursor on smaller devices
   }
 `;
 

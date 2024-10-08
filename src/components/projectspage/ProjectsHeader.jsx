@@ -129,7 +129,7 @@ const ProjectsHeader = () => {
       </motion.div>
       <div className="pt-24">
         <motion.h1
-          className="text-6xl font-bold text-center mb-4 font-['Space_Mono']"
+          className="text-5xl md:text-6xl font-bold text-center mb-4 font-['Space_Mono']"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -137,7 +137,7 @@ const ProjectsHeader = () => {
           Projects
         </motion.h1>
         <motion.p
-          className="text-lg font-bold text-center font-['Space_Mono']"
+          className="text-sm md:text-lg font-bold text-center font-['Space_Mono']"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
