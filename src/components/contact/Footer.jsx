@@ -4,21 +4,21 @@ import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 function Footer({ isDarkMode }) {
   return (
     <div
-      className={`w-full flex border-t-[1px] ${
+      className={`w-full flex flex-col sm:flex-row border-t-[1px] ${
         isDarkMode ? "border-[#d7cdcd71]" : "border-gray-300"
       }`}
     >
       <div
-        className={`w-1/4 border-r ${
+        className={`w-full sm:w-1/4 border-b sm:border-b-0 sm:border-r ${
           isDarkMode ? "border-[#d7cdcd71]" : "border-gray-300"
         } flex flex-col items-start justify-start p-4 pt-5`}
       >
-        <span className="text-xl font-light">Credits</span>
+        <span className="text-xl font-light">Contact</span>
       </div>
-      <div className="w-3/4 flex justify-between items-start px-6 pt-6 pb-16">
-        <div>
+      <div className="w-full sm:w-3/4 flex flex-col sm:flex-row justify-between items-start px-4 sm:px-6 pt-6 pb-2 sm:pb-16">
+        <div className="mb-6 sm:mb-0">
           <span
-            className={`text-lg font-light mb-2 block font-['roboto'] ${
+            className={`text-[1rem] md:text-lg font-light mb-2 block font-['roboto'] ${
               isDarkMode ? "text-gray-300" : "text-gray-700"
             }`}
           >
@@ -26,7 +26,7 @@ function Footer({ isDarkMode }) {
           </span>
           <a
             href="mailto:prateeksinghchouhan007@gmail.com"
-            className={`text-lg underline ${
+            className={`text-[1rem] lg:text-lg underline break-all ${
               isDarkMode ? "hover:text-gray-300" : "hover:text-gray-600"
             } transition-colors`}
           >
