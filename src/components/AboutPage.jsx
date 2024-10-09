@@ -10,7 +10,7 @@ import VisualJourneySection from "./about/VisualJourneySection";
 import ValuesSection from "./about/ValuesSection";
 import AboutThisSiteSection from "./about/AboutThisSiteSection";
 import AboutFooter from "./about/AboutFooter";
-import Navigation from "./about/Navigation"; // Import the new Navigation component
+import Navigation from "./about/AboutNavigation"; // Import the new Navigation component
 
 const BackToHomeButton = () => (
   <Link to="/" className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
