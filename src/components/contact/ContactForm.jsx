@@ -89,7 +89,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
           <p className={`text-sm md:text-lg mb-4 ${isDarkMode ? "text-gray-300" : "text-gray-700"} uppercase tracking-wide`}>
             Project budget (USD)
           </p>
-          <div className="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0">
+          <div className="flex flex-col md:flex-row space-x-0 md:space-x-12 space-y-4">
             {["< 2k", "2-5k", "5-10k", "> 10k"].map((budget) => (
               <label key={budget} className="relative inline-block cursor-pointer group">
                 <input
@@ -179,7 +179,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`text-3xl md:text-5xl font-['space_mono'] ${isDarkMode ? "text-white hover:text-gray-300" : "text-[#000000] hover:text-gray-600"} focus:outline-none transition-all mt-8 md:mt-12 ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+        className={`text-[1.7rem] md:text-5xl text-start font-['space_mono'] ${isDarkMode ? "text-white hover:text-gray-300" : "text-[#000000] hover:text-gray-600"} focus:outline-none transition-all mt-8 md:mt-12 ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         {isSubmitting ? "Sending..." : "Send request →"}
       </button>

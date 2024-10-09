@@ -3,7 +3,7 @@ import Cursor from "./Cursor";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
 import { FiSun, FiMoon } from "react-icons/fi";
-import Navigation from "./contact/Navigation";
+import Navigation from "./contact/ContactNavigation";
 import ContactForm from "./contact/ContactForm";
 import FAQSection from "./contact/FAQSection";
 import Footer from "./contact/Footer";
@@ -34,13 +34,15 @@ function ContactPage() {
       scrollbarContainer: false,
     });
 
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
+    // Remove these lines
+    // document.documentElement.style.overflow = 'hidden';
+    // document.body.style.overflow = 'hidden';
 
     return () => {
       if (locomotiveScroll) locomotiveScroll.destroy();
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
+      // Remove these lines
+      // document.documentElement.style.overflow = '';
+      // document.body.style.overflow = '';
     };
   }, []);
 
@@ -120,9 +122,10 @@ function ContactPage() {
       className={`flex min-h-screen ${
         isDarkMode ? "bg-[#070707] text-white" : "bg-[#F5F5F5] text-[#000000]"
       } font-sans relative transition-colors duration-300`}
-      style={{
-        overflow: 'hidden',
-      }}
+      // Remove this style
+      // style={{
+      //   overflow: 'hidden',
+      // }}
     >
       {cursorJSX}
 
@@ -134,7 +137,7 @@ function ContactPage() {
       {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className={`absolute top-6 right-12 lg:right-4 z-[61] p-2 rounded-full ${
+        className={`fixed top-[9px] right-12 lg:right-4 z-[61] p-2 rounded-full ${
           isDarkMode ? "text-white" : "text-black"
         } transition-colors duration-300 focus:outline-none hover:opacity-80`}
         aria-label="Toggle Dark Mode"
@@ -145,7 +148,7 @@ function ContactPage() {
       <Navigation isDarkMode={isDarkMode} />
 
       {/* Main Content */}
-      <div ref={scrollRef} className="flex flex-col w-full" data-scroll-container>
+      <div ref={scrollRef} className="flex flex-col w-full h-full" data-scroll-container>
         {/* Contact Section */}
         <div className="w-full flex flex-col md:flex-row"> {/* Updated for responsiveness */}
           <div

@@ -1,5 +1,6 @@
 import React, { useState } from "react"; 
 import { Link } from "react-router-dom"; 
+import { motion, AnimatePresence } from "framer-motion";
 
 const SmallNavigation = ({ isOpen, toggleMenu }) => (
     <nav className="md:hidden absolute top-4 right-4 z-20">
@@ -11,23 +12,33 @@ const SmallNavigation = ({ isOpen, toggleMenu }) => (
         <div className={`w-6 h-0.5 bg-white transition-opacity mb-1 duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
         <div className={`w-6 h-0.5 bg-white transition-transform mb-1 duration-300 ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
       </button>
-      <ul className={`flex flex-col space-y-2 mt-4 ${isOpen ? 'block' : 'hidden'} bg-black rounded-md shadow-lg absolute right-0`}>
-        <li>
-          <Link to="/" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/projects" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2">
-            Projects
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2">
-            Contact
-          </Link>
-        </li>
-      </ul>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.ul
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col space-y-2 mt-4 bg-black rounded-md shadow-lg absolute right-0"
+          >
+            <li>
+              <Link to="/" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2 block">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/projects" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2 block">
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2 block">
+                Contact
+              </Link>
+            </li>
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </nav>
   );
 
