@@ -41,7 +41,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
           </p>
           <div className="flex flex-col md:flex-row md:space-x-16 space-y-4 md:space-y-0">
             {["Website", "Webapp", "Other"].map((type) => (
-              <label key={type} className="inline-flex flex-col items-start cursor-pointer group">
+              <label key={type} className="relative inline-block cursor-pointer group">
                 <input
                   type="radio"
                   name="projectType"
@@ -53,7 +53,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
                 <span className={`text-lg md:text-3xl ${isDarkMode ? "text-white group-hover:text-gray-300" : "text-[#000000] group-hover:text-gray-600"} transition-colors`}>
                   {type}
                 </span>
-                <span className={`h-0.5 w-0 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transition-all duration-300 ${formData.projectType === type ? "w-full" : ""}`}></span>
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transform scale-x-0 transition-transform duration-300 ${formData.projectType === type ? "scale-x-100" : ""} origin-left`}></span>
               </label>
             ))}
           </div>
@@ -66,7 +66,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
           </p>
           <div className="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0">
             {["Design", "Development", "Design & dev"].map((interest) => (
-              <label key={interest} className="inline-flex flex-col items-start cursor-pointer group">
+              <label key={interest} className="relative inline-block cursor-pointer group">
                 <input
                   type="radio"
                   name="interestedIn"
@@ -78,7 +78,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
                 <span className={`text-lg md:text-3xl ${isDarkMode ? "text-white group-hover:text-gray-300" : "text-[#000000] group-hover:text-gray-600"} transition-colors`}>
                   {interest}
                 </span>
-                <span className={`h-0.5 w-0 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transition-all duration-300 ${formData.interestedIn === interest ? "w-full" : ""}`}></span>
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transform scale-x-0 transition-transform duration-300 ${formData.interestedIn === interest ? "scale-x-100" : ""} origin-left`}></span>
               </label>
             ))}
           </div>
@@ -91,7 +91,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
           </p>
           <div className="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0">
             {["< 2k", "2-5k", "5-10k", "> 10k"].map((budget) => (
-              <label key={budget} className="inline-flex flex-col items-start cursor-pointer group">
+              <label key={budget} className="relative inline-block cursor-pointer group">
                 <input
                   type="radio"
                   name="budget"
@@ -103,7 +103,7 @@ function ContactForm({ isDarkMode, formData, handleChange, handleInputFocus, han
                 <span className={`text-lg md:text-2xl ${isDarkMode ? "text-white group-hover:text-gray-300" : "text-[#000000] group-hover:text-gray-600"} transition-colors`}>
                   {budget}
                 </span>
-                <span className={`h-0.5 w-0 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transition-all duration-300 ${formData.budget === budget ? "w-full" : ""}`}></span>
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 ${isDarkMode ? "bg-white" : "bg-[#000000]"} transform scale-x-0 transition-transform duration-300 ${formData.budget === budget ? "scale-x-100" : ""} origin-left`}></span>
               </label>
             ))}
           </div>

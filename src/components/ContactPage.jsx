@@ -134,7 +134,7 @@ function ContactPage() {
       {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className={`absolute top-4 right-4 z-20 p-2 rounded-full ${
+        className={`absolute top-6 right-12 lg:right-4 z-[61] p-2 rounded-full ${
           isDarkMode ? "text-white" : "text-black"
         } transition-colors duration-300 focus:outline-none hover:opacity-80`}
         aria-label="Toggle Dark Mode"
@@ -157,17 +157,17 @@ function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="w-full md:w-3/4 pt-72 md:pt-32 pb-16 md:pb-32"> {/* Updated for responsiveness */}
+          <div className="w-full lg:w-3/4 pt-28 md:pt-32 pb-5 lg:pb-32"> {/* Updated for responsiveness */}
             <div
               className={`border-b-2 ${
                 isDarkMode ? "border-gray-200" : "border-gray-900"
-              } pb-8 mb-20 px-4 md:px-6`} // Updated for responsiveness
+              } pb-2 lg:pb-8 mb-10 lg:mb-20 px-4 md:px-6`} // Updated for responsiveness
             >
-              <h1 className="text-4xl md:text-8xl tracking-tight leading-[60px] md:leading-[90px] font-['space_mono'] font-bold mb-4"> {/* Updated for responsiveness */}
+              <h1 className="text-[3.7rem] md:text-8xl tracking-tight leading-[60px] md:leading-[90px] font-['space_mono'] font-normal lg:font-bold mb-2 lg:mb-4"> {/* Updated for responsiveness */}
                 Contact
               </h1>
               <p
-                className={`text-lg md:text-xl mb-12 font-normal leading-relaxed ${
+                className={`text-lg md:text-xl mb-6 lg:mb-12 font-normal leading-relaxed ${
                   isDarkMode ? "text-gray-300" : "text-gray-700"
                 }`}
               >
