@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"; // Added useState
+import React, { useEffect, useState, useCallback } from "react"; // Added useState and useCallback
 import "../App.css";
 
 import Cursor from "./Cursor";
@@ -26,24 +26,29 @@ function Home() {
   // New state for toggling the navbar
   const [isNavOpen, setIsNavOpen] = useState(false);
 
+  // Memoize the setFullHeight function
+  const setFullHeight = useCallback(() => {
+    const vh = window.innerHeight;
+    requestAnimationFrame(() => {
+      document.body.style.minHeight = `${vh}px`;
+    });
+  }, []);
+
   useEffect(() => {
     // Apply smooth scrolling and set background color
     document.documentElement.style.scrollBehavior = "smooth";
     document.body.style.backgroundColor = "#101010";
     document.documentElement.style.backgroundColor = "#101010";
 
-    // Ensure the content pushes the body to full height
-    const setFullHeight = () => {
-      const vh = window.innerHeight;
-      // Use requestAnimationFrame for better performance
-      requestAnimationFrame(() => {
-        document.body.style.minHeight = `${vh}px`;
-      });
-    };
-
     setFullHeight();
-    // Removed the resize event listener for better performance on mobile
-    // window.addEventListener("resize", setFullHeight);
+
+    // Add a debounced resize listener for better performance
+    let resizeTimer;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(setFullHeight, 100);
+    };
+    window.addEventListener("resize", handleResize);
 
     // Clean up function
     return () => {
@@ -51,9 +56,9 @@ function Home() {
       document.body.style.backgroundColor = "";
       document.documentElement.style.backgroundColor = "";
       document.body.style.minHeight = "";
-      // window.removeEventListener("resize", setFullHeight); // Removed
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [setFullHeight]);
 
   return (
     <div className="home-container">
@@ -65,6 +70,7 @@ function Home() {
       {/* Main Home components */}
       <div className="p-4">
         <div className="grid grid-cols-1 gap-4 list-none lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4">
+          {/* Wrap each component in a React.memo() call */}
           <ProfileSection />
           <SocialMediaSection />
           <ProjectsSection
@@ -89,4 +95,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default React.memo(Home);
