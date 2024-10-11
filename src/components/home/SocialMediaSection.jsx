@@ -16,11 +16,11 @@ const socialLinks = [
   { href: "mailto:email@prateeksinghchouhan007.com", icon: FaEnvelope },
   { href: "https://github.com/Prateeksingchn", icon: FaGithub },
   { href: "https://www.linkedin.com/in/prateek-singh-chouhan-7a511b1b7", icon: FaLinkedinIn },
-  { href: "https://www.instagram.com/prateeksinghchouhan007", icon: FaInstagram },
-  { href: "https://twitter.com/prateeksinghchouhan", icon: FaTwitter },
+  { href: "https://www.instagram.com/__.prateeeeek.__/", icon: FaInstagram },
+  { href: "https://x.com/Prateeeeek_", icon: FaTwitter },
   { href: "https://www.behance.net/prateeksinghc1", icon: FaBehance },
-  { href: "https://discord.gg/your-discord-invite", icon: FaDiscord },
-  { href: "https://open.spotify.com/user/your-spotify-username", icon: FaSpotify },
+  { href: "https://discord.com/users/Prateek#1915", icon: FaDiscord },
+  { href: "https://open.spotify.com/user/ql244hpcrp7fkv6en8520yr9f?si=74247a44fadc49f2", icon: FaSpotify },
 ];
 
 function SocialMediaSection() {

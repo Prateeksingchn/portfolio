@@ -33,7 +33,7 @@ const ProfileSection = () => {
         </p>
 
         <p className="text-base sm:text-lg font-[roboto] text-zinc-500 dark:text-zinc-400 mb-4">
-          👋 Hello! I'm Prateek, a versatile full-stack developer with a passion for crafting user-focused experiences. With 50+ projects under my belt, I specialize in:
+        👋 Hello! I'm Prateek, a full-stack magician in my final year of Computer Science. With 50+ projects up my sleeve, I specialize in:
         </p>
 
         <ul className="list-none text-base sm:text-lg font-[roboto] text-zinc-500 dark:text-zinc-400 mb-4 space-y-2">

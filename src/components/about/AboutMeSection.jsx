@@ -3,8 +3,9 @@ import React from "react";
 const AboutMeSection = () => (
   <section className="mb-10 sm:mb-12">
     <p className="mb-4 text-[15px]">
-      Hey there! I'm Prateek Singh Chouhan, a 20-year-old Full-Stack developer from Bhopal, India who
-      thrives on crafting intuitive and dynamic UIs, especially with React.
+      Hey there! I'm Prateek Singh Chouhan, a 20-year-old Full-Stack developer from Bhopal, India. 
+      Currently, I'm in my final year pursuing a Computer Science Engineering degree. I
+      thrive on crafting intuitive and dynamic UIs, especially with React.
     </p>
     <p className="mb-4 text-[15px]">
       I began my tech journey at the end of 2022, and since then, I've developed a strong
