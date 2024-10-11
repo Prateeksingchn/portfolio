@@ -17,7 +17,7 @@ const NavItem = ({ item, onClick, isActive }) => {
     }}>
       <Link
         to={item.path}
-        className={`text-white hover:text-blue-400 transition-colors tracking-tight duration-300 font-['Space_Mono'] font-bold w-full text-[2.5rem] flex items-center ${
+        className={`text-white hover:text-blue-400 transition-colors tracking-tight duration-300 font-['Space_Mono'] font-bold w-full text-5xl flex items-center ${
           isActive ? 'text-blue-400' : ''
         }`}
         onClick={onClick}

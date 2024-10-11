@@ -35,7 +35,8 @@ function Loader({ onLoadingComplete }) {
 
   useEffect(() => {
     const totalDuration = 5700; // 5.7 seconds for the entire loading process
-    const countInterval = 55; // Update count every 55ms
+    const countDuration = 5400; // Ensure count reaches 100 before loader completes
+    const countInterval = countDuration / 100; // Adjust interval to reach 100 in countDuration
     const imageInterval = 600; // Show a new image every 600ms (5400ms total for 9 images)
     const greetingInterval = totalDuration / greetings.length;
 
