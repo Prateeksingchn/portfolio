@@ -180,13 +180,13 @@ function Loader({ onLoadingComplete }) {
               variants={itemVariants}
             >
               <motion.p 
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-['Raleway'] tracking-wider text-gray-100 mb-2 sm:mb-4"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold font-['Raleway'] tracking-wider text-gray-100 mb-2 sm:mb-4"
                 variants={itemVariants}
               >
                 {count}%
               </motion.p>
               <motion.h3 
-                className="text-sm sm:text-xl md:text-xl font-['Atkinson_Hyperlegible'] italic text-gray-100"
+                className="text-xl  md:text-xl lg:text-xl font-['Atkinson_Hyperlegible'] italic text-gray-100"
                 variants={itemVariants}
               >
                 {greetings[currentGreeting]}
@@ -265,15 +265,15 @@ function getImageStyle(index) {
   ];
 
   const mbStyles = [
-    'top-0 left-0 w-[100px] h-[140px]',
-    'top-[35px] left-[180px] w-[140px] h-[125px]',
-    'top-[170px] left-[5px] w-[140px] h-[100px]',
-    'top-[180px] right-0 w-[150px] h-[130px]',
-    'bottom-[270px] left-0 w-[125px] h-[100px]',
-    'bottom-[190px] right-[20px] w-[150px] h-[130px]',
-    'bottom-[100px] left-[5px] w-[90px] h-[110px]',
-    'bottom-[5px] right-[150px] w-[120px] h-[90px]',
-    'bottom-[65px] right-0 w-[115px] h-[80px]',
+    'top-0 left-0 w-[90px] h-[130px]',
+    'top-[35px] left-[180px] w-[130px] h-[115px]',
+    'top-[170px] left-[5px] w-[130px] h-[90px]',
+    'top-[180px] right-0 w-[140px] h-[120px]',
+    'bottom-[270px] left-0 w-[115px] h-[90px]',
+    'bottom-[190px] right-[20px] w-[140px] h-[120px]',
+    'bottom-[100px] left-[5px] w-[80px] h-[100px]',
+    'bottom-[5px] right-[150px] w-[110px] h-[80px]',
+    'bottom-[65px] right-0 w-[105px] h-[70px]',
   ];
 
   return {
