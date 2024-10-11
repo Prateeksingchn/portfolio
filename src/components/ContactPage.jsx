@@ -137,7 +137,7 @@ function ContactPage() {
       {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className={`fixed top-[9px] right-12 lg:right-4 z-[61] p-2 rounded-full ${
+        className={`fixed top-[9px] right-[52px] lg:right-4 z-[61] p-2 rounded-full ${
           isDarkMode ? "text-white" : "text-black"
         } transition-colors duration-300 focus:outline-none hover:opacity-80`}
         aria-label="Toggle Dark Mode"

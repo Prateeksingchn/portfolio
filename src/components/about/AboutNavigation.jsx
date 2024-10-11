@@ -1,10 +1,45 @@
 import React, { useState } from "react"; 
-import { Link } from "react-router-dom"; 
+import { Link, useLocation } from "react-router-dom"; 
 import { AnimatePresence, motion } from "framer-motion"; // Import Framer Motion
-import { useLocation } from 'react-router-dom'; // Add this import
+
+const NavItem = ({ to, label, onClick }) => {
+  const isAbout = label === "About Me";
+  
+  return (
+    <motion.li variants={{
+      hidden: { opacity: 0, x: 50 },
+      visible: { opacity: 1, x: 0 },
+    }}>
+      <Link
+        to={to}
+        className={`text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] font-bold w-full text-5xl flex items-center`}
+        onClick={onClick}
+      >
+        {isAbout && <span className="w-8 h-1 bg-white -ml-12 mr-4"></span>}
+        {label}
+      </Link>
+    </motion.li>
+  );
+};
 
 const SmallNavigation = ({ isOpen, toggleMenu }) => {
   const location = useLocation();
+
+  const navItems = [
+    { to: "/", label: "Home" },
+    { to: "/projects", label: "Projects" },
+    { to: "/about", label: "About Me" },
+    { to: "/contact", label: "Contact" },
+  ];
+
+  const isActiveRoute = (path) => {
+    const isActive = path === '/' 
+      ? (location.pathname === '/' || location.pathname === '')
+      : location.pathname.startsWith(path);
+    
+    console.log(`Checking path: ${path}, Current location: ${location.pathname}, isActive: ${isActive}`);
+    return isActive;
+  };
 
   return (
     <nav className="md:hidden">
@@ -32,30 +67,19 @@ const SmallNavigation = ({ isOpen, toggleMenu }) => {
               transition={{ delay: 0.1, staggerChildren: 0.1, delayChildren: 0.2 }}
               className="flex flex-col space-y-6 text-center"
             >
-              {[ 
-                { to: "/", label: "Home" },
-                { to: "/about", label: "About Me" },
-                { to: "/projects", label: "Projects" },
-                { to: "/contact", label: "Contact" },
-              ].map((link) => (
-                <motion.li key={link.to} variants={{
-                  hidden: { opacity: 0, x: 50 },
-                  visible: { opacity: 1, x: 0 },
-                }}>
-                  <Link
-                    to={link.to}
-                    className={`text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] font-bold w-full text-5xl flex items-center ${
-                      location.pathname === link.to ? 'text-blue-400' : ''
-                    }`}
+              {navItems.map((item) => {
+                const active = isActiveRoute(item.to);
+                console.log(`Rendering NavItem: ${item.label}, isActive: ${active}`);
+                return (
+                  <NavItem
+                    key={item.to}
+                    to={item.to}
+                    label={item.label}
                     onClick={toggleMenu}
-                  >
-                    {location.pathname === link.to && (
-                      <span className="w-8 h-1 bg-white -ml-12 mr-4"></span>
-                    )}
-                    {link.label}
-                  </Link>
-                </motion.li>
-              ))}
+                    isActive={active}
+                  />
+                );
+              })}
             </motion.ul>
           </motion.div>
         )}
@@ -64,27 +88,38 @@ const SmallNavigation = ({ isOpen, toggleMenu }) => {
   );
 };
 
-const LargeNavigation = () => (
-  <nav className="hidden md:block absolute top-4 right-4 z-20">
-    <ul className="flex space-x-6">
-      <li>
-        <Link to="/" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
-          Home
-        </Link>
-      </li>
-      <li>
-        <Link to="/projects" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
-          Projects
-        </Link>
-      </li>
-      <li>
-        <Link to="/contact" className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm">
-          Contact
-        </Link>
-      </li>
-    </ul>
-  </nav>
-);
+const LargeNavigation = () => {
+  const location = useLocation();
+  return (
+    <nav className="hidden md:block absolute top-4 right-4 z-20">
+      <ul className="flex space-x-6">
+        {[ 
+          { to: "/", label: "Home" },
+          { to: "/projects", label: "Projects" },
+          { to: "/about", label: "About" },
+          { to: "/contact", label: "Contact" },
+        ].map((link) => (
+          <li key={link.to}>
+            <Link 
+              to={link.to} 
+              className={`text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm relative ${
+                location.pathname === link.to ? 'text-blue-400' : ''
+              }`}
+            >
+              {link.label}
+              {location.pathname === link.to && (
+                <motion.div
+                  layoutId="underline"
+                  className="absolute left-0 bottom-[-4px] h-0.5 w-full bg-blue-400"
+                />
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 const AboutNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

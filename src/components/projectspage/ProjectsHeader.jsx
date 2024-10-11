@@ -1,6 +1,6 @@
-import React, { useState } from "react"; // Added useState for managing menu state
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 
 const SpaceShuttleBackButton = () => (
@@ -32,47 +32,117 @@ const SpaceShuttleBackButton = () => (
   </Link>
 );
 
+const navItems = [
+  { name: "Home", path: "/" },
+  { name: "Projects", path: "/Projects" },
+  { name: "About Me", path: "/About" },
+  { name: "Contact", path: "/Contact" },
+];
+
+const NavItem = ({ item, onClick, isActive }) => {
+  return (
+    <motion.li
+      variants={{
+        hidden: { opacity: 0, x: -50 },
+        visible: { opacity: 1, x: 0 },
+      }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
+      <Link
+        to={item.path}
+        className={`text-white hover:text-blue-400 transition-colors tracking-tight duration-300 font-['Space_Mono'] font-bold w-full text-5xl flex items-center ${
+          isActive ? 'text-blue-400' : ''
+        }`}
+        onClick={onClick}
+      >
+        {(isActive || item.name === "Projects") && (
+          <span className="w-8 h-1 bg-white -ml-12 mr-4"></span>
+        )}
+        {item.name}
+      </Link>
+    </motion.li>
+  );
+};
+
 const SmallNavigation = () => {
-  const [isOpen, setIsOpen] = useState(false); // State to manage menu open/close
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const menuVariants = {
+    closed: {
+      x: "100%",
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        when: "afterChildren",
+        staggerChildren: 0.1,
+      },
+    },
+    open: {
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const listVariants = {
+    closed: {
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+      },
+    },
+    open: {
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0.2,
+      },
+    },
+  };
 
   return (
-    <nav className="absolute top-4 right-4 z-20">
-      {/* Toggle button for smaller devices */}
+    <nav className="md:hidden">
       <button 
-        className="flex flex-col justify-center items-center w-10 h-10 rounded-md bg-black hover:bg-[#1a1a1a] transition duration-300" 
-        onClick={() => setIsOpen(!isOpen)} // Toggle menu on button click
+        className="fixed top-3 right-3 z-30 flex flex-col justify-center items-center w-10 h-10 rounded-md transition duration-300" 
+        onClick={toggleMenu}
       >
         <div className={`w-6 h-0.5 bg-white transition-transform mb-1 duration-300 ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
         <div className={`w-6 h-0.5 bg-white transition-opacity mb-1 duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
         <div className={`w-6 h-0.5 bg-white transition-transform mb-1 duration-300 ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
       </button>
-      {/* Navigation links for small devices */}
-      <ul className={`flex flex-col space-y-2 mt-4 ${isOpen ? 'block' : 'hidden'} bg-black rounded-md shadow-lg absolute right-0 transition-all duration-300 ease-in-out`}>
-        <li>
-          <Link
-            to="/"
-            className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={menuVariants}
+            className="fixed inset-0 bg-black z-20 flex items-center justify-center"
           >
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/about"
-            className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2"
-          >
-            About
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/contact"
-            className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm px-4 py-2"
-          >
-            Contact
-          </Link>
-        </li>
-      </ul>
+            <motion.ul
+              variants={listVariants}
+              className="flex flex-col space-y-6 w-full text-center ml-[4.1rem]"
+            >
+              {navItems.map((item) => (
+                <NavItem
+                  key={item.name}
+                  item={item}
+                  onClick={toggleMenu}
+                  isActive={location.pathname === item.path}
+                />
+              ))}
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
@@ -111,11 +181,7 @@ const LargeNavigation = () => (
 const ProjectsHeader = () => {
   return (
     <>
-      {/* Render small navigation for small devices */}
-      <div className="md:hidden">
-        <SmallNavigation />
-      </div>
-      {/* Render large navigation for medium and large devices */}
+      <SmallNavigation />
       <div className="hidden md:block">
         <LargeNavigation />
       </div>

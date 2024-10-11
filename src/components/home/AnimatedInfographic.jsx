@@ -33,7 +33,7 @@ const AnimatedInfographic = () => {
     >
       <div className="w-full space-y-4 pb-1">
         <h2 className="text-2xl sm:text-3xl font-bold text-white">GitHub Insights</h2>
-        <div className='flex flex-col md:flex-row gap-0 lg:gap-6'>
+        <div className='flex flex-col lg:flex-row gap-0 lg:gap-6'>
           <div className='w-full md:w-1/2 space-y-4'>
             <p className="text-sm sm:text-base text-gray-400">A snapshot of my development journey and impact</p>
             <div className="h-64 sm:h-64 w-full mx-auto overflow-hidden rounded-2xl bg-black/20 relative hidden lg:block">
@@ -56,7 +56,7 @@ const AnimatedInfographic = () => {
             </div>
           </div>
           {/* GitHub Statistics */}
-          <div className="w-full md:w-1/2 space-y-4 mt-0 md:mt-0">
+          <div className="w-full lg:w-1/2 space-y-4 mt-0 md:mt-0">
             <h3 className="text-lg sm:text-xl font-semibold text-white hidden lg:block">GitHub Statistics</h3>
             <div className="space-y-3">
               {projectStats.map((stat, index) => (

@@ -38,10 +38,10 @@ function ContactNavigation({ isDarkMode }) {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5,
+        duration: 0.7,
         ease: [0.22, 1, 0.36, 1],
-        delayChildren: 0.2,
-        staggerChildren: 0.07,
+        delayChildren: 0.3,
+        staggerChildren: 0.1,
         staggerDirection: 1
       }
     }
@@ -81,19 +81,19 @@ function ContactNavigation({ isDarkMode }) {
               >
                 <Link
                   to={to}
-                  className="block text-white text-4xl mb-8 hover:text-gray-300 transition-colors duration-300"
+                  className="block text-white text-4xl font-['roboto'] mb-8 hover:text-gray-300 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
+                  {label === "Contact me" && (
+                    <motion.span 
+                      className="absolute left-[-20px] top-1/2 w-3 h-[2px] bg-white transform -translate-y-1/2"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.3, delay: 0.5 }}
+                    ></motion.span>
+                  )}
                   {label}
                 </Link>
-                {to === location.pathname && (
-                  <motion.span
-                    className="absolute left-[-30px] top-1/2 w-5 h-[2px] bg-white transform -translate-y-1/2"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                  ></motion.span>
-                )}
               </motion.div>
             ))}
           </motion.nav>
@@ -113,7 +113,7 @@ function ContactNavigation({ isDarkMode }) {
       <nav>
         <ul className="space-y-2 text-lg">
           {navItems.map(({ to, label }) => (
-            <li key={to}>
+            <li key={to} className="relative">
               <Link
                 to={to}
                 className={`relative group flex items-end text-[1rem] font-light font-['roboto'] transition-colors ${
@@ -126,7 +126,7 @@ function ContactNavigation({ isDarkMode }) {
                     : "text-gray-600 hover:text-[#000000]"
                 }`}
               >
-                {to === location.pathname && (
+                {label === "Contact me" && (
                   <span
                     className={`absolute left-[-20px] top-1/2 w-3 h-[2px] ${
                       isDarkMode ? "bg-white" : "bg-[#000000]"
