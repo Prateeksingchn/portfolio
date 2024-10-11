@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Code2, GitBranch } from 'lucide-react';
-import { TbBrandVscode } from 'react-icons/tb';
 
 const HoursOfCodingSection = () => {
   const [hours, setHours] = useState(10);
@@ -52,8 +51,24 @@ const HoursOfCodingSection = () => {
 
   return (
     <div ref={sectionRef} className="relative ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-14 md:p-20 lg:p-10 lg:row-start-4 h-full flex flex-col justify-between bg-gradient-to-r from-[1A1A1A] to-black dark:bg-secondary overflow-hidden group">
-      <div className="absolute bottom-20 left-28 sm:bottom-20 sm:left-32 md:bottom-20 md:left-32 lg:bottom-28 lg:left-24 w-full h-full flex items-center justify-center">
-        <TbBrandVscode className="w-20 h-20 md:w-28 md:h-28 lg:w-24 lg:h-24 text-[#007ACC] opacity-10 blur-sm group-hover:opacity-20 group-hover:blur-none transition-all duration-300" />
+      {/* Custom SVG icon (download2.svg) */}
+      <div className="absolute bottom-20 left-24 sm:bottom-20 sm:left-32 md:bottom-20 md:left-32 lg:bottom-28 lg:left-24 w-full h-full flex items-center justify-center">
+        <img 
+          src="/favicons/download2.svg" 
+          alt="Custom Code Icon" 
+          className="w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 opacity-20 lg:opacity-10 lg:blur-sm lg:group-hover:opacity-20 lg:group-hover:blur-none transition-all duration-300"
+        />
+      </div>
+      
+      {/* Custom SVG icon with iOS-style background */}
+      <div className="absolute top-20 right-24 sm:top-20 sm:right-28 md:top-20 md:right-36 lg:top-28 lg:right-24 w-full h-full flex items-center justify-center">
+        <div className=" rounded-2xl p-3">
+          <img 
+            src="/favicons/download.svg" 
+            alt="Custom Code Icon" 
+            className="w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 opacity-20 lg:opacity-10 lg:blur-sm lg:group-hover:opacity-20 lg:group-hover:blur-none transition-all duration-300"
+          />
+        </div>
       </div>
       
       <div className="absolute top-4 left-4">
