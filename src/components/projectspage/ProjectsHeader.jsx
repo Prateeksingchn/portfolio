@@ -147,36 +147,29 @@ const SmallNavigation = () => {
   );
 };
 
-const LargeNavigation = () => (
-  <nav className="absolute top-4 right-4 z-20">
-    <ul className="flex space-x-6">
-      <li>
-        <Link
-          to="/"
-          className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm"
-        >
-          Home
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/about"
-          className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm"
-        >
-          About
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/contact"
-          className="text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm"
-        >
-          Contact
-        </Link>
-      </li>
-    </ul>
-  </nav>
-);
+const LargeNavigation = () => {
+  return (
+    <nav className="absolute top-4 right-4 z-20">
+      <ul className="flex space-x-6">
+        {navItems.map((item) => (
+          <li key={item.name}>
+            <Link
+              to={item.path}
+              className={`text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm relative ${
+                item.name === "Projects" ? 'text-blue-400' : ''
+              }`}
+            >
+              {item.name}
+              {item.name === "Projects" && (
+                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-400" />
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 const ProjectsHeader = () => {
   return (

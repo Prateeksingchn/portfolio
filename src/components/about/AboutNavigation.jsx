@@ -89,29 +89,25 @@ const SmallNavigation = ({ isOpen, toggleMenu }) => {
 };
 
 const LargeNavigation = () => {
-  const location = useLocation();
   return (
     <nav className="hidden md:block absolute top-4 right-4 z-20">
       <ul className="flex space-x-6">
         {[ 
           { to: "/", label: "Home" },
           { to: "/projects", label: "Projects" },
-          { to: "/about", label: "About" },
+          { to: "/about", label: "About Me" },
           { to: "/contact", label: "Contact" },
         ].map((link) => (
           <li key={link.to}>
             <Link 
               to={link.to} 
               className={`text-white hover:text-blue-400 transition-colors duration-300 font-['Space_Mono'] text-sm relative ${
-                location.pathname === link.to ? 'text-blue-400' : ''
+                link.label === "About Me" ? 'text-blue-400' : ''
               }`}
             >
               {link.label}
-              {location.pathname === link.to && (
-                <motion.div
-                  layoutId="underline"
-                  className="absolute left-0 bottom-[-4px] h-0.5 w-full bg-blue-400"
-                />
+              {link.label === "About Me" && (
+                <div className="absolute left-0 bottom-[-4px] h-0.5 w-full bg-blue-400" />
               )}
             </Link>
           </li>
