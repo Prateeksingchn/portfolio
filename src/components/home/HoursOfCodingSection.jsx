@@ -50,7 +50,7 @@ const HoursOfCodingSection = () => {
   }, [isVisible]);
 
   return (
-    <div ref={sectionRef} className="relative ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-14 md:p-20 lg:p-10 lg:row-start-4 h-full flex flex-col justify-between bg-gradient-to-r from-[1A1A1A] to-black dark:bg-secondary overflow-hidden group">
+    <div ref={sectionRef} className="relative ring-1 dark:ring-white/10 ring-primary/5 shadow-xl dark:shadow-thick rounded-3xl p-16 md:p-20 lg:p-10 lg:row-start-4 h-full flex flex-col justify-between bg-gradient-to-r from-[1A1A1A] to-black dark:bg-secondary overflow-hidden group">
       {/* Custom SVG icon (download2.svg) */}
       <div className="absolute bottom-20 left-24 sm:bottom-20 sm:left-32 md:bottom-20 md:left-32 lg:bottom-28 lg:left-24 w-full h-full flex items-center justify-center">
         <img 
