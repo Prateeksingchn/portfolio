@@ -24,7 +24,7 @@ const StarField = () => {
       })));
     };
 
-    const intervalId = setInterval(moveStars, 50);
+    const intervalId = setInterval(moveStars, 150);
     return () => clearInterval(intervalId);
   }, []);
 
