@@ -6,14 +6,14 @@ import ProjectsHeader from './projectspage/ProjectsHeader';
 import ProjectFilter from './projectspage/ProjectFilter';
 import ProjectItem from './projectspage/ProjectItem';
 import ProjectFooter from './projectspage/ProjectFooter';
-import ComingSoon from './ComingSoon';
+// import ComingSoon from './ComingSoon';
 const projectsData = [
   {
     id: 1,
     title: 'Space',
     date: 'Aug 2024',
     description: 'My personal portfolio website',
-    image: './public/webui/web1.jpeg',
+    image: './public/webui/web1.png',
     technologies: ['Portfolio', 'Next.js', 'Framer motion', 'TypeScript', 'Shadcn UI', 'TailwindCSS'],
     sourceCode: 'https://github.com/Prateeksingchn/portfolio',
     liveDemo: 'https://prateekdev.vercel.app/',
@@ -35,7 +35,7 @@ const projectsData = [
     title: 'Recipes Ranch',
     date: 'Jan 2024 - July 2024',
     description: 'A comprehensive recipe management application with search and filtering',
-    image: './public/webui/web3.jpeg',
+    image: './public/webui/web3.png',
     technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'TailwindCSS'],
     sourceCode: 'https://github.com/Prateeksingchn/Recipe-App',
     liveDemo: 'https://recipe-ranch.vercel.app/',
