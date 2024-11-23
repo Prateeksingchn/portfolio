@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaEnvelope, FaGithub, FaLinkedinIn, FaInstagram, FaTwitter, FaBehance, FaDiscord, FaSpotify } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedinIn, FaInstagram, FaBehance, FaDiscord, FaSpotify } from 'react-icons/fa';
+import { SiX } from 'react-icons/si';
 
 const SocialIcon = ({ href, icon: Icon }) => (
   <a 
@@ -15,9 +16,9 @@ const SocialIcon = ({ href, icon: Icon }) => (
 const socialLinks = [
   { href: "mailto:email@prateeksinghchouhan007.com", icon: FaEnvelope },
   { href: "https://github.com/Prateeksingchn", icon: FaGithub },
-  { href: "https://www.linkedin.com/in/prateek-singh-chouhan-7a511b1b7", icon: FaLinkedinIn },
+  { href: "https://www.linkedin.com/in/prateek-singh-chouhan-654486243/", icon: FaLinkedinIn },
   { href: "https://www.instagram.com/__.prateeeeek.__/", icon: FaInstagram },
-  { href: "https://x.com/Prateeeeek_", icon: FaTwitter },
+  { href: "https://x.com/Prateeeeek_", icon: SiX },
   { href: "https://www.behance.net/prateeksinghc1", icon: FaBehance },
   { href: "https://discord.com/users/Prateek#1915", icon: FaDiscord },
   { href: "https://open.spotify.com/user/ql244hpcrp7fkv6en8520yr9f?si=74247a44fadc49f2", icon: FaSpotify },

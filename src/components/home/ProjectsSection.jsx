@@ -18,11 +18,11 @@ const ProjectsSection = ({ onMouseEnter, onMouseLeave }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const images = useMemo(() => [
-    "https://images.unsplash.com/photo-1658211208906-429cd4aa0e5b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8M2QlMjByZW5kZXJ8ZW58MHwxfDB8fHww",
-    "https://images.unsplash.com/photo-1668079078320-76dba982b397?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDNkJTIwcmVuZGVyfGVufDB8MXwwfHx8MA%3D%3D",
-    "https://images.unsplash.com/photo-1655834648155-f7a98ff3c49d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fDNkJTIwcmVuZGVyfGVufDB8MXwwfHx8MA%3D%3D",
-    "https://plus.unsplash.com/premium_photo-1668319126427-111a3164cf08?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fDNkJTIwcmVuZGVyfGVufDB8MXwwfHx8MA%3D%3D",
-    "https://images.unsplash.com/photo-1660912354672-42c807fac14c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTAyfHwzZCUyMHJlbmRlcnxlbnwwfDF8MHx8fDA%3D",
+    "./public/webui/web1.webp",
+    "./public/webui/web2.webp",
+    "./public/webui/web3.webp",
+    "./public/webui/web4.webp",
+    "./public/webui/web5.webp",
   ], []);
 
   const changeImage = useCallback(() => {
